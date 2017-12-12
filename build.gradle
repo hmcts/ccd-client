@@ -53,7 +53,7 @@ def pomConfig = {
     }
 
     scm {
-        url "https://github.com/hmcts/core-case-data-client"
+        url "https://github.com/hmcts/core-case-data-store-client"
     }
 }
 
@@ -85,9 +85,9 @@ publishing {
 
             pom.withXml {
                 def root = asNode()
-                root.appendNode('description', 'core case data client')
-                root.appendNode('name', 'Core case data client')
-                root.appendNode('url', 'https://github.com/hmcts/core-case-data-client')
+                root.appendNode('description', 'core case data store client')
+                root.appendNode('name', 'Core case data store client')
+                root.appendNode('url', 'https://github.com/hmcts/core-case-data-store-client')
                 root.children().last() + pomConfig
             }
         }
@@ -101,10 +101,10 @@ bintray {
     publish = true
     pkg {
         repo = 'hmcts-maven'
-        name = 'core-case-data-client'
+        name = 'core-case-data-store-client'
         userOrg = 'hmcts'
         licenses = ['MIT']
-        vcsUrl = 'https://github.com/hmcts/core-case-data-client'
+        vcsUrl = 'https://github.com/hmcts/core-case-data-store-client'
         version {
             name = project.version
         }
