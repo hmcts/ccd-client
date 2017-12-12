@@ -80,12 +80,12 @@ publishing {
             artifact sourcesJar
             artifact javadocJar
             groupId project.group
-            artifactId 'core-case-data-client'
+            artifactId 'core-case-data-store-client'
             version project.version
 
             pom.withXml {
                 def root = asNode()
-                root.appendNode('description', 'core case data store client')
+                root.appendNode('description', 'Core case data store client')
                 root.appendNode('name', 'Core case data store client')
                 root.appendNode('url', 'https://github.com/hmcts/core-case-data-store-client')
                 root.children().last() + pomConfig
