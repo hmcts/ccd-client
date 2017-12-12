@@ -13,7 +13,7 @@ import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @FeignClient(name = "core-case-data-api", url = "${core_case_data.api.url}")
-public interface StartCaseworkerApi {
+public interface StartForCaseworkerApi {
 
     @RequestMapping(
         method = RequestMethod.GET,

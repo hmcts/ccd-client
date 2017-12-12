@@ -1,4 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-uk.gov.hmcts.cmc.ccd.client.StartCaseworkerApi,\
-uk.gov.hmcts.cmc.ccd.client.SubmitCaseworkerApi
+uk.gov.hmcts.cmc.ccd.client.StartForCaseworkerApi,\
+uk.gov.hmcts.cmc.ccd.client.SubmitForCaseworkerApi
 

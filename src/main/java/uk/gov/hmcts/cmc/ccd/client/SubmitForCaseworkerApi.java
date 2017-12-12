@@ -14,7 +14,7 @@ import uk.gov.hmcts.cmc.ccd.client.model.CaseDetails;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 @FeignClient(name = "core-case-data-api", url = "${core_case_data.api.url}")
-public interface SubmitCaseworkerApi {
+public interface SubmitForCaseworkerApi {
 
     @RequestMapping(
         method = RequestMethod.POST,
