@@ -6,10 +6,11 @@ plugins {
     id 'java-library' apply true
     id 'maven' apply true
     id 'maven-publish' apply true
+    id 'net.ltgt.apt' version '0.10' apply true
 }
 
 group 'uk.gov.hmcts.reform'
-version '1.0.0'
+version '1.0.1'
 
 checkstyle {
     maxWarnings = 0
@@ -111,7 +112,17 @@ bintray {
     }
 }
 
+ext {
+    lombokVersion = '1.16.18'
+}
+
 dependencies {
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-feign', version: '1.4.0.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
+    compile group: 'io.github.openfeign', name: 'feign-httpclient', version: '9.5.0'
+
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
+    apt group: 'org.projectlombok', name: 'lombok', version: lombokVersion
 
 }
 
