@@ -2,7 +2,6 @@ package uk.gov.hmcts.cmc.ccd.client.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Builder;
 import lombok.Data;
 
@@ -27,7 +26,7 @@ public class CaseDetails {
     @JsonProperty("security_level")
     private Integer securityLevel;
     @JsonProperty("case_data")
-    private Map<String, JsonNode> data;
+    private Map<String, Object> data;
     @JsonProperty("security_classification")
     private Classification securityClassification;
 }
