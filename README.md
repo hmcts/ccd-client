@@ -1,8 +1,6 @@
-# CMC core case data client
+# Core case data client
 
-This is the backend service for Civil Money Claims.
-The service provides a set methods to integrate with core case data app.
-The two main responsibilities are:
+This is a client library for interacting with the core case data store application. The two main responsibilities are:
  - start event for new case
  - submit case to core case data app
 
