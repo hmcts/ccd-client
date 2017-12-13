@@ -25,11 +25,10 @@ public class CoreCaseDataHealthIndicator implements HealthIndicator {
     private final String coreCaseDataStoreBaseUrl;
 
     @Autowired
-    public CoreCaseDataHealthIndicator
-        (
-            final RestTemplate restTemplate,
-            @Value("${core_case_data.api.url}") String coreCaseDataStoreBaseUrl
-        ) {
+    public CoreCaseDataHealthIndicator(
+        final RestTemplate restTemplate,
+        @Value("${core_case_data.api.url}") String coreCaseDataStoreBaseUrl
+    ) {
         this.restTemplate = restTemplate;
         this.coreCaseDataStoreBaseUrl = coreCaseDataStoreBaseUrl;
     }
