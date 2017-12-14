@@ -24,14 +24,14 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @FeignClient(name = "core-case-data-api", url = "${core_case_data.api.url}",
-configuration = CoreCaseDataApi.CoreCaseDataConfiguration.class)
+    configuration = CoreCaseDataApi.CoreCaseDataConfiguration.class)
 public interface CoreCaseDataApi {
 
     @RequestMapping(
-            method = RequestMethod.GET,
-            value = "/caseworkers/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/event-triggers/"
-                    + "{eventId}/token",
-            headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
+        method = RequestMethod.GET,
+        value = "/caseworkers/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/event-triggers/"
+            + "{eventId}/token",
+        headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
     )
     ResponseEntity<StartEventResponse> start(@RequestHeader(AUTHORIZATION) String authorisation,
                                              @RequestHeader("ServiceAuthorization") String serviceAuthorization,
@@ -42,8 +42,8 @@ public interface CoreCaseDataApi {
     );
 
     @RequestMapping(
-            method = RequestMethod.POST,
-            value = "/caseworkers/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases"
+        method = RequestMethod.POST,
+        value = "/caseworkers/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases"
     )
     ResponseEntity<CaseDetails> submit(@RequestHeader(AUTHORIZATION) String authorisation,
                                        @RequestHeader("ServiceAuthorization") String serviceAuthorisation,
