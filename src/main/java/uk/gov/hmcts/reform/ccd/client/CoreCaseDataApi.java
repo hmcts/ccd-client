@@ -50,7 +50,7 @@ public interface CoreCaseDataApi {
 
     @RequestMapping(
         method = RequestMethod.GET,
-        value = "/health",
+        value = "/status/health",
         headers = CONTENT_TYPE + "=" + APPLICATION_JSON_UTF8_VALUE
     )
     InternalHealth health();
