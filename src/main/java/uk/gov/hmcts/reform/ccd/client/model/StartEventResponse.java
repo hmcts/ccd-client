@@ -1,4 +1,4 @@
-package uk.gov.hmcts.cmc.ccd.client.model;
+package uk.gov.hmcts.reform.ccd.client.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;

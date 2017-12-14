@@ -1,4 +1,4 @@
-package uk.gov.hmcts.cmc.ccd.client.healthcheck;
+package uk.gov.hmcts.reform.ccd.client.healthcheck;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -1,4 +1,4 @@
-package uk.gov.hmcts.cmc.ccd.client.exception;
+package uk.gov.hmcts.reform.ccd.client.exception;
 
 public class InvalidCaseDataException extends RuntimeException {
 
