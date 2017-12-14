@@ -1,6 +1,11 @@
 package uk.gov.hmcts.reform.ccd.client;
 
+import feign.codec.Decoder;
+import feign.jackson.JacksonDecoder;
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +23,8 @@ import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-@FeignClient(name = "core-case-data-api", url = "${core_case_data.api.url}")
+@FeignClient(name = "core-case-data-api", url = "${core_case_data.api.url}",
+configuration = CoreCaseDataApi.CoreCaseDataConfiguration.class)
 public interface CoreCaseDataApi {
 
     @RequestMapping(
@@ -55,4 +61,12 @@ public interface CoreCaseDataApi {
     )
     InternalHealth health();
 
+    class CoreCaseDataConfiguration {
+        @Bean
+        @Primary
+        @Scope("prototype")
+        Decoder feignDecoder() {
+            return new JacksonDecoder();
+        }
+    }
 }
