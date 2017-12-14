@@ -24,12 +24,10 @@ public class CoreCaseDataHealthIndicator implements HealthIndicator {
     public Health health() {
         try {
             InternalHealth internalHealth = this.coreCaseDataApi.health();
-            return new Health.Builder(internalHealth.getStatus())
-                .build();
+            return new Health.Builder(internalHealth.getStatus()).build();
         } catch (Exception ex) {
             LOGGER.error("Error on core case data store app healthcheck", ex);
-            return Health.down(ex)
-                .build();
+            return Health.down(ex).build();
         }
     }
 }
