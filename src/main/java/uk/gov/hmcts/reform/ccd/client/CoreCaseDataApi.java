@@ -1,5 +1,11 @@
 package uk.gov.hmcts.reform.ccd.client;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import feign.codec.Decoder;
 import feign.jackson.JacksonDecoder;
 import org.springframework.cloud.netflix.feign.FeignClient;
@@ -65,7 +71,16 @@ public interface CoreCaseDataApi {
         @Primary
         @Scope("prototype")
         Decoder feignDecoder() {
-            return new JacksonDecoder();
+            return new JacksonDecoder(objectMapper());
+        }
+
+        @Bean
+        public ObjectMapper objectMapper() {
+            return new ObjectMapper()
+                .registerModule(new Jdk8Module())
+                .registerModule(new ParameterNamesModule(JsonCreator.Mode.PROPERTIES))
+                .registerModule(new JavaTimeModule()).disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                .disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
         }
     }
 }

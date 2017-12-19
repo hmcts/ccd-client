@@ -10,7 +10,7 @@ plugins {
 }
 
 group 'uk.gov.hmcts.reform'
-version '1.0.7'
+version '1.0.8'
 
 checkstyle {
     maxWarnings = 0
@@ -114,6 +114,7 @@ bintray {
 
 ext {
     lombokVersion = '1.16.18'
+    jacksonVersion = '2.8.10'
 }
 
 dependencies {
@@ -121,6 +122,11 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
     compile group: 'io.github.openfeign', name: 'feign-httpclient', version: '9.5.0'
     compile group: 'com.netflix.feign', name: 'feign-jackson', version: '8.18.0'
+    
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: jacksonVersion
+    compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-parameter-names', version: jacksonVersion
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jdk8', version: jacksonVersion
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: jacksonVersion
 
     compileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     apt group: 'org.projectlombok', name: 'lombok', version: lombokVersion
