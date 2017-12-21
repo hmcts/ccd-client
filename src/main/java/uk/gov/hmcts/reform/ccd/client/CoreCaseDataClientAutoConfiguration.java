@@ -8,11 +8,11 @@ import uk.gov.hmcts.reform.ccd.client.healthcheck.CoreCaseDataHealthIndicator;
 
 @Configuration
 @EnableFeignClients(basePackages = "uk.gov.hmcts.reform.ccd.client")
-public class CoreCaseDataClientConfiguration {
+public class CoreCaseDataClientAutoConfiguration {
 
     @Bean
     @ConditionalOnProperty(prefix = "core_case_data", name = "api.url")
-    public CoreCaseDataHealthIndicator coreCaseDataHealthIndicator(CoreCaseDataApi coreCaseDataApi) {
+    public CoreCaseDataHealthIndicator healthIndicator(CoreCaseDataApi coreCaseDataApi) {
         return new CoreCaseDataHealthIndicator(coreCaseDataApi);
     }
 }
