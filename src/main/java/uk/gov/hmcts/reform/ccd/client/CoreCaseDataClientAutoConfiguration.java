@@ -7,12 +7,13 @@ import org.springframework.context.annotation.Configuration;
 import uk.gov.hmcts.reform.ccd.client.healthcheck.CoreCaseDataHealthIndicator;
 
 @Configuration
+@ConditionalOnProperty(prefix = "core_case_data", name = "api.url")
 @EnableFeignClients(basePackages = "uk.gov.hmcts.reform.ccd.client")
 public class CoreCaseDataClientAutoConfiguration {
 
     @Bean
-    @ConditionalOnProperty(prefix = "core_case_data", name = "api.url")
-    public CoreCaseDataHealthIndicator healthIndicator(CoreCaseDataApi coreCaseDataApi) {
+    public CoreCaseDataHealthIndicator coreCaseData(CoreCaseDataApi coreCaseDataApi) {
         return new CoreCaseDataHealthIndicator(coreCaseDataApi);
     }
+
 }
