@@ -12,7 +12,7 @@ import uk.gov.hmcts.reform.ccd.client.healthcheck.CoreCaseDataHealthIndicator;
 public class CoreCaseDataClientAutoConfiguration {
 
     @Bean
-    public CoreCaseDataHealthIndicator healthIndicator(CoreCaseDataApi coreCaseDataApi) {
+    public CoreCaseDataHealthIndicator coreCaseData(CoreCaseDataApi coreCaseDataApi) {
         return new CoreCaseDataHealthIndicator(coreCaseDataApi);
     }
 
