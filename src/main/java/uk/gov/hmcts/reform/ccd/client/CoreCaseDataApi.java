@@ -6,6 +6,7 @@ import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import feign.codec.Decoder;
 import feign.jackson.JacksonDecoder;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
@@ -67,17 +68,9 @@ public interface CoreCaseDataApi {
     class CoreCaseDataConfiguration {
         @Bean
         @Primary
-        @Scope("prototype")
-        Decoder feignDecoder() {
-            return new JacksonDecoder(objectMapper());
-        }
-
-        @Bean
-        public ObjectMapper objectMapper() {
-            return new ObjectMapper()
-                .registerModule(new Jdk8Module())
-                .registerModule(new JavaTimeModule()).disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-                .disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+        Decoder feignDecoder(ObjectMapper objectMapper) {
+            return new JacksonDecoder(objectMapper);
         }
     }
+
 }

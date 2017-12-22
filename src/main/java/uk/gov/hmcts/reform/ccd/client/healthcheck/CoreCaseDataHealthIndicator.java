@@ -8,14 +8,12 @@ import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.stereotype.Component;
 import uk.gov.hmcts.reform.ccd.client.CoreCaseDataApi;
 
-@Component
 public class CoreCaseDataHealthIndicator implements HealthIndicator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CoreCaseDataHealthIndicator.class);
 
     private final CoreCaseDataApi coreCaseDataApi;
 
-    @Autowired
     public CoreCaseDataHealthIndicator(final CoreCaseDataApi coreCaseDataApi) {
         this.coreCaseDataApi = coreCaseDataApi;
     }
@@ -30,4 +28,5 @@ public class CoreCaseDataHealthIndicator implements HealthIndicator {
             return Health.down(ex).build();
         }
     }
+
 }
