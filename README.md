@@ -11,7 +11,13 @@ This is a client library for interacting with the core case data store applicati
 - [JDK 8](https://www.oracle.com/java)
 - [Docker](https://www.docker.com)
 
-### Building
+## Usage
+
+Just include the library as your dependency and you will be to use the client class. Health check for CCD service is provided as well.
+
+Components provided by this library will get automatically configured in a Spring context if `core_case_data.api.url` configuration property is defined and does not equal `false`. 
+
+## Building
 
 The project uses [Gradle](https://gradle.org) as a build tool but you don't have install it locally since there is a
 `./gradlew` wrapper script.  
