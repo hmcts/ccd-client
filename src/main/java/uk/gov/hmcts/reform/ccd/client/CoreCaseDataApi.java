@@ -1,16 +1,11 @@
 package uk.gov.hmcts.reform.ccd.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import feign.codec.Decoder;
 import feign.jackson.JacksonDecoder;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;

@@ -2,10 +2,8 @@ package uk.gov.hmcts.reform.ccd.client.healthcheck;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
-import org.springframework.stereotype.Component;
 import uk.gov.hmcts.reform.ccd.client.CoreCaseDataApi;
 
 public class CoreCaseDataHealthIndicator implements HealthIndicator {
