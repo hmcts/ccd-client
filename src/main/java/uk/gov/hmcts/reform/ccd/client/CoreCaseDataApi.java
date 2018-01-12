@@ -32,7 +32,7 @@ public interface CoreCaseDataApi {
             + "{eventId}/token",
         headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
     )
-    StartEventResponse start(@RequestHeader(AUTHORIZATION) String authorisation,
+    StartEventResponse startForCaseworker(@RequestHeader(AUTHORIZATION) String authorisation,
                              @RequestHeader("ServiceAuthorization") String serviceAuthorization,
                              @PathVariable String userId,
                              @PathVariable String jurisdictionId,
@@ -44,13 +44,40 @@ public interface CoreCaseDataApi {
         method = RequestMethod.POST,
         value = "/caseworkers/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases"
     )
-    CaseDetails submit(@RequestHeader(AUTHORIZATION) String authorisation,
+    CaseDetails submitForCaseworker(@RequestHeader(AUTHORIZATION) String authorisation,
                        @RequestHeader("ServiceAuthorization") String serviceAuthorisation,
                        @PathVariable String userId,
                        @PathVariable String jurisdictionId,
                        @PathVariable String caseType,
                        @RequestParam("ignore-warning") boolean ignoreWarning,
                        @RequestBody CaseDataContent caseDataContent
+    );
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/citizens/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/event-triggers/"
+                    + "{eventId}/token",
+            headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
+    )
+    StartEventResponse startForCitizen(@RequestHeader(AUTHORIZATION) String authorisation,
+                                          @RequestHeader("ServiceAuthorization") String serviceAuthorization,
+                                          @PathVariable String userId,
+                                          @PathVariable String jurisdictionId,
+                                          @PathVariable String caseType,
+                                          @PathVariable String eventId
+    );
+
+    @RequestMapping(
+            method = RequestMethod.POST,
+            value = "/citizens/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases"
+    )
+    CaseDetails submitForCitizen(@RequestHeader(AUTHORIZATION) String authorisation,
+                                    @RequestHeader("ServiceAuthorization") String serviceAuthorisation,
+                                    @PathVariable String userId,
+                                    @PathVariable String jurisdictionId,
+                                    @PathVariable String caseType,
+                                    @RequestParam("ignore-warning") boolean ignoreWarning,
+                                    @RequestBody CaseDataContent caseDataContent
     );
 
     @RequestMapping(
