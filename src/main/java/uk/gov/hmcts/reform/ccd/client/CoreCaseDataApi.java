@@ -1,6 +1,7 @@
 package uk.gov.hmcts.reform.ccd.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import feign.QueryMap;
 import feign.codec.Decoder;
 import feign.jackson.JacksonDecoder;
 import org.springframework.cloud.netflix.feign.FeignClient;
@@ -16,6 +17,8 @@ import uk.gov.hmcts.reform.ccd.client.healthcheck.InternalHealth;
 import uk.gov.hmcts.reform.ccd.client.model.CaseDataContent;
 import uk.gov.hmcts.reform.ccd.client.model.CaseDetails;
 import uk.gov.hmcts.reform.ccd.client.model.StartEventResponse;
+
+import java.util.Map;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
@@ -55,6 +58,19 @@ public interface CoreCaseDataApi {
 
     @RequestMapping(
             method = RequestMethod.GET,
+            value = "/caseworkers/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases"
+    )
+    CaseDetails searchForCaseworker(
+            @RequestHeader(AUTHORIZATION) String authorisation,
+            @RequestHeader("ServiceAuthorization") String serviceAuthorisation,
+            @PathVariable String userId,
+            @PathVariable String jurisdictionId,
+            @PathVariable String caseType,
+            @QueryMap Map<String, Object> searchCriteria
+    );
+
+    @RequestMapping(
+            method = RequestMethod.GET,
             value = "/citizens/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/event-triggers/"
                     + "{eventId}/token",
             headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
@@ -78,6 +94,19 @@ public interface CoreCaseDataApi {
                                     @PathVariable String caseType,
                                     @RequestParam("ignore-warning") boolean ignoreWarning,
                                     @RequestBody CaseDataContent caseDataContent
+    );
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/citizens/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases"
+    )
+    CaseDetails searchForCitizen(
+            @RequestHeader(AUTHORIZATION) String authorisation,
+            @RequestHeader("ServiceAuthorization") String serviceAuthorisation,
+            @PathVariable String userId,
+            @PathVariable String jurisdictionId,
+            @PathVariable String caseType,
+            @QueryMap Map<String, Object> searchCriteria
     );
 
     @RequestMapping(
