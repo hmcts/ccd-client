@@ -18,6 +18,7 @@ import uk.gov.hmcts.reform.ccd.client.model.CaseDataContent;
 import uk.gov.hmcts.reform.ccd.client.model.CaseDetails;
 import uk.gov.hmcts.reform.ccd.client.model.StartEventResponse;
 
+import java.util.List;
 import java.util.Map;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
@@ -60,7 +61,7 @@ public interface CoreCaseDataApi {
             method = RequestMethod.GET,
             value = "/caseworkers/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases"
     )
-    CaseDetails searchForCaseworker(
+    List<CaseDetails> searchForCaseworker(
             @RequestHeader(AUTHORIZATION) String authorisation,
             @RequestHeader("ServiceAuthorization") String serviceAuthorisation,
             @PathVariable String userId,
@@ -100,7 +101,7 @@ public interface CoreCaseDataApi {
             method = RequestMethod.GET,
             value = "/citizens/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases"
     )
-    CaseDetails searchForCitizen(
+    List<CaseDetails> searchForCitizen(
             @RequestHeader(AUTHORIZATION) String authorisation,
             @RequestHeader("ServiceAuthorization") String serviceAuthorisation,
             @PathVariable String userId,
