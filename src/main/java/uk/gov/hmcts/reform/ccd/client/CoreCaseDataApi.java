@@ -99,7 +99,8 @@ public interface CoreCaseDataApi {
 
     @RequestMapping(
             method = RequestMethod.GET,
-            value = "/citizens/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases"
+            value = "/citizens/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases",
+            headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
     )
     List<CaseDetails> searchForCitizen(
             @RequestHeader(AUTHORIZATION) String authorisation,
@@ -107,7 +108,7 @@ public interface CoreCaseDataApi {
             @PathVariable String userId,
             @PathVariable String jurisdictionId,
             @PathVariable String caseType,
-            @QueryMap Map<String, Object> searchCriteria
+            @RequestParam Map<String, Object> searchCriteria
     );
 
     @RequestMapping(
