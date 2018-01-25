@@ -25,31 +25,35 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
         configuration = CoreCaseDataConfiguration.class)
 public interface CoreCaseDataApi {
 
+    String SERVICE_AUTHORIZATION = "ServiceAuthorization";
+
     @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/caseworkers/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/event-triggers/"
-            + "{eventId}/token",
-        headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
+            method = RequestMethod.GET,
+            value = "/caseworkers/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/event-triggers/"
+                    + "{eventId}/token",
+            headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
     )
-    StartEventResponse startForCaseworker(@RequestHeader(AUTHORIZATION) String authorisation,
-                             @RequestHeader("ServiceAuthorization") String serviceAuthorization,
-                             @PathVariable String userId,
-                             @PathVariable String jurisdictionId,
-                             @PathVariable String caseType,
-                             @PathVariable String eventId
+    StartEventResponse startForCaseworker(
+            @RequestHeader(AUTHORIZATION) String authorisation,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
+            @PathVariable String userId,
+            @PathVariable String jurisdictionId,
+            @PathVariable String caseType,
+            @PathVariable String eventId
     );
 
     @RequestMapping(
-        method = RequestMethod.POST,
-        value = "/caseworkers/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases"
+            method = RequestMethod.POST,
+            value = "/caseworkers/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases"
     )
-    CaseDetails submitForCaseworker(@RequestHeader(AUTHORIZATION) String authorisation,
-                       @RequestHeader("ServiceAuthorization") String serviceAuthorisation,
-                       @PathVariable String userId,
-                       @PathVariable String jurisdictionId,
-                       @PathVariable String caseType,
-                       @RequestParam("ignore-warning") boolean ignoreWarning,
-                       @RequestBody CaseDataContent caseDataContent
+    CaseDetails submitForCaseworker(
+            @RequestHeader(AUTHORIZATION) String authorisation,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
+            @PathVariable String userId,
+            @PathVariable String jurisdictionId,
+            @PathVariable String caseType,
+            @RequestParam("ignore-warning") boolean ignoreWarning,
+            @RequestBody CaseDataContent caseDataContent
     );
 
     @RequestMapping(
@@ -58,7 +62,7 @@ public interface CoreCaseDataApi {
     )
     List<CaseDetails> searchForCaseworker(
             @RequestHeader(AUTHORIZATION) String authorisation,
-            @RequestHeader("ServiceAuthorization") String serviceAuthorisation,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
             @PathVariable String userId,
             @PathVariable String jurisdictionId,
             @PathVariable String caseType,
@@ -71,25 +75,57 @@ public interface CoreCaseDataApi {
                     + "{eventId}/token",
             headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
     )
-    StartEventResponse startForCitizen(@RequestHeader(AUTHORIZATION) String authorisation,
-                                          @RequestHeader("ServiceAuthorization") String serviceAuthorization,
-                                          @PathVariable String userId,
-                                          @PathVariable String jurisdictionId,
-                                          @PathVariable String caseType,
-                                          @PathVariable String eventId
+    StartEventResponse startForCitizen(
+            @RequestHeader(AUTHORIZATION) String authorisation,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
+            @PathVariable String userId,
+            @PathVariable String jurisdictionId,
+            @PathVariable String caseType,
+            @PathVariable String eventId
     );
 
     @RequestMapping(
             method = RequestMethod.POST,
             value = "/citizens/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases"
     )
-    CaseDetails submitForCitizen(@RequestHeader(AUTHORIZATION) String authorisation,
-                                    @RequestHeader("ServiceAuthorization") String serviceAuthorisation,
-                                    @PathVariable String userId,
-                                    @PathVariable String jurisdictionId,
-                                    @PathVariable String caseType,
-                                    @RequestParam("ignore-warning") boolean ignoreWarning,
-                                    @RequestBody CaseDataContent caseDataContent
+    CaseDetails submitForCitizen(
+            @RequestHeader(AUTHORIZATION) String authorisation,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
+            @PathVariable String userId,
+            @PathVariable String jurisdictionId,
+            @PathVariable String caseType,
+            @RequestParam("ignore-warning") boolean ignoreWarning,
+            @RequestBody CaseDataContent caseDataContent
+    );
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/citizens/{uid}/jurisdictions/{jid}/case-types/{ctid}/cases/{cid}/event-triggers/{etid}/token",
+            headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
+    )
+    StartEventResponse startEventForCitizen(
+            @RequestHeader(AUTHORIZATION) String authorisation,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
+            @PathVariable("uid") String userId,
+            @PathVariable("jid") String jurisdictionId,
+            @PathVariable("ctid") String caseType,
+            @PathVariable("cid") String caseId,
+            @PathVariable("etid") String eventId
+    );
+
+    @RequestMapping(
+            method = RequestMethod.POST,
+            value = "/citizens/{uid}/jurisdictions/{jid}/case-types/{ctid}/cases/{cid}/events"
+    )
+    CaseDetails submitEventForCitizen(
+            @RequestHeader(AUTHORIZATION) String authorisation,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
+            @PathVariable("uid") String userId,
+            @PathVariable("jid") String jurisdictionId,
+            @PathVariable("ctid") String caseType,
+            @PathVariable("cid") String caseId,
+            @RequestParam("ignore-warning") boolean ignoreWarning,
+            @RequestBody CaseDataContent caseDataContent
     );
 
     @RequestMapping(
@@ -99,7 +135,7 @@ public interface CoreCaseDataApi {
     )
     List<CaseDetails> searchForCitizen(
             @RequestHeader(AUTHORIZATION) String authorisation,
-            @RequestHeader("ServiceAuthorization") String serviceAuthorisation,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
             @PathVariable String userId,
             @PathVariable String jurisdictionId,
             @PathVariable String caseType,
@@ -107,9 +143,9 @@ public interface CoreCaseDataApi {
     );
 
     @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/status/health",
-        headers = CONTENT_TYPE + "=" + APPLICATION_JSON_UTF8_VALUE
+            method = RequestMethod.GET,
+            value = "/status/health",
+            headers = CONTENT_TYPE + "=" + APPLICATION_JSON_UTF8_VALUE
     )
     InternalHealth health();
 }
