@@ -13,6 +13,7 @@ import uk.gov.hmcts.reform.ccd.client.model.UserId;
 import java.util.List;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
+import static uk.gov.hmcts.reform.ccd.client.CoreCaseDataApi.SERVICE_AUTHORIZATION;
 
 @FeignClient(name = "ccd-access-api", url = "${core_case_data.api.url}",
         configuration = CoreCaseDataConfiguration.class)
@@ -25,7 +26,7 @@ public interface CaseAccessApi {
     )
     List<String> findCaseIdsGivenUserIdHasAccessTo(
             @RequestHeader(AUTHORIZATION) String authorisation,
-            @RequestHeader("ServiceAuthorization") String serviceAuthorization,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
             @PathVariable("uid") final Integer uid,
             @PathVariable("jid") final String jurisdictionId,
             @PathVariable("ctid") final String caseTypeId,
@@ -39,7 +40,7 @@ public interface CaseAccessApi {
     )
     void grantAccessToCase(
             @RequestHeader(AUTHORIZATION) String authorisation,
-            @RequestHeader("ServiceAuthorization") String serviceAuthorization,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
             @PathVariable("uid") final String uid,
             @PathVariable("jid") final String jurisdictionId,
             @PathVariable("ctid") final String caseTypeId,
@@ -54,7 +55,7 @@ public interface CaseAccessApi {
     )
     void revokeAccessToCase(
             @RequestHeader(AUTHORIZATION) String authorisation,
-            @RequestHeader("ServiceAuthorization") String serviceAuthorization,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
             @PathVariable("uid") final Integer uid,
             @PathVariable("jid") final String jurisdictionId,
             @PathVariable("ctid") final String caseTypeId,
