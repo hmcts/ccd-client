@@ -57,7 +57,8 @@ public interface CoreCaseDataApi {
 
     @RequestMapping(
             method = RequestMethod.GET,
-            value = "/caseworkers/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases"
+            value = "/caseworkers/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases",
+            headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
     )
     List<CaseDetails> searchForCaseworker(
             @RequestHeader(AUTHORIZATION) String authorisation,
