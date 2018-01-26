@@ -1,6 +1,5 @@
 package uk.gov.hmcts.reform.ccd.client;
 
-import feign.QueryMap;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -66,7 +65,7 @@ public interface CoreCaseDataApi {
             @PathVariable String userId,
             @PathVariable String jurisdictionId,
             @PathVariable String caseType,
-            @QueryMap Map<String, Object> searchCriteria
+            @RequestParam Map<String, Object> searchCriteria
     );
 
     @RequestMapping(
