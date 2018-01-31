@@ -27,7 +27,7 @@ public interface CaseAccessApi {
     List<String> findCaseIdsGivenUserIdHasAccessTo(
             @RequestHeader(AUTHORIZATION) String authorisation,
             @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
-            @PathVariable("uid") final Integer uid,
+            @PathVariable("uid") final String uid,
             @PathVariable("jid") final String jurisdictionId,
             @PathVariable("ctid") final String caseTypeId,
             @RequestParam(value = "userId") final String idSearchingFor
@@ -56,7 +56,7 @@ public interface CaseAccessApi {
     void revokeAccessToCase(
             @RequestHeader(AUTHORIZATION) String authorisation,
             @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
-            @PathVariable("uid") final Integer uid,
+            @PathVariable("uid") final String uid,
             @PathVariable("jid") final String jurisdictionId,
             @PathVariable("ctid") final String caseTypeId,
             @PathVariable("cid") final String caseId,

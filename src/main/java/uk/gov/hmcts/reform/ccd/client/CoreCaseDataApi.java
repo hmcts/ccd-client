@@ -142,6 +142,35 @@ public interface CoreCaseDataApi {
             @RequestParam Map<String, Object> searchCriteria
     );
 
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/caseworkers/{uid}/jurisdictions/{jid}/case-types/{ctid}/cases/{cid}",
+            headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
+    )
+    CaseDetails readForCaseWorker(
+            @RequestHeader(AUTHORIZATION) String authorisation,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
+            @PathVariable("uid") final String uid,
+            @PathVariable("jid") final String jurisdictionId,
+            @PathVariable("ctid") final String caseTypeId,
+            @PathVariable("cid") final String caseId
+    );
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/citizens/{uid}/jurisdictions/{jid}/case-types/{ctid}/cases/{cid}",
+            headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
+    )
+    CaseDetails readForCitizen(
+            @RequestHeader(AUTHORIZATION) String authorisation,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
+            @PathVariable("uid") final String uid,
+            @PathVariable("jid") final String jurisdictionId,
+            @PathVariable("ctid") final String caseTypeId,
+            @PathVariable("cid") final String caseId
+    );
+
     @RequestMapping(
             method = RequestMethod.GET,
             value = "/status/health",
