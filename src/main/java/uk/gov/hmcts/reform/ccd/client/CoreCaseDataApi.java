@@ -142,7 +142,6 @@ public interface CoreCaseDataApi {
             @RequestParam Map<String, Object> searchCriteria
     );
 
-
     @RequestMapping(
             method = RequestMethod.GET,
             value = "/caseworkers/{uid}/jurisdictions/{jid}/case-types/{ctid}/cases/{cid}",
