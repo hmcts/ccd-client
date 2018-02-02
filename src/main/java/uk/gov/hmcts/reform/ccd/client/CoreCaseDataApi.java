@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import uk.gov.hmcts.reform.ccd.client.healthcheck.InternalHealth;
 import uk.gov.hmcts.reform.ccd.client.model.CaseDataContent;
 import uk.gov.hmcts.reform.ccd.client.model.CaseDetails;
+import uk.gov.hmcts.reform.ccd.client.model.PaginatedSearchMetadata;
 import uk.gov.hmcts.reform.ccd.client.model.StartEventResponse;
 
 import java.util.List;
@@ -68,6 +69,31 @@ public interface CoreCaseDataApi {
             @PathVariable String caseType,
             @RequestParam Map<String, Object> searchCriteria
     );
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/caseworkers/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases/pagination_metadata",
+            headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE)
+    PaginatedSearchMetadata searchCasesMetadataForCaseworkers(@RequestHeader(AUTHORIZATION) String authorisation,
+                                                              @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
+                                                              @PathVariable String userId,
+                                                              @PathVariable String jurisdictionId,
+                                                              @PathVariable String caseType,
+                                                              @RequestParam Map<String, String> queryParameters
+    );
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/citizens/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases/pagination_metadata",
+            headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE)
+    PaginatedSearchMetadata searchCasesMetadataForCitizens(@RequestHeader(AUTHORIZATION) String authorisation,
+                                                              @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
+                                                              @PathVariable String userId,
+                                                              @PathVariable String jurisdictionId,
+                                                              @PathVariable String caseType,
+                                                              @RequestParam Map<String, String> queryParameters
+    );
+
 
     @RequestMapping(
             method = RequestMethod.GET,
