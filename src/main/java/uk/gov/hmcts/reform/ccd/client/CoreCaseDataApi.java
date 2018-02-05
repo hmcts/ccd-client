@@ -79,7 +79,7 @@ public interface CoreCaseDataApi {
                                                               @PathVariable String userId,
                                                               @PathVariable String jurisdictionId,
                                                               @PathVariable String caseType,
-                                                              @RequestParam Map<String, String> queryParameters
+                                                              @RequestParam Map<String, String> searchCriteria
     );
 
     @RequestMapping(
@@ -91,7 +91,7 @@ public interface CoreCaseDataApi {
                                                               @PathVariable String userId,
                                                               @PathVariable String jurisdictionId,
                                                               @PathVariable String caseType,
-                                                              @RequestParam Map<String, String> queryParameters
+                                                              @RequestParam Map<String, String> searchCriteria
     );
 
 
