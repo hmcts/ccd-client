@@ -72,26 +72,29 @@ public interface CoreCaseDataApi {
 
     @RequestMapping(
             method = RequestMethod.GET,
-            value = "/caseworkers/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases/pagination_metadata",
+            value = "/caseworkers/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases" +
+                    "/pagination_metadata",
             headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE)
-    PaginatedSearchMetadata getPaginationInfoForSearchForCaseworkers(@RequestHeader(AUTHORIZATION) String authorisation,
-                                                              @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
-                                                              @PathVariable String userId,
-                                                              @PathVariable String jurisdictionId,
-                                                              @PathVariable String caseType,
-                                                              @RequestParam Map<String, String> searchCriteria
+    PaginatedSearchMetadata getPaginationInfoForSearchForCaseworkers(
+            @RequestHeader(AUTHORIZATION) String authorisation,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
+            @PathVariable String userId,
+            @PathVariable String jurisdictionId,
+            @PathVariable String caseType,
+            @RequestParam Map<String, String> searchCriteria
     );
 
     @RequestMapping(
             method = RequestMethod.GET,
             value = "/citizens/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases/pagination_metadata",
             headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE)
-    PaginatedSearchMetadata getPaginationInfoForSearchForCitizens(@RequestHeader(AUTHORIZATION) String authorisation,
-                                                              @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
-                                                              @PathVariable String userId,
-                                                              @PathVariable String jurisdictionId,
-                                                              @PathVariable String caseType,
-                                                              @RequestParam Map<String, String> searchCriteria
+    PaginatedSearchMetadata getPaginationInfoForSearchForCitizens(
+            @RequestHeader(AUTHORIZATION) String authorisation,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
+            @PathVariable String userId,
+            @PathVariable String jurisdictionId,
+            @PathVariable String caseType,
+            @RequestParam Map<String, String> searchCriteria
     );
 
 
