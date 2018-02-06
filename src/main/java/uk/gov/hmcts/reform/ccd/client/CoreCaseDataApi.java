@@ -74,7 +74,7 @@ public interface CoreCaseDataApi {
             method = RequestMethod.GET,
             value = "/caseworkers/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases/pagination_metadata",
             headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE)
-    PaginatedSearchMetadata searchCasesMetadataForCaseworkers(@RequestHeader(AUTHORIZATION) String authorisation,
+    PaginatedSearchMetadata getPaginationInfoForSearchForCaseworkers(@RequestHeader(AUTHORIZATION) String authorisation,
                                                               @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
                                                               @PathVariable String userId,
                                                               @PathVariable String jurisdictionId,
@@ -86,7 +86,7 @@ public interface CoreCaseDataApi {
             method = RequestMethod.GET,
             value = "/citizens/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases/pagination_metadata",
             headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE)
-    PaginatedSearchMetadata searchCasesMetadataForCitizens(@RequestHeader(AUTHORIZATION) String authorisation,
+    PaginatedSearchMetadata getPaginationInfoForSearchForCitizens(@RequestHeader(AUTHORIZATION) String authorisation,
                                                               @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
                                                               @PathVariable String userId,
                                                               @PathVariable String jurisdictionId,
