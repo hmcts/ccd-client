@@ -86,6 +86,36 @@ public interface CoreCaseDataApi {
 
     @RequestMapping(
             method = RequestMethod.GET,
+            value = "/caseworkers/{uid}/jurisdictions/{jid}/case-types/{ctid}/cases/{cid}/event-triggers/{etid}/token",
+            headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
+    )
+    StartEventResponse startEventForCaseWorker(
+            @RequestHeader(AUTHORIZATION) String authorisation,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
+            @PathVariable("uid") String userId,
+            @PathVariable("jid") String jurisdictionId,
+            @PathVariable("ctid") String caseType,
+            @PathVariable("cid") String caseId,
+            @PathVariable("etid") String eventId
+    );
+
+    @RequestMapping(
+            method = RequestMethod.POST,
+            value = "/caseworkers/{uid}/jurisdictions/{jid}/case-types/{ctid}/cases/{cid}/events"
+    )
+    CaseDetails submitEventForCaseWorker(
+            @RequestHeader(AUTHORIZATION) String authorisation,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
+            @PathVariable("uid") String userId,
+            @PathVariable("jid") String jurisdictionId,
+            @PathVariable("ctid") String caseType,
+            @PathVariable("cid") String caseId,
+            @RequestParam("ignore-warning") boolean ignoreWarning,
+            @RequestBody CaseDataContent caseDataContent
+    );
+
+    @RequestMapping(
+            method = RequestMethod.GET,
             value = "/citizens/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases/pagination_metadata",
             headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE)
     PaginatedSearchMetadata getPaginationInfoForSearchForCitizens(
