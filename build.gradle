@@ -1,16 +1,16 @@
 plugins {
-    id 'checkstyle' apply true
-    id 'io.spring.dependency-management' version '1.0.3.RELEASE'
-    id 'org.springframework.boot' version '1.5.9.RELEASE' apply true
-    id 'com.jfrog.bintray' version '1.8.0' apply true
-    id 'java-library' apply true
-    id 'maven' apply true
-    id 'maven-publish' apply true
-    id 'net.ltgt.apt' version '0.10' apply true
+    id 'checkstyle'
+    id 'io.spring.dependency-management' version '1.0.5.RELEASE'
+    id 'org.springframework.boot' version '2.0.1.RELEASE'
+    id 'com.jfrog.bintray' version '1.8.0'
+    id 'java-library'
+    id 'maven'
+    id 'maven-publish'
+    id 'net.ltgt.apt' version '0.10'
 }
 
 group 'uk.gov.hmcts.reform'
-version '2.5.0'
+version '3.0.0'
 
 checkstyle {
     maxWarnings = 0
@@ -29,6 +29,9 @@ compileTestJava {
 
 repositories {
     jcenter()
+    maven {
+        url 'https://repo.spring.io/libs-milestone'
+    }
     mavenLocal()
 }
 
@@ -114,25 +117,29 @@ bintray {
 
 ext {
     lombokVersion = '1.16.18'
-    jacksonVersion = '2.8.10'
+    springCloudVersion = 'Finchley.M9'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 dependencies {
-    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-feign', version: '1.4.0.RELEASE'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
-    compile group: 'io.github.openfeign', name: 'feign-httpclient', version: '9.5.0'
-    compile group: 'com.netflix.feign', name: 'feign-jackson', version: '8.18.0'
-    
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: jacksonVersion
-    compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-parameter-names', version: jacksonVersion
-    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jdk8', version: jacksonVersion
-    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: jacksonVersion
+    compile group: 'io.github.openfeign', name: 'feign-jackson'
 
     compileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     apt group: 'org.projectlombok', name: 'lombok', version: lombokVersion
 
 }
 
-bootRepackage {
-    enabled = false;
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
 }
