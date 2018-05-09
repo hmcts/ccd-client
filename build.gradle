@@ -10,7 +10,7 @@ plugins {
 }
 
 group 'uk.gov.hmcts.reform'
-version '2.5.0'
+version '2.5.1'
 
 checkstyle {
     maxWarnings = 0
