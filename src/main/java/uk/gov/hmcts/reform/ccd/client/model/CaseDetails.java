@@ -29,4 +29,6 @@ public class CaseDetails {
     private Map<String, Object> data;
     @JsonProperty("security_classification")
     private Classification securityClassification;
+    @JsonProperty("callback_response_status")
+    private String callbackResponseStatus;
 }
