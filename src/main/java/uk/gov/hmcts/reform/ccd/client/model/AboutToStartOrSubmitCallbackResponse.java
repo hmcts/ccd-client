@@ -9,7 +9,7 @@ import java.util.Map;
 
 @Data
 @Builder
-public class AboutToStartOrSubmitCallbackResponse {
+public class AboutToStartOrSubmitCallbackResponse implements CallbackResponse {
     private Map<String, Object> data;
     @JsonProperty("data_classification")
     private Map<String, Object> dataClassification;

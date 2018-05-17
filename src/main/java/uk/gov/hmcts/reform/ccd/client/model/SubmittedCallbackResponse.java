@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class SubmittedCallbackResponse {
+public class SubmittedCallbackResponse implements CallbackResponse {
     @JsonProperty("confirmation_header")
     private String confirmationHeader;
 
