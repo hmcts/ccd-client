@@ -8,7 +8,7 @@ import java.util.Map;
 
 @Data
 @Builder
-public class CaseCallback {
+public class CallbackRequest {
     @JsonProperty("case_details")
     private Map<String, Object> caseDetails;
     @JsonProperty("case_details_before")
