@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 
 /**
- * A print callback takes a List of CaseDocument's as the response
+ * A print callback takes a List of CaseDocument's as the response.
  */
 @Data
 @Builder
