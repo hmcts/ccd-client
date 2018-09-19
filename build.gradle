@@ -28,11 +28,11 @@ compileTestJava {
 }
 
 repositories {
+    mavenLocal()
     jcenter()
     maven {
-        url 'https://repo.spring.io/libs-milestone'
+        url 'https://dl.bintray.com/hmcts/hmcts-maven'
     }
-    mavenLocal()
 }
 
 jar {
@@ -117,7 +117,7 @@ bintray {
 
 ext {
     lombokVersion = '1.16.18'
-    springCloudVersion = 'Finchley.M9'
+    springCloudVersion = 'Finchley.RELEASE'
 }
 
 dependencyManagement {
