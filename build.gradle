@@ -10,7 +10,7 @@ plugins {
 }
 
 group 'uk.gov.hmcts.reform'
-version '4.1.1'
+version '4.1.2'
 
 checkstyle {
     maxWarnings = 0
@@ -28,11 +28,8 @@ compileTestJava {
 }
 
 repositories {
-    jcenter()
-    maven {
-        url 'https://repo.spring.io/libs-milestone'
-    }
     mavenLocal()
+    jcenter()
 }
 
 jar {
@@ -117,7 +114,7 @@ bintray {
 
 ext {
     lombokVersion = '1.16.18'
-    springCloudVersion = 'Finchley.M9'
+    springCloudVersion = 'Finchley.RELEASE'
 }
 
 dependencyManagement {
