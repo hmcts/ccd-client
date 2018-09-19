@@ -30,9 +30,6 @@ compileTestJava {
 repositories {
     mavenLocal()
     jcenter()
-    maven {
-        url 'https://dl.bintray.com/hmcts/hmcts-maven'
-    }
 }
 
 jar {
