@@ -1,5 +1,8 @@
 # Core case data client
 
+[![Build Status](https://travis-ci.org/hmcts/core-case-data-store-client.svg?branch=master)](https://travis-ci.org/hmcts/core-case-data-store-client)
+[![Download](https://api.bintray.com/packages/hmcts/hmcts-maven/core-case-data-store-client/images/download.svg) ](https://bintray.com/hmcts/hmcts-maven/core-case-data-store-client/_latestVersion)
+
 This is a client library for interacting with the core case data store application. The two main responsibilities are:
  - start event for new case
  - submit case to core case data app
