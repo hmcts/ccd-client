@@ -9,9 +9,12 @@ import lombok.Data;
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class StartEventResponse {
+
     @JsonProperty("case_details")
     private CaseDetails caseDetails;
+
     @JsonProperty("event_id")
     private String eventId;
+
     private String token;
 }

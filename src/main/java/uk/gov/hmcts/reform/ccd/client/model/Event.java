@@ -9,5 +9,4 @@ public class Event {
     private String id;
     private String summary;
     private String description;
-
 }

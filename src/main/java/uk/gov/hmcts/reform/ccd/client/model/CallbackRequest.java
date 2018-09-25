@@ -9,10 +9,13 @@ import java.util.Map;
 @Data
 @Builder
 public class CallbackRequest {
+
     @JsonProperty("case_details")
     private Map<String, Object> caseDetails;
+
     @JsonProperty("case_details_before")
     private Map<String, Object> caseDetailsBefore;
+
     @JsonProperty("event_id")
     private String eventId;
 }
