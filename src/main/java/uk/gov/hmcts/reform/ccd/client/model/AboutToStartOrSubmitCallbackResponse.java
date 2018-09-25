@@ -10,12 +10,17 @@ import java.util.Map;
 @Data
 @Builder
 public class AboutToStartOrSubmitCallbackResponse implements CallbackResponse {
+
     private Map<String, Object> data;
+
     @JsonProperty("data_classification")
     private Map<String, Object> dataClassification;
+
     @JsonProperty("security_classification")
     private Map<String, Object> securityClassification;
+
     private List<String> errors;
+
     private List<String> warnings;
 
 }
