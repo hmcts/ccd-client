@@ -11,10 +11,10 @@ import java.util.Map;
 public class CallbackRequest {
 
     @JsonProperty("case_details")
-    private Map<String, Object> caseDetails;
+    private CaseDetails caseDetails;
 
     @JsonProperty("case_details_before")
-    private Map<String, Object> caseDetailsBefore;
+    private CaseDetails caseDetailsBefore;
 
     @JsonProperty("event_id")
     private String eventId;
