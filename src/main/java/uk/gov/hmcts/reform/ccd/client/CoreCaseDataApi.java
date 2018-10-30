@@ -201,6 +201,20 @@ public interface CoreCaseDataApi {
             @RequestParam Map<String, String> searchCriteria
     );
 
+    /**
+     * Retrieve case by Case Id
+     */
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/cases/{cid}",
+            headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
+    )
+    CaseDetails getCase(
+            @RequestHeader(AUTHORIZATION) String authorisation,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
+            @PathVariable("cid") String caseId
+    );
+
     @RequestMapping(
             method = RequestMethod.GET,
             value = "/caseworkers/{uid}/jurisdictions/{jid}/case-types/{ctid}/cases/{cid}",
