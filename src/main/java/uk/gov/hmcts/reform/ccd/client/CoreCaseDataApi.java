@@ -207,7 +207,10 @@ public interface CoreCaseDataApi {
     @RequestMapping(
             method = RequestMethod.GET,
             value = "/cases/{cid}",
-            headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
+            headers = {
+                    CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE,
+                    "experimental="
+            }
     )
     CaseDetails getCase(
             @RequestHeader(AUTHORIZATION) String authorisation,
