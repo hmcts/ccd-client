@@ -28,7 +28,8 @@ public class CaseDetails {
     @JsonAlias("created_on")
     private LocalDateTime createdDate;
 
-    @JsonProperty("last_modified_on")
+    @JsonProperty("last_modified")
+    @JsonAlias("last_modified_on")
     private LocalDateTime lastModified;
 
     @JsonProperty("state")
