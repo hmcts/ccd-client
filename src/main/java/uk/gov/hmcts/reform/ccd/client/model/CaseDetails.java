@@ -14,10 +14,8 @@ import java.util.Map;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CaseDetails {
 
-    @JsonProperty("id")
     private Long id;
 
-    @JsonProperty("jurisdiction")
     private String jurisdiction;
 
     @JsonProperty("case_type_id")
@@ -32,7 +30,6 @@ public class CaseDetails {
     @JsonAlias("last_modified_on")
     private LocalDateTime lastModified;
 
-    @JsonProperty("state")
     private String state;
 
     @JsonProperty("locked_by_user_id")
