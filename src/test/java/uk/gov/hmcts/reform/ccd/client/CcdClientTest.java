@@ -29,7 +29,11 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
-@SpringBootTest(classes = {CoreCaseDataClientAutoConfiguration.class, CoreCaseDataConfiguration.class, CoreCaseDataApi.class})
+@SpringBootTest(classes = {
+        CoreCaseDataClientAutoConfiguration.class,
+        CoreCaseDataConfiguration.class,
+        CoreCaseDataApi.class
+})
 @ExtendWith(SpringExtension.class)
 @EnableAutoConfiguration
 class CcdClientTest {
