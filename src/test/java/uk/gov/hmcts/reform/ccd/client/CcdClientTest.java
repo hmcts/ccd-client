@@ -63,7 +63,7 @@ class CcdClientTest {
     }
 
     @Test
-    @DisplayName("Should be able to call the new Api")
+    @DisplayName("Should be able to call the v2 retreive Api")
     void getCaseTest() {
         stubFor(get(urlEqualTo("/cases/1234"))
                 .withHeader("ServiceAuthorization", equalTo("s2sAuth"))
