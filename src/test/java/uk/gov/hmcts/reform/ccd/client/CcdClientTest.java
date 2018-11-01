@@ -38,12 +38,11 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 @EnableAutoConfiguration
 class CcdClientTest {
 
-
-    public static final LocalDateTime DATE_TIME = LocalDateTime.of(2018, 11, 01, 14, 37, 47, 584000000);
+    private static final LocalDateTime DATE_TIME = LocalDateTime.of(2018, 11, 01, 14, 37, 47, 584000000);
     private static WireMockServer wireMockServer;
 
     @Autowired
-    CoreCaseDataApi ccdApi;
+    private CoreCaseDataApi ccdApi;
 
     @BeforeAll
     static void configureSystemUnderTest() {
@@ -59,7 +58,7 @@ class CcdClientTest {
     }
 
     @SneakyThrows
-    public static String loadFile(String filename) {
+    private static String loadFile(String filename) {
         return Resources.toString(ClassLoader.getSystemClassLoader().getResource(filename), UTF_8);
     }
 
