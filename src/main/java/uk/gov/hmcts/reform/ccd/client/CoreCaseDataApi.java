@@ -1,6 +1,7 @@
 package uk.gov.hmcts.reform.ccd.client;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -21,11 +22,14 @@ import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-@FeignClient(name = "core-case-data-api", url = "${core_case_data.api.url}",
-        configuration = CoreCaseDataConfiguration.class)
+@FeignClient(
+        name = "core-case-data-api",
+        url = "${core_case_data.api.url}",
+        configuration = CoreCaseDataConfiguration.class
+)
 public interface CoreCaseDataApi {
-
     String SERVICE_AUTHORIZATION = "ServiceAuthorization";
+    String EXPERIMENTAL = "experimental=";
 
     @RequestMapping(
             method = RequestMethod.GET,
@@ -36,10 +40,10 @@ public interface CoreCaseDataApi {
     StartEventResponse startForCaseworker(
             @RequestHeader(AUTHORIZATION) String authorisation,
             @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
-            @PathVariable String userId,
-            @PathVariable String jurisdictionId,
-            @PathVariable String caseType,
-            @PathVariable String eventId
+            @PathVariable("userId") String userId,
+            @PathVariable("jurisdictionId") String jurisdictionId,
+            @PathVariable("caseType") String caseType,
+            @PathVariable("eventId") String eventId
     );
 
     @RequestMapping(
@@ -49,9 +53,9 @@ public interface CoreCaseDataApi {
     CaseDetails submitForCaseworker(
             @RequestHeader(AUTHORIZATION) String authorisation,
             @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
-            @PathVariable String userId,
-            @PathVariable String jurisdictionId,
-            @PathVariable String caseType,
+            @PathVariable("userId") String userId,
+            @PathVariable("jurisdictionId") String jurisdictionId,
+            @PathVariable("caseType") String caseType,
             @RequestParam("ignore-warning") boolean ignoreWarning,
             @RequestBody CaseDataContent caseDataContent
     );
@@ -64,9 +68,9 @@ public interface CoreCaseDataApi {
     List<CaseDetails> searchForCaseworker(
             @RequestHeader(AUTHORIZATION) String authorisation,
             @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
-            @PathVariable String userId,
-            @PathVariable String jurisdictionId,
-            @PathVariable String caseType,
+            @PathVariable("userId") String userId,
+            @PathVariable("jurisdictionId") String jurisdictionId,
+            @PathVariable("caseType") String caseType,
             @RequestParam Map<String, String> searchCriteria
     );
 
@@ -78,9 +82,9 @@ public interface CoreCaseDataApi {
     PaginatedSearchMetadata getPaginationInfoForSearchForCaseworkers(
             @RequestHeader(AUTHORIZATION) String authorisation,
             @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
-            @PathVariable String userId,
-            @PathVariable String jurisdictionId,
-            @PathVariable String caseType,
+            @PathVariable("userId") String userId,
+            @PathVariable("jurisdictionId") String jurisdictionId,
+            @PathVariable("caseType") String caseType,
             @RequestParam Map<String, String> searchCriteria
     );
 
@@ -121,9 +125,9 @@ public interface CoreCaseDataApi {
     PaginatedSearchMetadata getPaginationInfoForSearchForCitizens(
             @RequestHeader(AUTHORIZATION) String authorisation,
             @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
-            @PathVariable String userId,
-            @PathVariable String jurisdictionId,
-            @PathVariable String caseType,
+            @PathVariable("userId") String userId,
+            @PathVariable("jurisdictionId") String jurisdictionId,
+            @PathVariable("caseType") String caseType,
             @RequestParam Map<String, String> searchCriteria
     );
 
@@ -137,10 +141,10 @@ public interface CoreCaseDataApi {
     StartEventResponse startForCitizen(
             @RequestHeader(AUTHORIZATION) String authorisation,
             @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
-            @PathVariable String userId,
-            @PathVariable String jurisdictionId,
-            @PathVariable String caseType,
-            @PathVariable String eventId
+            @PathVariable("userId") String userId,
+            @PathVariable("jurisdictionId") String jurisdictionId,
+            @PathVariable("caseType") String caseType,
+            @PathVariable("eventId") String eventId
     );
 
     @RequestMapping(
@@ -150,9 +154,9 @@ public interface CoreCaseDataApi {
     CaseDetails submitForCitizen(
             @RequestHeader(AUTHORIZATION) String authorisation,
             @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
-            @PathVariable String userId,
-            @PathVariable String jurisdictionId,
-            @PathVariable String caseType,
+            @PathVariable("userId") String userId,
+            @PathVariable("jurisdictionId") String jurisdictionId,
+            @PathVariable("caseType") String caseType,
             @RequestParam("ignore-warning") boolean ignoreWarning,
             @RequestBody CaseDataContent caseDataContent
     );
@@ -195,27 +199,10 @@ public interface CoreCaseDataApi {
     List<CaseDetails> searchForCitizen(
             @RequestHeader(AUTHORIZATION) String authorisation,
             @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
-            @PathVariable String userId,
-            @PathVariable String jurisdictionId,
-            @PathVariable String caseType,
+            @PathVariable("userId") String userId,
+            @PathVariable("jurisdictionId") String jurisdictionId,
+            @PathVariable("caseType") String caseType,
             @RequestParam Map<String, String> searchCriteria
-    );
-
-    /**
-     * Retrieve case by Case Id
-     */
-    @RequestMapping(
-            method = RequestMethod.GET,
-            value = "/cases/{cid}",
-            headers = {
-                    CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE,
-                    "experimental="
-            }
-    )
-    CaseDetails getCase(
-            @RequestHeader(AUTHORIZATION) String authorisation,
-            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
-            @PathVariable("cid") String caseId
     );
 
     @RequestMapping(
@@ -252,4 +239,23 @@ public interface CoreCaseDataApi {
             headers = CONTENT_TYPE + "=" + APPLICATION_JSON_UTF8_VALUE
     )
     InternalHealth health();
+
+    // ==========================================
+    // V2 Api's
+    // ==========================================
+
+    /**
+     * Retrieve case by Case Id
+     */
+    @GetMapping(
+            path = "/cases/{cid}",
+            headers = EXPERIMENTAL
+    )
+    CaseDetails getCase(
+            @RequestHeader(AUTHORIZATION) String authorisation,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
+            @PathVariable("cid") String caseId
+    );
+
+
 }
