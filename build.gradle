@@ -1,16 +1,17 @@
 plugins {
     id 'checkstyle'
-    id 'io.spring.dependency-management' version '1.0.5.RELEASE'
-    id 'org.springframework.boot' version '2.0.1.RELEASE'
-    id 'com.jfrog.bintray' version '1.8.0'
+    id 'io.spring.dependency-management' version '1.0.6.RELEASE'
+    id 'org.springframework.boot' version '2.0.5.RELEASE'
+    id 'com.jfrog.bintray' version '1.8.4'
+    id 'com.github.ben-manes.versions' version '0.20.0'
     id 'java-library'
     id 'maven'
     id 'maven-publish'
-    id 'net.ltgt.apt' version '0.10'
+    id 'net.ltgt.apt' version '0.18'
 }
 
 group 'uk.gov.hmcts.reform'
-version '4.4.0'
+version '4.4.1'
 
 checkstyle {
     maxWarnings = 0
