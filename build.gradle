@@ -10,7 +10,7 @@ plugins {
 }
 
 group 'uk.gov.hmcts.reform'
-version '4.3.1'
+version '4.4.0'
 
 checkstyle {
     maxWarnings = 0
@@ -129,8 +129,24 @@ dependencies {
     compile group: 'io.github.openfeign', name: 'feign-jackson'
 
     compileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
+    testCompileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     apt group: 'org.projectlombok', name: 'lombok', version: lombokVersion
 
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.3.0'
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.3.0'
+
+    testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+    testCompile group: 'com.github.tomakehurst', name: 'wiremock-standalone', version: '2.19.0'
+    testCompile  group: 'com.google.guava', name: 'guava', version: '27.0-jre'
+
+}
+
+wrapper {
+    distributionType = Wrapper.DistributionType.ALL
+}
+
+test {
+    useJUnitPlatform()
 }
 
 bootJar {

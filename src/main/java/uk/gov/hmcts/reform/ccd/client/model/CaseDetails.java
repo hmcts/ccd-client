@@ -1,5 +1,6 @@
 package uk.gov.hmcts.reform.ccd.client.model;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
@@ -18,12 +19,15 @@ public class CaseDetails {
     private String jurisdiction;
 
     @JsonProperty("case_type_id")
+    @JsonAlias("case_type")
     private String caseTypeId;
 
     @JsonProperty("created_date")
+    @JsonAlias("created_on")
     private LocalDateTime createdDate;
 
     @JsonProperty("last_modified")
+    @JsonAlias("last_modified_on")
     private LocalDateTime lastModified;
 
     private String state;
@@ -35,6 +39,7 @@ public class CaseDetails {
     private Integer securityLevel;
 
     @JsonProperty("case_data")
+    @JsonAlias("data")
     private Map<String, Object> data;
 
     @JsonProperty("security_classification")
