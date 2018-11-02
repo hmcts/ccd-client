@@ -103,8 +103,8 @@ public interface CoreCaseDataApi {
     );
 
 
-    @GetMapping("/citizens/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}" +
-            "/event-triggers/{eventId}/token")
+    @GetMapping("/citizens/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}"
+            + "/event-triggers/{eventId}/token")
     StartEventResponse startForCitizen(
             @RequestHeader(AUTHORIZATION) String authorisation,
             @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
