@@ -19,12 +19,11 @@ public class SearchCriteria {
     }
 
     public String matchAllQuery(Integer size) {
-        JsonNode query = mapper.createObjectNode()
+        return mapper.createObjectNode()
             .put("size", Optional.ofNullable(size).orElse(MINIMUM_SIZE_PER_PAGES))
             .set("query", mapper.createObjectNode()
-                .set("match_all", mapper.createObjectNode()));
-
-        return query.toString();
+                .set("match_all", mapper.createObjectNode()))
+            .toString();
     }
 
     public String searchByQuery(String key, String value) {
@@ -32,7 +31,7 @@ public class SearchCriteria {
     }
 
     public String searchByQuery(String key, String value, Integer size) {
-        JsonNode query = mapper.createObjectNode()
+        return mapper.createObjectNode()
             .put("size", Optional.ofNullable(size).orElse(MINIMUM_SIZE_PER_PAGES))
             .set("query", mapper.createObjectNode()
                 .set("bool", mapper.createObjectNode()
@@ -42,8 +41,6 @@ public class SearchCriteria {
                         )
                     )
                 )
-            );
-
-        return query.toString();
+            ).toString();
     }
 }
