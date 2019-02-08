@@ -14,6 +14,10 @@ public class SearchCriteria {
         this.mapper = mapper;
     }
 
+    public String matchAllQuery() {
+        return matchAllQuery(MINIMUM_SIZE_PER_PAGES);
+    }
+
     public String matchAllQuery(Integer size) {
         JsonNode query = mapper.createObjectNode()
             .put("size", Optional.ofNullable(size).orElse(MINIMUM_SIZE_PER_PAGES))
@@ -21,6 +25,10 @@ public class SearchCriteria {
                 .set("match_all", mapper.createObjectNode()));
 
         return query.toString();
+    }
+
+    public String searchByQuery(String key, String value) {
+        return searchByQuery(key, value, MINIMUM_SIZE_PER_PAGES);
     }
 
     public String searchByQuery(String key, String value, Integer size) {
