@@ -68,7 +68,7 @@ class CcdClientTest {
         stubFor(get(urlEqualTo("/cases/1234"))
                 .withHeader("ServiceAuthorization", equalTo("s2sAuth"))
                 .withHeader(AUTHORIZATION, equalTo("UserToken"))
-                .withHeader("experimental", equalTo("")
+                .withHeader("experimental", equalTo("true")
                 )
                 .willReturn(okJson(loadFile("v2Case.json")))
         );
