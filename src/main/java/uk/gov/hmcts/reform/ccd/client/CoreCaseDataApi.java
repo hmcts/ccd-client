@@ -30,7 +30,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 )
 public interface CoreCaseDataApi {
     String SERVICE_AUTHORIZATION = "ServiceAuthorization";
-    String EXPERIMENTAL = "experimental=";
+    String EXPERIMENTAL = "experimental=true";
 
     @RequestMapping(
             method = RequestMethod.GET,
