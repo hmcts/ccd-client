@@ -12,6 +12,7 @@ import uk.gov.hmcts.reform.ccd.client.healthcheck.InternalHealth;
 import uk.gov.hmcts.reform.ccd.client.model.CaseDataContent;
 import uk.gov.hmcts.reform.ccd.client.model.CaseDetails;
 import uk.gov.hmcts.reform.ccd.client.model.PaginatedSearchMetadata;
+import uk.gov.hmcts.reform.ccd.client.model.SearchResult;
 import uk.gov.hmcts.reform.ccd.client.model.StartEventResponse;
 
 import java.util.List;
@@ -29,7 +30,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 )
 public interface CoreCaseDataApi {
     String SERVICE_AUTHORIZATION = "ServiceAuthorization";
-    String EXPERIMENTAL = "experimental=";
+    String EXPERIMENTAL = "experimental=true";
 
     @RequestMapping(
             method = RequestMethod.GET,
@@ -58,6 +59,18 @@ public interface CoreCaseDataApi {
             @PathVariable("caseType") String caseType,
             @RequestParam("ignore-warning") boolean ignoreWarning,
             @RequestBody CaseDataContent caseDataContent
+    );
+
+    @RequestMapping(
+            method = RequestMethod.POST,
+            value = "/searchCases?ctid={caseType}",
+            headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
+    )
+    SearchResult searchCases(
+            @RequestHeader(AUTHORIZATION) String authorisation,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
+            @PathVariable("caseType") String caseType,
+            @RequestBody String searchString
     );
 
     @RequestMapping(
