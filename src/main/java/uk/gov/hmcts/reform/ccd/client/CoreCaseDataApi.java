@@ -257,9 +257,6 @@ public interface CoreCaseDataApi {
     // V2 Api's
     // ==========================================
 
-    /**
-     * Retrieve case by Case Id
-     */
     @GetMapping(
             path = "/cases/{cid}",
             headers = EXPERIMENTAL
