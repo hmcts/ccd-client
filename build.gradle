@@ -7,7 +7,7 @@ plugins {
     id 'java-library'
     id 'maven'
     id 'maven-publish'
-    id 'net.ltgt.apt' version '0.18'
+    id 'net.ltgt.apt' version '0.21'
 }
 
 group 'uk.gov.hmcts.reform'
@@ -75,22 +75,28 @@ artifacts {
     archives javadocJar
 }
 
+def gitRepo = "https://github.com/hmcts/core-case-data-store-client"
+
 publishing {
     publications {
-        Main(MavenPublication) {
+        mavenJava(MavenPublication) {
             from components.java
             artifact sourcesJar
             artifact javadocJar
-            groupId project.group
-            artifactId 'core-case-data-store-client'
-            version project.version
 
-            pom.withXml {
-                def root = asNode()
-                root.appendNode('description', 'Core case data store client')
-                root.appendNode('name', 'Core case data store client')
-                root.appendNode('url', 'https://github.com/hmcts/core-case-data-store-client')
-                root.children().last() + pomConfig
+            pom {
+                name = 'Core case data store client'
+                description = 'Core case data store client'
+                url = gitRepo
+                licenses {
+                    license {
+                        name = 'MIT License, Copyright (c) 2019 HM Courts & Tribunals Service'
+                        url = "http://www.opensource.org/licenses/mit-license.php"
+                    }
+                }
+                scm {
+                    url = gitRepo
+                }
             }
         }
     }
@@ -99,14 +105,14 @@ publishing {
 bintray {
     user = System.getenv('BINTRAY_USER')
     key = System.getenv('BINTRAY_KEY')
-    publications = ['Main']
+    publications = ['mavenJava']
     publish = true
     pkg {
         repo = 'hmcts-maven'
         name = 'core-case-data-store-client'
         userOrg = 'hmcts'
         licenses = ['MIT']
-        vcsUrl = 'https://github.com/hmcts/core-case-data-store-client'
+        vcsUrl = gitRepo
         version {
             name = project.version
         }
@@ -131,7 +137,7 @@ dependencies {
 
     compileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     testCompileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
-    apt group: 'org.projectlombok', name: 'lombok', version: lombokVersion
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
 
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.3.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.3.0'

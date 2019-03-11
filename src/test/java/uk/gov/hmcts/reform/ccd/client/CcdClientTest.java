@@ -4,7 +4,6 @@ import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.google.common.io.Resources;
-import lombok.SneakyThrows;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -17,6 +16,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import uk.gov.hmcts.reform.ccd.client.model.CaseDetails;
 import uk.gov.hmcts.reform.ccd.client.model.Classification;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -57,14 +57,13 @@ class CcdClientTest {
         wireMockServer.shutdownServer();
     }
 
-    @SneakyThrows
-    private static String loadFile(String filename) {
+    private static String loadFile(String filename) throws IOException {
         return Resources.toString(ClassLoader.getSystemClassLoader().getResource(filename), UTF_8);
     }
 
     @Test
     @DisplayName("Should be able to call the v2 retreive Api")
-    void getCaseTest() {
+    void getCaseTest() throws IOException {
         stubFor(get(urlEqualTo("/cases/1234"))
                 .withHeader("ServiceAuthorization", equalTo("s2sAuth"))
                 .withHeader(AUTHORIZATION, equalTo("UserToken"))
