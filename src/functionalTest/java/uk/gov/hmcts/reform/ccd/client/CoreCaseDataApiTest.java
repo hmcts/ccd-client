@@ -222,9 +222,9 @@ class CoreCaseDataApiTest {
 
                 CaseDetails aCase = coreCaseDataApi
                         .readForCitizen(
-                                idamCaseWorkerToken,
+                                idamCitizenToken,
                                 authTokenGenerator.generate(),
-                                idamCaseWorkerId,
+                                idamCitizenId,
                                 JURISDICTION,
                                 CASE_TYPE,
                                 caseDetails.getId() + ""
@@ -240,9 +240,9 @@ class CoreCaseDataApiTest {
                 createCaseForCitizen();
 
                 List<CaseDetails> caseDetails1 = coreCaseDataApi.searchForCitizen(
-                        idamCaseWorkerToken,
+                        idamCitizenToken,
                         authTokenGenerator.generate(),
-                        idamCaseWorkerId,
+                        idamCitizenId,
                         JURISDICTION,
                         CASE_TYPE,
                         SEARCH_CRITERIA
@@ -258,9 +258,9 @@ class CoreCaseDataApiTest {
                 CaseDetails caseDetails = createCaseForCitizen();
 
                 StartEventResponse startEventResponse = coreCaseDataApi.startEventForCitizen(
-                        idamCaseWorkerToken,
+                        idamCitizenToken,
                         authTokenGenerator.generate(),
-                        idamCaseWorkerId,
+                        idamCitizenId,
                         JURISDICTION,
                         CASE_TYPE,
                         caseDetails.getId() + "",
@@ -292,9 +292,9 @@ class CoreCaseDataApiTest {
 
     private CaseDetails createCaseForCitizen() {
         StartEventResponse startEventResponse = coreCaseDataApi.startForCitizen(
-                idamCaseWorkerToken,
+                idamCitizenToken,
                 authTokenGenerator.generate(),
-                idamCaseWorkerId,
+                idamCitizenId,
                 JURISDICTION,
                 CASE_TYPE,
                 CREATE_CASE_EVENT
