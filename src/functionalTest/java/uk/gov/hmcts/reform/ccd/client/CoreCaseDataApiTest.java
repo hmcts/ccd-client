@@ -94,10 +94,10 @@ class CoreCaseDataApiTest {
         void getCaseForCaseworker() {
             CaseDetails caseDetails = createCaseForCaseworker();
 
-            CaseDetails aCase = coreCaseDataApi
+            CaseDetails theCase = coreCaseDataApi
                     .getCase(idamCaseWorkerToken, authTokenGenerator.generate(), caseDetails.getId() + "");
 
-            assertThat(aCase.getId())
+            assertThat(theCase.getId())
                     .isEqualTo(caseDetails.getId());
         }
     }
@@ -128,7 +128,7 @@ class CoreCaseDataApiTest {
             void getCase() {
                 CaseDetails caseDetails = createCaseForCaseworker();
 
-                CaseDetails aCase = coreCaseDataApi
+                CaseDetails theCase = coreCaseDataApi
                         .readForCaseWorker(
                                 idamCaseWorkerToken,
                                 authTokenGenerator.generate(),
@@ -138,7 +138,7 @@ class CoreCaseDataApiTest {
                                 caseDetails.getId() + ""
                         );
 
-                assertThat(aCase.getId())
+                assertThat(theCase.getId())
                         .isEqualTo(caseDetails.getId());
             }
 
@@ -220,7 +220,7 @@ class CoreCaseDataApiTest {
             void getCase() {
                 CaseDetails caseDetails = createCaseForCitizen();
 
-                CaseDetails aCase = coreCaseDataApi
+                CaseDetails theCase = coreCaseDataApi
                         .readForCitizen(
                                 idamCitizenToken,
                                 authTokenGenerator.generate(),
@@ -230,7 +230,7 @@ class CoreCaseDataApiTest {
                                 caseDetails.getId() + ""
                         );
 
-                assertThat(aCase.getId())
+                assertThat(theCase.getId())
                         .isEqualTo(caseDetails.getId());
             }
 
