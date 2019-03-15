@@ -29,7 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {TestConfiguration.class})
 // IntelliJ doesn't seem to pickup any of the clients here
-class CoreCaseDataApiTest extends BaseTest{
+class CoreCaseDataApiTest extends BaseTest {
 
     private static final Map<String, String> UPDATE_CASE_DATA = new HashMap<String, String>() {
         {
