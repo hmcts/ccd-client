@@ -2,11 +2,12 @@ package uk.gov.hmcts.reform.ccd.client;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import uk.gov.hmcts.reform.ccd.client.model.UserId;
 
@@ -19,10 +20,7 @@ import static uk.gov.hmcts.reform.ccd.client.CoreCaseDataApi.SERVICE_AUTHORIZATI
         configuration = CoreCaseDataConfiguration.class)
 public interface CaseAccessApi {
 
-    @RequestMapping(
-            value = "/caseworkers/{uid}/jurisdictions/{jid}/case-types/{ctid}/cases/ids",
-            method = RequestMethod.GET
-    )
+    @GetMapping("/caseworkers/{uid}/jurisdictions/{jid}/case-types/{ctid}/cases/ids")
     List<String> findCaseIdsGivenUserIdHasAccessTo(
             @RequestHeader(AUTHORIZATION) String authorisation,
             @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
@@ -32,9 +30,8 @@ public interface CaseAccessApi {
             @RequestParam(value = "userId") final String idSearchingFor
     );
 
-    @RequestMapping(
+    @PostMapping(
             value = "/caseworkers/{uid}/jurisdictions/{jid}/case-types/{ctid}/cases/{cid}/users",
-            method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
     void grantAccessToCase(
@@ -47,11 +44,7 @@ public interface CaseAccessApi {
             @RequestBody final UserId id
     );
 
-    @RequestMapping(
-            value = "/caseworkers/{uid}/jurisdictions/{jid}/case-types/{ctid}/cases/{cid}/users/{idToDelete}",
-            method = RequestMethod.DELETE,
-            consumes = MediaType.ALL_VALUE
-    )
+    @DeleteMapping("/caseworkers/{uid}/jurisdictions/{jid}/case-types/{ctid}/cases/{cid}/users/{idToDelete}")
     void revokeAccessToCase(
             @RequestHeader(AUTHORIZATION) String authorisation,
             @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
