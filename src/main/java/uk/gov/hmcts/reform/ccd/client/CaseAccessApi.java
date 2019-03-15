@@ -21,8 +21,7 @@ public interface CaseAccessApi {
 
     @RequestMapping(
             value = "/caseworkers/{uid}/jurisdictions/{jid}/case-types/{ctid}/cases/ids",
-            method = RequestMethod.GET,
-            consumes = MediaType.ALL_VALUE
+            method = RequestMethod.GET
     )
     List<String> findCaseIdsGivenUserIdHasAccessTo(
             @RequestHeader(AUTHORIZATION) String authorisation,
