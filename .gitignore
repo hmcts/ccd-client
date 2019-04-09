@@ -4,6 +4,7 @@
 build
 classes
 out
+bin
 
 .idea
 *.ipr
@@ -12,3 +13,4 @@ out
 
 .classpath
 .project
+.settings
