@@ -1,0 +1,26 @@
+{
+  "_links": [
+    {
+      "deprecation": "string",
+      "href": "string",
+      "hreflang": "string",
+      "media": "string",
+      "rel": "string",
+      "templated": true,
+      "title": "string",
+      "type": "string"
+    }
+  ],
+  "case_type": "someCaseType",
+  "created_on": "2018-11-01T14:37:47.584Z",
+  "data": {
+    "someProp": {
+      "someAttributes": 1
+    }
+  },
+  "id": "1234",
+  "jurisdiction": "JURISDICTION",
+  "last_modified_on": "2018-11-01T14:37:47.584Z",
+  "security_classification": "PUBLIC",
+  "state": "SOME_STATE"
+}

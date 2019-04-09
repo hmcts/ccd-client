@@ -1,5 +1,12 @@
 package uk.gov.hmcts.reform.ccd.client;
 
+import uk.gov.hmcts.reform.ccd.client.healthcheck.InternalHealth;
+import uk.gov.hmcts.reform.ccd.client.model.CaseDataContent;
+import uk.gov.hmcts.reform.ccd.client.model.CaseDetails;
+import uk.gov.hmcts.reform.ccd.client.model.PaginatedSearchMetadata;
+import uk.gov.hmcts.reform.ccd.client.model.SearchResult;
+import uk.gov.hmcts.reform.ccd.client.model.StartEventResponse;
+
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,12 +15,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import uk.gov.hmcts.reform.ccd.client.healthcheck.InternalHealth;
-import uk.gov.hmcts.reform.ccd.client.model.CaseDataContent;
-import uk.gov.hmcts.reform.ccd.client.model.CaseDetails;
-import uk.gov.hmcts.reform.ccd.client.model.PaginatedSearchMetadata;
-import uk.gov.hmcts.reform.ccd.client.model.SearchResult;
-import uk.gov.hmcts.reform.ccd.client.model.StartEventResponse;
 
 import java.util.List;
 import java.util.Map;
@@ -267,5 +268,26 @@ public interface CoreCaseDataApi {
             @PathVariable("cid") String caseId
     );
 
+    @GetMapping(
+            path = "/case-types/{caseTypeId}/event-triggers/{triggerId}",
+            headers = EXPERIMENTAL
+    )
+    StartEventResponse startCase(
+            @RequestHeader(AUTHORIZATION) String authorisation,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
+            @PathVariable("caseTypeId") String caseType,
+            @PathVariable("triggerId") String eventId
+    );
+
+    @GetMapping(
+            path = "/cases/{caseId}/event-triggers/{triggerId}",
+            headers = EXPERIMENTAL
+    )
+    StartEventResponse startEvent(
+            @RequestHeader(AUTHORIZATION) String authorisation,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
+            @PathVariable("caseTypeId") String caseType,
+            @PathVariable("triggerId") String eventId
+    );
 
 }
