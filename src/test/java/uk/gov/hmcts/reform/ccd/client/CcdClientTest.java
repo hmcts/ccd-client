@@ -73,7 +73,7 @@ class CcdClientTest {
         );
         CaseDetails caseData = ccdApi.getCase("UserToken", "s2sAuth", "1234");
 
-        assertThat(caseData.getJurisdiction()).isEqualTo("JURISDICTION");
+        assertThat(caseData.getJurisdiction()).isEqualTo("ICTIONJURISD");
         assertThat(caseData.getLastModified()).isEqualTo(DATE_TIME);
         assertThat(caseData.getCreatedDate()).isEqualTo(DATE_TIME);
         assertThat(caseData.getState()).isEqualTo("SOME_STATE");
