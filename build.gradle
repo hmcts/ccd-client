@@ -138,8 +138,8 @@ sourceSets {
 }
 
 configurations {
-    functionalTestImplementation.extendsFrom implementation
-    functionalTestRuntimeOnly.extendsFrom runtimeOnly
+    functionalTestImplementation.extendsFrom testImplementation
+    functionalTestRuntimeOnly.extendsFrom testRuntimeOnly
 }
 
 task functionalTest(type: Test) {
@@ -156,38 +156,30 @@ dependencies {
     compile group: 'io.github.openfeign', name: 'feign-jackson'
 
     compileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
-    functionalTestCompileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
-
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
-    functionalTestAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
 
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.3.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.3.0'
 
     testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test'
     testCompile group: 'com.github.tomakehurst', name: 'wiremock-standalone', version: '2.19.0'
-    testCompile  group: 'com.google.guava', name: 'guava', version: '27.0-jre'
-
-    functionalTestImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.3.0'
-    functionalTestImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.3.0'
+    testCompile group: 'com.google.guava', name: 'guava', version: '27.0-jre'
 
     functionalTestImplementation group: 'uk.gov.hmcts.reform', name: 'service-auth-provider-client', version: '2.0.1'
     functionalTestImplementation group: 'uk.gov.hmcts.reform', name: 'idam-client', version: '1.0.0'
     functionalTestImplementation group: 'org.assertj', name: 'assertj-core', version: '3.12.1'
-    functionalTestImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+    functionalTestCompileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
+    functionalTestAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
 
     functionalTestImplementation group: 'com.fasterxml.jackson.module', name: 'jackson-module-parameter-names', version: '2.9.8'
+    
 }
 
 wrapper {
     distributionType = Wrapper.DistributionType.ALL
 }
 
-test {
-    useJUnitPlatform()
-}
-
-functionalTest {
+tasks.withType(Test) {
     useJUnitPlatform()
 }
 
