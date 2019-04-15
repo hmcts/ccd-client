@@ -285,7 +285,7 @@ public interface CoreCaseDataApi {
     StartEventResponse startEvent(
             @RequestHeader(AUTHORIZATION) String authorisation,
             @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
-            @PathVariable("caseTypeId") String caseType,
+            @PathVariable("caseId") String caseId,
             @PathVariable("triggerId") String eventId
     );
 

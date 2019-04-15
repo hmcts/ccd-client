@@ -260,4 +260,70 @@ class CoreCaseDataApiTest extends BaseTest {
         }
 
     }
+
+    @Nested
+    class V2 {
+
+        @BeforeEach
+        void init() {
+            caseWorker = createCaseworker();
+        }
+
+        @Test
+        @DisplayName("Should be able to create a case")
+        void create() {
+            CaseDetails caseDetails = createCase(caseWorker);
+
+            assertThat(caseDetails.getData().get("TextField"))
+                    .isEqualTo("text...");
+        }
+
+        @Test
+        @DisplayName("Should be able to retrieve a case")
+        void getCase() {
+            CaseDetails caseDetails = createCase(caseWorker);
+
+            CaseDetails theCase = coreCaseDataApi
+                    .getCase(
+                            caseWorker.getAuthToken(),
+                            authTokenGenerator.generate(),
+                            caseDetails.getId() + ""
+                    );
+
+            assertThat(theCase.getId())
+                    .isEqualTo(caseDetails.getId());
+        }
+
+        @Test
+        @DisplayName("Should be able to update a case")
+        void update() {
+            CaseDetails caseDetails = createCaseForCaseworker(caseWorker);
+
+            StartEventResponse startEventResponse = coreCaseDataApi.startEvent(
+                    caseWorker.getAuthToken(),
+                    authTokenGenerator.generate(),
+                    caseDetails.getId() + "",
+                    UPDATE_CASE_EVENT
+            );
+
+            CaseDataContent caseDataContent = CaseDataContent.builder()
+                    .eventToken(startEventResponse.getToken())
+                    .event(Event.builder().id(startEventResponse.getEventId()).build())
+                    .data(UPDATE_CASE_DATA)
+                    .build();
+
+            CaseDetails updatedCase = coreCaseDataApi.submitEventForCaseWorker(
+                    caseWorker.getAuthToken(),
+                    authTokenGenerator.generate(),
+                    caseWorker.getUserDetails().getId(),
+                    JURISDICTION,
+                    CASE_TYPE,
+                    caseDetails.getId() + "",
+                    true,
+                    caseDataContent
+            );
+
+            assertThat(updatedCase.getData().get("TextField")).isEqualTo("text updated");
+        }
+    }
 }

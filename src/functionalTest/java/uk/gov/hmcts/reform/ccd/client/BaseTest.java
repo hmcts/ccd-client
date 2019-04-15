@@ -2,11 +2,13 @@ package uk.gov.hmcts.reform.ccd.client;
 
 import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
+
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 import uk.gov.hmcts.reform.authorisation.generators.AuthTokenGenerator;
 import uk.gov.hmcts.reform.ccd.client.model.CaseDataContent;
 import uk.gov.hmcts.reform.ccd.client.model.CaseDetails;
@@ -119,6 +121,31 @@ public class BaseTest {
                 caseworker.getAuthToken(),
                 authTokenGenerator.generate(),
                 caseworker.getUserDetails().getId(),
+                JURISDICTION,
+                CASE_TYPE,
+                true,
+                caseDataContent
+        );
+    }
+
+    CaseDetails createCase(User user) {
+        StartEventResponse startEventResponse = coreCaseDataApi.startCase(
+                user.getAuthToken(),
+                authTokenGenerator.generate(),
+                CASE_TYPE,
+                CREATE_CASE_EVENT
+        );
+
+        CaseDataContent caseDataContent = CaseDataContent.builder()
+                .eventToken(startEventResponse.getToken())
+                .event(Event.builder().id(startEventResponse.getEventId()).build())
+                .data(CREATE_CASE_DATA)
+                .build();
+
+        return coreCaseDataApi.submitForCaseworker(
+                user.getAuthToken(),
+                authTokenGenerator.generate(),
+                user.getUserDetails().getId(),
                 JURISDICTION,
                 CASE_TYPE,
                 true,
