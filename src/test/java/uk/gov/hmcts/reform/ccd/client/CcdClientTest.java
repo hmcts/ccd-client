@@ -71,7 +71,7 @@ class CcdClientTest {
                 .withHeader(AUTHORIZATION, equalTo("UserToken"))
                 .withHeader("experimental", equalTo("true")
                 )
-                .willReturn(okJson(loadFile("v2Case.json")))
+                .willReturn(okJson(loadFile("case.v2.json")))
         );
         CaseDetails caseData = ccdApi.getCase("UserToken", "s2sAuth", "1234");
 
@@ -99,13 +99,11 @@ class CcdClientTest {
         );
         StartEventResponse startEventResponse = ccdApi.startCase("UserToken", "s2sAuth", CASE_TYPE_ID, EVENT_TRIGGER_ID);
 
-        assertThat(startEventResponse.getEventId()).isEqualTo(EVENT_TRIGGER_ID);
         CaseDetails caseDetails = startEventResponse.getCaseDetails();
         assertThat(caseDetails.getCaseTypeId()).isEqualTo(CASE_TYPE_ID);
         assertThat(caseDetails.getLastModified()).isEqualTo(DATE_TIME);
         assertThat(caseDetails.getCreatedDate()).isEqualTo(DATE_TIME);
         assertThat(caseDetails.getState()).isEqualTo("SOME_STATE");
-        assertThat(caseDetails.getCaseTypeId()).isEqualTo("someCaseType");
         assertThat(caseDetails.getId()).isEqualTo(1234L);
         assertThat(caseDetails.getSecurityClassification()).isEqualTo(Classification.PUBLIC);
         Map<String, Object> someProp = (Map<String, Object>) caseDetails.getData().get("someProp");
