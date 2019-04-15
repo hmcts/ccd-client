@@ -97,9 +97,9 @@ class CcdClientTest {
                 )
                 .willReturn(okJson(loadFile("startCase.v2.json")))
         );
-        StartEventResponse startEventResponse = ccdApi.startCase("UserToken", "s2sAuth", CASE_TYPE_ID, EVENT_TRIGGER_ID);
+        StartEventResponse startEvent = ccdApi.startCase("UserToken", "s2sAuth", CASE_TYPE_ID, EVENT_TRIGGER_ID);
 
-        CaseDetails caseDetails = startEventResponse.getCaseDetails();
+        CaseDetails caseDetails = startEvent.getCaseDetails();
         assertThat(caseDetails.getCaseTypeId()).isEqualTo(CASE_TYPE_ID);
         assertThat(caseDetails.getLastModified()).isEqualTo(DATE_TIME);
         assertThat(caseDetails.getCreatedDate()).isEqualTo(DATE_TIME);

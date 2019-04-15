@@ -3,11 +3,9 @@ package uk.gov.hmcts.reform.ccd.client;
 import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import uk.gov.hmcts.reform.authorisation.generators.AuthTokenGenerator;
 import uk.gov.hmcts.reform.ccd.client.model.CaseDataContent;
@@ -27,7 +25,6 @@ import java.util.Map;
 import static java.util.Collections.singletonList;
 
 @Slf4j
-@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {TestConfiguration.class})
 public class BaseTest {
 
