@@ -20,4 +20,7 @@ public class CaseDataContent {
 
     @JsonProperty("ignore_warning")
     private boolean ignoreWarning;
+
+    @JsonProperty("case_reference")
+    private String caseReference;
 }

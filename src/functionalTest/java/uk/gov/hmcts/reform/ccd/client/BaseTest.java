@@ -34,6 +34,7 @@ public class BaseTest {
     static final String CASE_TYPE = "AAT";
     static final String UPDATE_CASE_EVENT = "START_PROGRESS";
     private static final String CREATE_CASE_EVENT = "CREATE";
+    private static final String CASE_REFERENCE = "REF123";
 
     private static final Map<String, String> CREATE_CASE_DATA = new HashMap<String, String>() {
         {
@@ -113,6 +114,7 @@ public class BaseTest {
                 .eventToken(startEventResponse.getToken())
                 .event(Event.builder().id(startEventResponse.getEventId()).build())
                 .data(CREATE_CASE_DATA)
+                .caseReference(CASE_REFERENCE)
                 .build();
 
         return coreCaseDataApi.submitForCaseworker(
