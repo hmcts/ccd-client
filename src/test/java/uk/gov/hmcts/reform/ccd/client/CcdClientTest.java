@@ -4,17 +4,18 @@ import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.google.common.io.Resources;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 import uk.gov.hmcts.reform.ccd.client.model.CaseDetails;
 import uk.gov.hmcts.reform.ccd.client.model.Classification;
+import uk.gov.hmcts.reform.ccd.client.model.StartEventResponse;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -34,12 +35,13 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
         CoreCaseDataConfiguration.class,
         CoreCaseDataApi.class
 })
-@ExtendWith(SpringExtension.class)
 @EnableAutoConfiguration
 class CcdClientTest {
 
     private static final LocalDateTime DATE_TIME = LocalDateTime.of(2018, 11, 01, 14, 37, 47, 584000000);
     private static WireMockServer wireMockServer;
+    private static final String EVENT_TRIGGER_ID = "createCase";
+    private static final String CASE_TYPE_ID = "TestAddressBookCase";
 
     @Autowired
     private CoreCaseDataApi ccdApi;
@@ -69,7 +71,7 @@ class CcdClientTest {
                 .withHeader(AUTHORIZATION, equalTo("UserToken"))
                 .withHeader("experimental", equalTo("true")
                 )
-                .willReturn(okJson(loadFile("v2Case.json")))
+                .willReturn(okJson(loadFile("case.v2.json")))
         );
         CaseDetails caseData = ccdApi.getCase("UserToken", "s2sAuth", "1234");
 
@@ -81,6 +83,30 @@ class CcdClientTest {
         assertThat(caseData.getId()).isEqualTo(1234L);
         assertThat(caseData.getSecurityClassification()).isEqualTo(Classification.PUBLIC);
         Map<String, Object> someProp = (Map<String, Object>) caseData.getData().get("someProp");
+        assertThat(someProp.get("someAttributes")).isEqualTo(1);
+
+    }
+
+    @Test
+    @DisplayName("Should be able to call the v2 create a case Api")
+    void startCaseTest() throws IOException {
+        stubFor(get(urlEqualTo("/case-types/" + CASE_TYPE_ID + "/event-triggers/" + EVENT_TRIGGER_ID))
+                .withHeader("ServiceAuthorization", equalTo("s2sAuth"))
+                .withHeader(AUTHORIZATION, equalTo("UserToken"))
+                .withHeader("experimental", equalTo("true")
+                )
+                .willReturn(okJson(loadFile("startCase.v2.json")))
+        );
+        StartEventResponse startEvent = ccdApi.startCase("UserToken", "s2sAuth", CASE_TYPE_ID, EVENT_TRIGGER_ID);
+
+        CaseDetails caseDetails = startEvent.getCaseDetails();
+        assertThat(caseDetails.getCaseTypeId()).isEqualTo(CASE_TYPE_ID);
+        assertThat(caseDetails.getLastModified()).isEqualTo(DATE_TIME);
+        assertThat(caseDetails.getCreatedDate()).isEqualTo(DATE_TIME);
+        assertThat(caseDetails.getState()).isEqualTo("SOME_STATE");
+        assertThat(caseDetails.getId()).isEqualTo(1234L);
+        assertThat(caseDetails.getSecurityClassification()).isEqualTo(Classification.PUBLIC);
+        Map<String, Object> someProp = (Map<String, Object>) caseDetails.getData().get("someProp");
         assertThat(someProp.get("someAttributes")).isEqualTo(1);
 
     }

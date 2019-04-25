@@ -267,5 +267,26 @@ public interface CoreCaseDataApi {
             @PathVariable("cid") String caseId
     );
 
+    @GetMapping(
+            path = "/case-types/{caseTypeId}/event-triggers/{triggerId}",
+            headers = EXPERIMENTAL
+    )
+    StartEventResponse startCase(
+            @RequestHeader(AUTHORIZATION) String authorisation,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
+            @PathVariable("caseTypeId") String caseType,
+            @PathVariable("triggerId") String eventId
+    );
+
+    @GetMapping(
+            path = "/cases/{caseId}/event-triggers/{triggerId}",
+            headers = EXPERIMENTAL
+    )
+    StartEventResponse startEvent(
+            @RequestHeader(AUTHORIZATION) String authorisation,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
+            @PathVariable("caseId") String caseId,
+            @PathVariable("triggerId") String eventId
+    );
 
 }
