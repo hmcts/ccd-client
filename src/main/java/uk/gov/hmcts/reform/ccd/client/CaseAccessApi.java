@@ -54,5 +54,4 @@ public interface CaseAccessApi {
             @PathVariable("cid") final String caseId,
             @PathVariable("idToDelete") final String idToDelete
     );
-
 }
