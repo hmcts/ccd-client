@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
+import uk.gov.hmcts.reform.ccd.client.model.CaseUser;
 import uk.gov.hmcts.reform.ccd.client.model.UserId;
 
 import java.util.List;
@@ -55,4 +57,12 @@ public interface CaseAccessApi {
             @PathVariable("idToDelete") final String idToDelete
     );
 
+    @PutMapping("/cases/{caseReference}/users/{userId}")
+    void updateCaseRolesForUser(
+        @RequestHeader(AUTHORIZATION) String authorisation,
+        @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
+        @PathVariable("caseReference") String caseReference,
+        @PathVariable("userId") String userId,
+        @RequestBody CaseUser caseUser
+    );
 }
