@@ -1,0 +1,1342 @@
+[
+  {
+    "user_id": "7657d804-1ad0-43cb-8d5f-b2ada8bbb8b5",
+    "user_last_name": "SystemUser",
+    "user_first_name": "CMC",
+    "event_name": "Claim submitted",
+    "created_date": "2019-06-03T16:28:11.4",
+    "case_type_id": "MoneyClaimCase",
+    "case_type_version": 38,
+    "state_id": "open",
+    "state_name": "Open",
+    "data": {
+      "reason": "A strong sense of entitlement that would explain my reasons of the claim, that the Roof work and leaks that followed were done below standards set by the council inspector",
+      "applicants": [
+        {
+          "id": "447a9dd9-cd5f-4b7b-adfe-0bde33390d43",
+          "value": {
+            "partyName": "Jan Clark",
+            "partyDetail": {
+              "type": "INDIVIDUAL",
+              "idamId": "5bdeda64-3cfc-4c75-8d7c-f587c547d413",
+              "dateOfBirth": "2000-01-01",
+              "emailAddress": "dharmendra.kumar@hmcts.net",
+              "primaryAddress": {
+                "PostCode": "SW1H 9AJ",
+                "PostTown": "London",
+                "AddressLine1": "Street 1",
+                "AddressLine2": "Street 2",
+                "AddressLine3": "Street 3"
+              },
+              "telephoneNumber": {
+                "telephoneNumber": "(0)207 127 0000"
+              }
+            },
+            "leadApplicantIndicator": "YES"
+          }
+        }
+      ],
+      "interestType": "BREAKDOWN",
+      "caseDocuments": [
+        {
+          "id": "178153ae-41bc-47dc-ac67-68f41dd79e17",
+          "value": {
+            "size": 80173,
+            "createdBy": "OCMC",
+            "documentLink": {
+              "document_url": "http://localhost:4460/documents/463ddc5a-000d-49b4-8d1b-800942d228e0",
+              "document_filename": "000MC665-claim-form.pdf",
+              "document_binary_url": "http://localhost:4460/documents/463ddc5a-000d-49b4-8d1b-800942d228e0/binary"
+            },
+            "documentName": "000MC665-claim-form.pdf",
+            "documentType": "SEALED_CLAIM",
+            "createdDatetime": "2019-05-31T10:19:42.168"
+          }
+        },
+        {
+          "id": "14fac93f-ff66-45e7-81eb-ca7eb6523b77",
+          "value": {
+            "size": 73453,
+            "createdBy": "OCMC",
+            "documentLink": {
+              "document_url": "http://localhost:4460/documents/58741639-0354-4a79-8b42-75e038bae349",
+              "document_filename": "000MC665-claim-form-claimant-copy.pdf",
+              "document_binary_url": "http://localhost:4460/documents/58741639-0354-4a79-8b42-75e038bae349/binary"
+            },
+            "documentName": "000MC665-claim-form-claimant-copy.pdf",
+            "documentType": "CLAIM_ISSUE_RECEIPT",
+            "createdDatetime": "2019-05-31T10:19:42.307"
+          }
+        }
+      ],
+      "feeAmountInPennies": "2500",
+      "interestBreakDownExplanation": "sdf",
+      "paymentAmount": "2500",
+      "issuedOn": "2019-05-31",
+      "features": "admissions,directionsQuestionnaire,mediationPilot",
+      "interestSpecificDailyAmount": "4500",
+      "submitterId": "5bdeda64-3cfc-4c75-8d7c-f587c547d413",
+      "caseName": "Jan Clark Vs Mrs. Mary Richards",
+      "claimSubmissionOperationIndicators": {
+        "rpa": "YES",
+        "bulkPrint": "YES",
+        "sealedClaimUpload": "NO",
+        "staffNotification": "YES",
+        "claimantNotification": "YES",
+        "defendantNotification": "YES",
+        "claimIssueReceiptUpload": "NO"
+      },
+      "previousServiceCaseReference": "000MC665",
+      "id": "1559579289296366",
+      "paymentStatus": "Success",
+      "currentInterestAmount": "3400",
+      "amountType": "BREAK_DOWN",
+      "amountBreakDown": [
+        {
+          "id": "740ee9ab-f9b9-42dc-ba34-2acb7b0896f7",
+          "value": {
+            "amount": "7500",
+            "reason": "Roof Fix & repairs to leak"
+          }
+        }
+      ],
+      "paymentReference": "RC-1559-2979-6221-5252",
+      "submittedOn": "2019-05-31T11:19:39.984038",
+      "externalId": "c68b47c4-402e-4419-8877-56c2e2960991",
+      "interestBreakDownAmount": "3400",
+      "respondents": [
+        {
+          "id": "1480548e-61c5-48b7-a2c3-b27e1885fcb4",
+          "value": {
+            "servedDate": "2019-06-05",
+            "letterHolderId": "8fd5eede-ead1-429f-9284-d63877d6ea36",
+            "responseDeadline": "2019-06-19",
+            "claimantProvidedDetail": {
+              "type": "INDIVIDUAL",
+              "title": "Mrs.",
+              "lastName": "Richards",
+              "firstName": "Mary",
+              "emailAddress": "dharmendra.kumar@hmcts.net",
+              "primaryAddress": {
+                "PostCode": "SW1H 9AJ",
+                "PostTown": "London",
+                "AddressLine1": "Flat 3A",
+                "AddressLine2": "Street 1",
+                "AddressLine3": "Middle Road"
+              }
+            },
+            "claimantProvidedPartyName": "Mrs. Mary Richards",
+            "responseMoreTimeNeededOption": "NO"
+          }
+        }
+      ],
+      "totalAmount": "13400",
+      "migratedFromClaimStore": "YES",
+      "timeline": [
+        {
+          "id": "f951eaa6-2bc0-4445-b10d-99bc674931fa",
+          "value": {
+            "date": "01 October 2017",
+            "description": "The day the first bill was issued"
+          }
+        },
+        {
+          "id": "6bfe0f25-d890-4d22-b480-1f4b3e6c36a0",
+          "value": {
+            "date": "26 March 2018",
+            "description": "A historic day with enormous importance"
+          }
+        },
+        {
+          "id": "dc352492-ec9b-4ea9-997a-47fbfa1539cb",
+          "value": {
+            "date": "14 June 2018",
+            "description": "line to explain what happened and when"
+          }
+        }
+      ],
+      "submitterEmail": "dharmendra.kumar@hmcts.net"
+    },
+    "data_classification": {
+      "reason": "PUBLIC",
+      "applicants": {
+        "value": [
+          {
+            "id": "447a9dd9-cd5f-4b7b-adfe-0bde33390d43",
+            "value": {
+              "partyName": "PUBLIC",
+              "partyDetail": {
+                "value": {
+                  "type": "PUBLIC",
+                  "idamId": "PUBLIC",
+                  "dateOfBirth": "PUBLIC",
+                  "emailAddress": "PUBLIC",
+                  "primaryAddress": {
+                    "value": {
+                      "PostCode": "PUBLIC",
+                      "PostTown": "PUBLIC",
+                      "AddressLine1": "PUBLIC",
+                      "AddressLine2": "PUBLIC",
+                      "AddressLine3": "PUBLIC"
+                    },
+                    "classification": "PUBLIC"
+                  },
+                  "telephoneNumber": {
+                    "value": {
+                      "telephoneNumber": "PUBLIC"
+                    },
+                    "classification": "PUBLIC"
+                  }
+                },
+                "classification": "PUBLIC"
+              },
+              "leadApplicantIndicator": "PUBLIC"
+            }
+          }
+        ],
+        "classification": "PUBLIC"
+      },
+      "interestType": "PUBLIC",
+      "caseDocuments": {
+        "value": [
+          {
+            "id": "178153ae-41bc-47dc-ac67-68f41dd79e17",
+            "value": {
+              "size": "PUBLIC",
+              "createdBy": "PUBLIC",
+              "documentLink": "PUBLIC",
+              "documentName": "PUBLIC",
+              "documentType": "PUBLIC",
+              "createdDatetime": "PUBLIC"
+            }
+          },
+          {
+            "id": "14fac93f-ff66-45e7-81eb-ca7eb6523b77",
+            "value": {
+              "size": "PUBLIC",
+              "createdBy": "PUBLIC",
+              "documentLink": "PUBLIC",
+              "documentName": "PUBLIC",
+              "documentType": "PUBLIC",
+              "createdDatetime": "PUBLIC"
+            }
+          }
+        ],
+        "classification": "PUBLIC"
+      },
+      "feeAmountInPennies": "PUBLIC",
+      "interestBreakDownExplanation": "PUBLIC",
+      "paymentAmount": "PUBLIC",
+      "issuedOn": "PUBLIC",
+      "features": "PUBLIC",
+      "interestSpecificDailyAmount": "PUBLIC",
+      "submitterId": "PUBLIC",
+      "caseName": "PUBLIC",
+      "claimSubmissionOperationIndicators": {
+        "value": {
+          "rpa": "PUBLIC",
+          "bulkPrint": "PUBLIC",
+          "sealedClaimUpload": "PUBLIC",
+          "staffNotification": "PUBLIC",
+          "claimantNotification": "PUBLIC",
+          "defendantNotification": "PUBLIC",
+          "claimIssueReceiptUpload": "PUBLIC"
+        },
+        "classification": "PUBLIC"
+      },
+      "previousServiceCaseReference": "PUBLIC",
+      "id": "PUBLIC",
+      "paymentStatus": "PUBLIC",
+      "currentInterestAmount": "PUBLIC",
+      "amountType": "PUBLIC",
+      "amountBreakDown": {
+        "value": [
+          {
+            "id": "740ee9ab-f9b9-42dc-ba34-2acb7b0896f7",
+            "value": {
+              "amount": "PUBLIC",
+              "reason": "PUBLIC"
+            }
+          }
+        ],
+        "classification": "PUBLIC"
+      },
+      "paymentReference": "PUBLIC",
+      "submittedOn": "PUBLIC",
+      "externalId": "PUBLIC",
+      "interestBreakDownAmount": "PUBLIC",
+      "respondents": {
+        "value": [
+          {
+            "id": "1480548e-61c5-48b7-a2c3-b27e1885fcb4",
+            "value": {
+              "servedDate": "PUBLIC",
+              "partyDetail": {
+                "classification": "PUBLIC"
+              },
+              "letterHolderId": "PUBLIC",
+              "responseDeadline": "PUBLIC",
+              "claimantProvidedDetail": {
+                "value": {
+                  "type": "PUBLIC",
+                  "title": "PUBLIC",
+                  "lastName": "PUBLIC",
+                  "firstName": "PUBLIC",
+                  "emailAddress": "PUBLIC",
+                  "primaryAddress": {
+                    "value": {
+                      "PostCode": "PUBLIC",
+                      "PostTown": "PUBLIC",
+                      "AddressLine1": "PUBLIC",
+                      "AddressLine2": "PUBLIC",
+                      "AddressLine3": "PUBLIC"
+                    },
+                    "classification": "PUBLIC"
+                  }
+                },
+                "classification": "PUBLIC"
+              },
+              "claimantProvidedPartyName": "PUBLIC",
+              "responseMoreTimeNeededOption": "PUBLIC"
+            }
+          }
+        ],
+        "classification": "PUBLIC"
+      },
+      "totalAmount": "PUBLIC",
+      "migratedFromClaimStore": "PUBLIC",
+      "timeline": {
+        "value": [
+          {
+            "id": "f951eaa6-2bc0-4445-b10d-99bc674931fa",
+            "value": {
+              "date": "PUBLIC",
+              "description": "PUBLIC"
+            }
+          },
+          {
+            "id": "6bfe0f25-d890-4d22-b480-1f4b3e6c36a0",
+            "value": {
+              "date": "PUBLIC",
+              "description": "PUBLIC"
+            }
+          },
+          {
+            "id": "dc352492-ec9b-4ea9-997a-47fbfa1539cb",
+            "value": {
+              "date": "PUBLIC",
+              "description": "PUBLIC"
+            }
+          }
+        ],
+        "classification": "PUBLIC"
+      },
+      "submitterEmail": "PUBLIC"
+    }
+  },
+  {
+    "user_id": "7657d804-1ad0-43cb-8d5f-b2ada8bbb8b5",
+    "user_last_name": "SystemUser",
+    "user_first_name": "CMC",
+    "event_name": "Claim issue receipt uploaded",
+    "created_date": "2019-06-03T16:28:11.297",
+    "case_type_id": "MoneyClaimCase",
+    "case_type_version": 38,
+    "state_id": "create",
+    "state_name": "Create",
+    "data": {
+      "reason": "A strong sense of entitlement that would explain my reasons of the claim, that the Roof work and leaks that followed were done below standards set by the council inspector",
+      "applicants": [
+        {
+          "id": "447a9dd9-cd5f-4b7b-adfe-0bde33390d43",
+          "value": {
+            "partyName": "Jan Clark",
+            "partyDetail": {
+              "type": "INDIVIDUAL",
+              "idamId": "5bdeda64-3cfc-4c75-8d7c-f587c547d413",
+              "dateOfBirth": "2000-01-01",
+              "emailAddress": "dharmendra.kumar@hmcts.net",
+              "primaryAddress": {
+                "PostCode": "SW1H 9AJ",
+                "PostTown": "London",
+                "AddressLine1": "Street 1",
+                "AddressLine2": "Street 2",
+                "AddressLine3": "Street 3"
+              },
+              "telephoneNumber": {
+                "telephoneNumber": "(0)207 127 0000"
+              }
+            },
+            "leadApplicantIndicator": "YES"
+          }
+        }
+      ],
+      "interestType": "BREAKDOWN",
+      "caseDocuments": [
+        {
+          "id": "178153ae-41bc-47dc-ac67-68f41dd79e17",
+          "value": {
+            "size": 80173,
+            "createdBy": "OCMC",
+            "documentLink": {
+              "document_url": "http://localhost:4460/documents/463ddc5a-000d-49b4-8d1b-800942d228e0",
+              "document_filename": "000MC665-claim-form.pdf",
+              "document_binary_url": "http://localhost:4460/documents/463ddc5a-000d-49b4-8d1b-800942d228e0/binary"
+            },
+            "documentName": "000MC665-claim-form.pdf",
+            "documentType": "SEALED_CLAIM",
+            "createdDatetime": "2019-05-31T10:19:42.168"
+          }
+        },
+        {
+          "id": "14fac93f-ff66-45e7-81eb-ca7eb6523b77",
+          "value": {
+            "size": 73453,
+            "createdBy": "OCMC",
+            "documentLink": {
+              "document_url": "http://localhost:4460/documents/58741639-0354-4a79-8b42-75e038bae349",
+              "document_filename": "000MC665-claim-form-claimant-copy.pdf",
+              "document_binary_url": "http://localhost:4460/documents/58741639-0354-4a79-8b42-75e038bae349/binary"
+            },
+            "documentName": "000MC665-claim-form-claimant-copy.pdf",
+            "documentType": "CLAIM_ISSUE_RECEIPT",
+            "createdDatetime": "2019-05-31T10:19:42.307"
+          }
+        }
+      ],
+      "feeAmountInPennies": "2500",
+      "interestBreakDownExplanation": "sdf",
+      "paymentAmount": "2500",
+      "issuedOn": "2019-05-31",
+      "features": "admissions,directionsQuestionnaire,mediationPilot",
+      "interestSpecificDailyAmount": "4500",
+      "submitterId": "5bdeda64-3cfc-4c75-8d7c-f587c547d413",
+      "caseName": "Jan Clark Vs Mrs. Mary Richards",
+      "claimSubmissionOperationIndicators": {
+        "rpa": "YES",
+        "bulkPrint": "YES",
+        "sealedClaimUpload": "NO",
+        "staffNotification": "YES",
+        "claimantNotification": "YES",
+        "defendantNotification": "YES",
+        "claimIssueReceiptUpload": "NO"
+      },
+      "previousServiceCaseReference": "000MC665",
+      "id": 156,
+      "paymentStatus": "Success",
+      "currentInterestAmount": "3400",
+      "amountType": "BREAK_DOWN",
+      "amountBreakDown": [
+        {
+          "id": "740ee9ab-f9b9-42dc-ba34-2acb7b0896f7",
+          "value": {
+            "amount": "7500",
+            "reason": "Roof Fix & repairs to leak"
+          }
+        }
+      ],
+      "paymentReference": "RC-1559-2979-6221-5252",
+      "submittedOn": "2019-05-31T11:19:39.984038",
+      "externalId": "c68b47c4-402e-4419-8877-56c2e2960991",
+      "interestBreakDownAmount": "3400",
+      "respondents": [
+        {
+          "id": "1480548e-61c5-48b7-a2c3-b27e1885fcb4",
+          "value": {
+            "servedDate": "2019-06-05",
+            "letterHolderId": "8fd5eede-ead1-429f-9284-d63877d6ea36",
+            "responseDeadline": "2019-06-19",
+            "claimantProvidedDetail": {
+              "type": "INDIVIDUAL",
+              "title": "Mrs.",
+              "lastName": "Richards",
+              "firstName": "Mary",
+              "emailAddress": "dharmendra.kumar@hmcts.net",
+              "primaryAddress": {
+                "PostCode": "SW1H 9AJ",
+                "PostTown": "London",
+                "AddressLine1": "Flat 3A",
+                "AddressLine2": "Street 1",
+                "AddressLine3": "Middle Road"
+              }
+            },
+            "claimantProvidedPartyName": "Mrs. Mary Richards",
+            "responseMoreTimeNeededOption": "NO"
+          }
+        }
+      ],
+      "totalAmount": "13400",
+      "migratedFromClaimStore": "YES",
+      "timeline": [
+        {
+          "id": "f951eaa6-2bc0-4445-b10d-99bc674931fa",
+          "value": {
+            "date": "01 October 2017",
+            "description": "The day the first bill was issued"
+          }
+        },
+        {
+          "id": "6bfe0f25-d890-4d22-b480-1f4b3e6c36a0",
+          "value": {
+            "date": "26 March 2018",
+            "description": "A historic day with enormous importance"
+          }
+        },
+        {
+          "id": "dc352492-ec9b-4ea9-997a-47fbfa1539cb",
+          "value": {
+            "date": "14 June 2018",
+            "description": "line to explain what happened and when"
+          }
+        }
+      ],
+      "submitterEmail": "dharmendra.kumar@hmcts.net"
+    },
+    "data_classification": {
+      "reason": "PUBLIC",
+      "applicants": {
+        "value": [
+          {
+            "id": "447a9dd9-cd5f-4b7b-adfe-0bde33390d43",
+            "value": {
+              "partyName": "PUBLIC",
+              "partyDetail": {
+                "value": {
+                  "type": "PUBLIC",
+                  "idamId": "PUBLIC",
+                  "dateOfBirth": "PUBLIC",
+                  "emailAddress": "PUBLIC",
+                  "primaryAddress": {
+                    "value": {
+                      "PostCode": "PUBLIC",
+                      "PostTown": "PUBLIC",
+                      "AddressLine1": "PUBLIC",
+                      "AddressLine2": "PUBLIC",
+                      "AddressLine3": "PUBLIC"
+                    },
+                    "classification": "PUBLIC"
+                  },
+                  "telephoneNumber": {
+                    "value": {
+                      "telephoneNumber": "PUBLIC"
+                    },
+                    "classification": "PUBLIC"
+                  }
+                },
+                "classification": "PUBLIC"
+              },
+              "leadApplicantIndicator": "PUBLIC"
+            }
+          }
+        ],
+        "classification": "PUBLIC"
+      },
+      "interestType": "PUBLIC",
+      "caseDocuments": {
+        "value": [
+          {
+            "id": "178153ae-41bc-47dc-ac67-68f41dd79e17",
+            "value": {
+              "size": "PUBLIC",
+              "createdBy": "PUBLIC",
+              "documentLink": "PUBLIC",
+              "documentName": "PUBLIC",
+              "documentType": "PUBLIC",
+              "createdDatetime": "PUBLIC"
+            }
+          },
+          {
+            "id": "14fac93f-ff66-45e7-81eb-ca7eb6523b77",
+            "value": {
+              "size": "PUBLIC",
+              "createdBy": "PUBLIC",
+              "documentLink": "PUBLIC",
+              "documentName": "PUBLIC",
+              "documentType": "PUBLIC",
+              "createdDatetime": "PUBLIC"
+            }
+          }
+        ],
+        "classification": "PUBLIC"
+      },
+      "feeAmountInPennies": "PUBLIC",
+      "interestBreakDownExplanation": "PUBLIC",
+      "paymentAmount": "PUBLIC",
+      "issuedOn": "PUBLIC",
+      "features": "PUBLIC",
+      "interestSpecificDailyAmount": "PUBLIC",
+      "submitterId": "PUBLIC",
+      "caseName": "PUBLIC",
+      "claimSubmissionOperationIndicators": {
+        "value": {
+          "rpa": "PUBLIC",
+          "bulkPrint": "PUBLIC",
+          "sealedClaimUpload": "PUBLIC",
+          "staffNotification": "PUBLIC",
+          "claimantNotification": "PUBLIC",
+          "defendantNotification": "PUBLIC",
+          "claimIssueReceiptUpload": "PUBLIC"
+        },
+        "classification": "PUBLIC"
+      },
+      "previousServiceCaseReference": "PUBLIC",
+      "id": "PUBLIC",
+      "paymentStatus": "PUBLIC",
+      "currentInterestAmount": "PUBLIC",
+      "amountType": "PUBLIC",
+      "amountBreakDown": {
+        "value": [
+          {
+            "id": "740ee9ab-f9b9-42dc-ba34-2acb7b0896f7",
+            "value": {
+              "amount": "PUBLIC",
+              "reason": "PUBLIC"
+            }
+          }
+        ],
+        "classification": "PUBLIC"
+      },
+      "paymentReference": "PUBLIC",
+      "submittedOn": "PUBLIC",
+      "externalId": "PUBLIC",
+      "interestBreakDownAmount": "PUBLIC",
+      "respondents": {
+        "value": [
+          {
+            "id": "1480548e-61c5-48b7-a2c3-b27e1885fcb4",
+            "value": {
+              "servedDate": "PUBLIC",
+              "partyDetail": {
+                "classification": "PUBLIC"
+              },
+              "letterHolderId": "PUBLIC",
+              "responseDeadline": "PUBLIC",
+              "claimantProvidedDetail": {
+                "value": {
+                  "type": "PUBLIC",
+                  "title": "PUBLIC",
+                  "lastName": "PUBLIC",
+                  "firstName": "PUBLIC",
+                  "emailAddress": "PUBLIC",
+                  "primaryAddress": {
+                    "value": {
+                      "PostCode": "PUBLIC",
+                      "PostTown": "PUBLIC",
+                      "AddressLine1": "PUBLIC",
+                      "AddressLine2": "PUBLIC",
+                      "AddressLine3": "PUBLIC"
+                    },
+                    "classification": "PUBLIC"
+                  }
+                },
+                "classification": "PUBLIC"
+              },
+              "claimantProvidedPartyName": "PUBLIC",
+              "responseMoreTimeNeededOption": "PUBLIC"
+            }
+          }
+        ],
+        "classification": "PUBLIC"
+      },
+      "totalAmount": "PUBLIC",
+      "migratedFromClaimStore": "PUBLIC",
+      "timeline": {
+        "value": [
+          {
+            "id": "f951eaa6-2bc0-4445-b10d-99bc674931fa",
+            "value": {
+              "date": "PUBLIC",
+              "description": "PUBLIC"
+            }
+          },
+          {
+            "id": "6bfe0f25-d890-4d22-b480-1f4b3e6c36a0",
+            "value": {
+              "date": "PUBLIC",
+              "description": "PUBLIC"
+            }
+          },
+          {
+            "id": "dc352492-ec9b-4ea9-997a-47fbfa1539cb",
+            "value": {
+              "date": "PUBLIC",
+              "description": "PUBLIC"
+            }
+          }
+        ],
+        "classification": "PUBLIC"
+      },
+      "submitterEmail": "PUBLIC"
+    }
+  },
+  {
+    "user_id": "7657d804-1ad0-43cb-8d5f-b2ada8bbb8b5",
+    "user_last_name": "SystemUser",
+    "user_first_name": "CMC",
+    "event_name": "Sealed claim uploaded",
+    "created_date": "2019-06-03T16:28:11.206",
+    "case_type_id": "MoneyClaimCase",
+    "case_type_version": 38,
+    "state_id": "create",
+    "state_name": "Create",
+    "data": {
+      "reason": "A strong sense of entitlement that would explain my reasons of the claim, that the Roof work and leaks that followed were done below standards set by the council inspector",
+      "applicants": [
+        {
+          "id": "447a9dd9-cd5f-4b7b-adfe-0bde33390d43",
+          "value": {
+            "partyName": "Jan Clark",
+            "partyDetail": {
+              "type": "INDIVIDUAL",
+              "idamId": "5bdeda64-3cfc-4c75-8d7c-f587c547d413",
+              "dateOfBirth": "2000-01-01",
+              "emailAddress": "dharmendra.kumar@hmcts.net",
+              "primaryAddress": {
+                "PostCode": "SW1H 9AJ",
+                "PostTown": "London",
+                "AddressLine1": "Street 1",
+                "AddressLine2": "Street 2",
+                "AddressLine3": "Street 3"
+              },
+              "telephoneNumber": {
+                "telephoneNumber": "(0)207 127 0000"
+              }
+            },
+            "leadApplicantIndicator": "YES"
+          }
+        }
+      ],
+      "interestType": "BREAKDOWN",
+      "caseDocuments": [
+        {
+          "id": "178153ae-41bc-47dc-ac67-68f41dd79e17",
+          "value": {
+            "size": 80173,
+            "createdBy": "OCMC",
+            "documentLink": {
+              "document_url": "http://localhost:4460/documents/463ddc5a-000d-49b4-8d1b-800942d228e0",
+              "document_filename": "000MC665-claim-form.pdf",
+              "document_binary_url": "http://localhost:4460/documents/463ddc5a-000d-49b4-8d1b-800942d228e0/binary"
+            },
+            "documentName": "000MC665-claim-form.pdf",
+            "documentType": "SEALED_CLAIM",
+            "createdDatetime": "2019-05-31T10:19:42.168"
+          }
+        },
+        {
+          "id": "14fac93f-ff66-45e7-81eb-ca7eb6523b77",
+          "value": {
+            "size": 73453,
+            "createdBy": "OCMC",
+            "documentLink": {
+              "document_url": "http://localhost:4460/documents/58741639-0354-4a79-8b42-75e038bae349",
+              "document_filename": "000MC665-claim-form-claimant-copy.pdf",
+              "document_binary_url": "http://localhost:4460/documents/58741639-0354-4a79-8b42-75e038bae349/binary"
+            },
+            "documentName": "000MC665-claim-form-claimant-copy.pdf",
+            "documentType": "CLAIM_ISSUE_RECEIPT",
+            "createdDatetime": "2019-05-31T10:19:42.307"
+          }
+        }
+      ],
+      "feeAmountInPennies": "2500",
+      "interestBreakDownExplanation": "sdf",
+      "paymentAmount": "2500",
+      "issuedOn": "2019-05-31",
+      "features": "admissions,directionsQuestionnaire,mediationPilot",
+      "interestSpecificDailyAmount": "4500",
+      "submitterId": "5bdeda64-3cfc-4c75-8d7c-f587c547d413",
+      "caseName": "Jan Clark Vs Mrs. Mary Richards",
+      "claimSubmissionOperationIndicators": {
+        "rpa": "YES",
+        "bulkPrint": "YES",
+        "sealedClaimUpload": "NO",
+        "staffNotification": "YES",
+        "claimantNotification": "YES",
+        "defendantNotification": "YES",
+        "claimIssueReceiptUpload": "NO"
+      },
+      "previousServiceCaseReference": "000MC665",
+      "id": 156,
+      "paymentStatus": "Success",
+      "currentInterestAmount": "3400",
+      "amountType": "BREAK_DOWN",
+      "amountBreakDown": [
+        {
+          "id": "740ee9ab-f9b9-42dc-ba34-2acb7b0896f7",
+          "value": {
+            "amount": "7500",
+            "reason": "Roof Fix & repairs to leak"
+          }
+        }
+      ],
+      "paymentReference": "RC-1559-2979-6221-5252",
+      "submittedOn": "2019-05-31T11:19:39.984038",
+      "externalId": "c68b47c4-402e-4419-8877-56c2e2960991",
+      "interestBreakDownAmount": "3400",
+      "respondents": [
+        {
+          "id": "1480548e-61c5-48b7-a2c3-b27e1885fcb4",
+          "value": {
+            "servedDate": "2019-06-05",
+            "letterHolderId": "8fd5eede-ead1-429f-9284-d63877d6ea36",
+            "responseDeadline": "2019-06-19",
+            "claimantProvidedDetail": {
+              "type": "INDIVIDUAL",
+              "title": "Mrs.",
+              "lastName": "Richards",
+              "firstName": "Mary",
+              "emailAddress": "dharmendra.kumar@hmcts.net",
+              "primaryAddress": {
+                "PostCode": "SW1H 9AJ",
+                "PostTown": "London",
+                "AddressLine1": "Flat 3A",
+                "AddressLine2": "Street 1",
+                "AddressLine3": "Middle Road"
+              }
+            },
+            "claimantProvidedPartyName": "Mrs. Mary Richards",
+            "responseMoreTimeNeededOption": "NO"
+          }
+        }
+      ],
+      "totalAmount": "13400",
+      "migratedFromClaimStore": "YES",
+      "timeline": [
+        {
+          "id": "f951eaa6-2bc0-4445-b10d-99bc674931fa",
+          "value": {
+            "date": "01 October 2017",
+            "description": "The day the first bill was issued"
+          }
+        },
+        {
+          "id": "6bfe0f25-d890-4d22-b480-1f4b3e6c36a0",
+          "value": {
+            "date": "26 March 2018",
+            "description": "A historic day with enormous importance"
+          }
+        },
+        {
+          "id": "dc352492-ec9b-4ea9-997a-47fbfa1539cb",
+          "value": {
+            "date": "14 June 2018",
+            "description": "line to explain what happened and when"
+          }
+        }
+      ],
+      "submitterEmail": "dharmendra.kumar@hmcts.net"
+    },
+    "data_classification": {
+      "reason": "PUBLIC",
+      "applicants": {
+        "value": [
+          {
+            "id": "447a9dd9-cd5f-4b7b-adfe-0bde33390d43",
+            "value": {
+              "partyName": "PUBLIC",
+              "partyDetail": {
+                "value": {
+                  "type": "PUBLIC",
+                  "idamId": "PUBLIC",
+                  "dateOfBirth": "PUBLIC",
+                  "emailAddress": "PUBLIC",
+                  "primaryAddress": {
+                    "value": {
+                      "PostCode": "PUBLIC",
+                      "PostTown": "PUBLIC",
+                      "AddressLine1": "PUBLIC",
+                      "AddressLine2": "PUBLIC",
+                      "AddressLine3": "PUBLIC"
+                    },
+                    "classification": "PUBLIC"
+                  },
+                  "telephoneNumber": {
+                    "value": {
+                      "telephoneNumber": "PUBLIC"
+                    },
+                    "classification": "PUBLIC"
+                  }
+                },
+                "classification": "PUBLIC"
+              },
+              "leadApplicantIndicator": "PUBLIC"
+            }
+          }
+        ],
+        "classification": "PUBLIC"
+      },
+      "interestType": "PUBLIC",
+      "caseDocuments": {
+        "value": [
+          {
+            "id": "178153ae-41bc-47dc-ac67-68f41dd79e17",
+            "value": {
+              "size": "PUBLIC",
+              "createdBy": "PUBLIC",
+              "documentLink": "PUBLIC",
+              "documentName": "PUBLIC",
+              "documentType": "PUBLIC",
+              "createdDatetime": "PUBLIC"
+            }
+          },
+          {
+            "id": "14fac93f-ff66-45e7-81eb-ca7eb6523b77",
+            "value": {
+              "size": "PUBLIC",
+              "createdBy": "PUBLIC",
+              "documentLink": "PUBLIC",
+              "documentName": "PUBLIC",
+              "documentType": "PUBLIC",
+              "createdDatetime": "PUBLIC"
+            }
+          }
+        ],
+        "classification": "PUBLIC"
+      },
+      "feeAmountInPennies": "PUBLIC",
+      "interestBreakDownExplanation": "PUBLIC",
+      "paymentAmount": "PUBLIC",
+      "issuedOn": "PUBLIC",
+      "features": "PUBLIC",
+      "interestSpecificDailyAmount": "PUBLIC",
+      "submitterId": "PUBLIC",
+      "caseName": "PUBLIC",
+      "claimSubmissionOperationIndicators": {
+        "value": {
+          "rpa": "PUBLIC",
+          "bulkPrint": "PUBLIC",
+          "sealedClaimUpload": "PUBLIC",
+          "staffNotification": "PUBLIC",
+          "claimantNotification": "PUBLIC",
+          "defendantNotification": "PUBLIC",
+          "claimIssueReceiptUpload": "PUBLIC"
+        },
+        "classification": "PUBLIC"
+      },
+      "previousServiceCaseReference": "PUBLIC",
+      "id": "PUBLIC",
+      "paymentStatus": "PUBLIC",
+      "currentInterestAmount": "PUBLIC",
+      "amountType": "PUBLIC",
+      "amountBreakDown": {
+        "value": [
+          {
+            "id": "740ee9ab-f9b9-42dc-ba34-2acb7b0896f7",
+            "value": {
+              "amount": "PUBLIC",
+              "reason": "PUBLIC"
+            }
+          }
+        ],
+        "classification": "PUBLIC"
+      },
+      "paymentReference": "PUBLIC",
+      "submittedOn": "PUBLIC",
+      "externalId": "PUBLIC",
+      "interestBreakDownAmount": "PUBLIC",
+      "respondents": {
+        "value": [
+          {
+            "id": "1480548e-61c5-48b7-a2c3-b27e1885fcb4",
+            "value": {
+              "servedDate": "PUBLIC",
+              "partyDetail": {
+                "classification": "PUBLIC"
+              },
+              "letterHolderId": "PUBLIC",
+              "responseDeadline": "PUBLIC",
+              "claimantProvidedDetail": {
+                "value": {
+                  "type": "PUBLIC",
+                  "title": "PUBLIC",
+                  "lastName": "PUBLIC",
+                  "firstName": "PUBLIC",
+                  "emailAddress": "PUBLIC",
+                  "primaryAddress": {
+                    "value": {
+                      "PostCode": "PUBLIC",
+                      "PostTown": "PUBLIC",
+                      "AddressLine1": "PUBLIC",
+                      "AddressLine2": "PUBLIC",
+                      "AddressLine3": "PUBLIC"
+                    },
+                    "classification": "PUBLIC"
+                  }
+                },
+                "classification": "PUBLIC"
+              },
+              "claimantProvidedPartyName": "PUBLIC",
+              "responseMoreTimeNeededOption": "PUBLIC"
+            }
+          }
+        ],
+        "classification": "PUBLIC"
+      },
+      "totalAmount": "PUBLIC",
+      "migratedFromClaimStore": "PUBLIC",
+      "timeline": {
+        "value": [
+          {
+            "id": "f951eaa6-2bc0-4445-b10d-99bc674931fa",
+            "value": {
+              "date": "PUBLIC",
+              "description": "PUBLIC"
+            }
+          },
+          {
+            "id": "6bfe0f25-d890-4d22-b480-1f4b3e6c36a0",
+            "value": {
+              "date": "PUBLIC",
+              "description": "PUBLIC"
+            }
+          },
+          {
+            "id": "dc352492-ec9b-4ea9-997a-47fbfa1539cb",
+            "value": {
+              "date": "PUBLIC",
+              "description": "PUBLIC"
+            }
+          }
+        ],
+        "classification": "PUBLIC"
+      },
+      "submitterEmail": "PUBLIC"
+    }
+  },
+  {
+    "user_id": "7657d804-1ad0-43cb-8d5f-b2ada8bbb8b5",
+    "user_last_name": "SystemUser",
+    "user_first_name": "CMC",
+    "event_name": "Claim created",
+    "created_date": "2019-06-03T16:28:09.25",
+    "case_type_id": "MoneyClaimCase",
+    "case_type_version": 38,
+    "state_id": "create",
+    "state_name": "Create",
+    "data": {
+      "reason": "A strong sense of entitlement that would explain my reasons of the claim, that the Roof work and leaks that followed were done below standards set by the council inspector",
+      "applicants": [
+        {
+          "id": "447a9dd9-cd5f-4b7b-adfe-0bde33390d43",
+          "value": {
+            "partyName": "Jan Clark",
+            "partyDetail": {
+              "type": "INDIVIDUAL",
+              "idamId": "5bdeda64-3cfc-4c75-8d7c-f587c547d413",
+              "dateOfBirth": "2000-01-01",
+              "emailAddress": "dharmendra.kumar@hmcts.net",
+              "primaryAddress": {
+                "PostCode": "SW1H 9AJ",
+                "PostTown": "London",
+                "AddressLine1": "Street 1",
+                "AddressLine2": "Street 2",
+                "AddressLine3": "Street 3"
+              },
+              "telephoneNumber": {
+                "telephoneNumber": "(0)207 127 0000"
+              }
+            },
+            "leadApplicantIndicator": "YES"
+          }
+        }
+      ],
+      "interestType": "BREAKDOWN",
+      "caseDocuments": [
+        {
+          "id": "178153ae-41bc-47dc-ac67-68f41dd79e17",
+          "value": {
+            "size": 80173,
+            "createdBy": "OCMC",
+            "documentLink": {
+              "document_url": "http://localhost:4460/documents/463ddc5a-000d-49b4-8d1b-800942d228e0",
+              "document_filename": "000MC665-claim-form.pdf",
+              "document_binary_url": "http://localhost:4460/documents/463ddc5a-000d-49b4-8d1b-800942d228e0/binary"
+            },
+            "documentName": "000MC665-claim-form.pdf",
+            "documentType": "SEALED_CLAIM",
+            "createdDatetime": "2019-05-31T10:19:42.168"
+          }
+        },
+        {
+          "id": "14fac93f-ff66-45e7-81eb-ca7eb6523b77",
+          "value": {
+            "size": 73453,
+            "createdBy": "OCMC",
+            "documentLink": {
+              "document_url": "http://localhost:4460/documents/58741639-0354-4a79-8b42-75e038bae349",
+              "document_filename": "000MC665-claim-form-claimant-copy.pdf",
+              "document_binary_url": "http://localhost:4460/documents/58741639-0354-4a79-8b42-75e038bae349/binary"
+            },
+            "documentName": "000MC665-claim-form-claimant-copy.pdf",
+            "documentType": "CLAIM_ISSUE_RECEIPT",
+            "createdDatetime": "2019-05-31T10:19:42.307"
+          }
+        }
+      ],
+      "feeAmountInPennies": "2500",
+      "interestBreakDownExplanation": "sdf",
+      "paymentAmount": "2500",
+      "issuedOn": "2019-05-31",
+      "features": "admissions,directionsQuestionnaire,mediationPilot",
+      "interestSpecificDailyAmount": "4500",
+      "submitterId": "5bdeda64-3cfc-4c75-8d7c-f587c547d413",
+      "caseName": "Jan Clark Vs Mrs. Mary Richards",
+      "claimSubmissionOperationIndicators": {
+        "rpa": "YES",
+        "bulkPrint": "YES",
+        "sealedClaimUpload": "NO",
+        "staffNotification": "YES",
+        "claimantNotification": "YES",
+        "defendantNotification": "YES",
+        "claimIssueReceiptUpload": "NO"
+      },
+      "previousServiceCaseReference": "000MC665",
+      "id": 156,
+      "paymentStatus": "Success",
+      "currentInterestAmount": "3400",
+      "amountType": "BREAK_DOWN",
+      "amountBreakDown": [
+        {
+          "id": "740ee9ab-f9b9-42dc-ba34-2acb7b0896f7",
+          "value": {
+            "amount": "7500",
+            "reason": "Roof Fix & repairs to leak"
+          }
+        }
+      ],
+      "paymentReference": "RC-1559-2979-6221-5252",
+      "submittedOn": "2019-05-31T11:19:39.984038",
+      "externalId": "c68b47c4-402e-4419-8877-56c2e2960991",
+      "interestBreakDownAmount": "3400",
+      "respondents": [
+        {
+          "id": "1480548e-61c5-48b7-a2c3-b27e1885fcb4",
+          "value": {
+            "servedDate": "2019-06-05",
+            "letterHolderId": "8fd5eede-ead1-429f-9284-d63877d6ea36",
+            "responseDeadline": "2019-06-19",
+            "claimantProvidedDetail": {
+              "type": "INDIVIDUAL",
+              "title": "Mrs.",
+              "lastName": "Richards",
+              "firstName": "Mary",
+              "emailAddress": "dharmendra.kumar@hmcts.net",
+              "primaryAddress": {
+                "PostCode": "SW1H 9AJ",
+                "PostTown": "London",
+                "AddressLine1": "Flat 3A",
+                "AddressLine2": "Street 1",
+                "AddressLine3": "Middle Road"
+              }
+            },
+            "claimantProvidedPartyName": "Mrs. Mary Richards",
+            "responseMoreTimeNeededOption": "NO"
+          }
+        }
+      ],
+      "totalAmount": "13400",
+      "migratedFromClaimStore": "YES",
+      "timeline": [
+        {
+          "id": "f951eaa6-2bc0-4445-b10d-99bc674931fa",
+          "value": {
+            "date": "01 October 2017",
+            "description": "The day the first bill was issued"
+          }
+        },
+        {
+          "id": "6bfe0f25-d890-4d22-b480-1f4b3e6c36a0",
+          "value": {
+            "date": "26 March 2018",
+            "description": "A historic day with enormous importance"
+          }
+        },
+        {
+          "id": "dc352492-ec9b-4ea9-997a-47fbfa1539cb",
+          "value": {
+            "date": "14 June 2018",
+            "description": "line to explain what happened and when"
+          }
+        }
+      ],
+      "submitterEmail": "dharmendra.kumar@hmcts.net"
+    },
+    "data_classification": {
+      "reason": "PUBLIC",
+      "applicants": {
+        "value": [
+          {
+            "id": "447a9dd9-cd5f-4b7b-adfe-0bde33390d43",
+            "value": {
+              "partyName": "PUBLIC",
+              "partyDetail": {
+                "value": {
+                  "type": "PUBLIC",
+                  "idamId": "PUBLIC",
+                  "dateOfBirth": "PUBLIC",
+                  "emailAddress": "PUBLIC",
+                  "primaryAddress": {
+                    "value": {
+                      "PostCode": "PUBLIC",
+                      "PostTown": "PUBLIC",
+                      "AddressLine1": "PUBLIC",
+                      "AddressLine2": "PUBLIC",
+                      "AddressLine3": "PUBLIC"
+                    },
+                    "classification": "PUBLIC"
+                  },
+                  "telephoneNumber": {
+                    "value": {
+                      "telephoneNumber": "PUBLIC"
+                    },
+                    "classification": "PUBLIC"
+                  }
+                },
+                "classification": "PUBLIC"
+              },
+              "leadApplicantIndicator": "PUBLIC"
+            }
+          }
+        ],
+        "classification": "PUBLIC"
+      },
+      "interestType": "PUBLIC",
+      "caseDocuments": {
+        "value": [
+          {
+            "id": "178153ae-41bc-47dc-ac67-68f41dd79e17",
+            "value": {
+              "size": "PUBLIC",
+              "createdBy": "PUBLIC",
+              "documentLink": "PUBLIC",
+              "documentName": "PUBLIC",
+              "documentType": "PUBLIC",
+              "createdDatetime": "PUBLIC"
+            }
+          },
+          {
+            "id": "14fac93f-ff66-45e7-81eb-ca7eb6523b77",
+            "value": {
+              "size": "PUBLIC",
+              "createdBy": "PUBLIC",
+              "documentLink": "PUBLIC",
+              "documentName": "PUBLIC",
+              "documentType": "PUBLIC",
+              "createdDatetime": "PUBLIC"
+            }
+          }
+        ],
+        "classification": "PUBLIC"
+      },
+      "feeAmountInPennies": "PUBLIC",
+      "interestBreakDownExplanation": "PUBLIC",
+      "paymentAmount": "PUBLIC",
+      "issuedOn": "PUBLIC",
+      "features": "PUBLIC",
+      "interestSpecificDailyAmount": "PUBLIC",
+      "submitterId": "PUBLIC",
+      "caseName": "PUBLIC",
+      "claimSubmissionOperationIndicators": {
+        "value": {
+          "rpa": "PUBLIC",
+          "bulkPrint": "PUBLIC",
+          "sealedClaimUpload": "PUBLIC",
+          "staffNotification": "PUBLIC",
+          "claimantNotification": "PUBLIC",
+          "defendantNotification": "PUBLIC",
+          "claimIssueReceiptUpload": "PUBLIC"
+        },
+        "classification": "PUBLIC"
+      },
+      "previousServiceCaseReference": "PUBLIC",
+      "id": "PUBLIC",
+      "paymentStatus": "PUBLIC",
+      "currentInterestAmount": "PUBLIC",
+      "amountType": "PUBLIC",
+      "amountBreakDown": {
+        "value": [
+          {
+            "id": "740ee9ab-f9b9-42dc-ba34-2acb7b0896f7",
+            "value": {
+              "amount": "PUBLIC",
+              "reason": "PUBLIC"
+            }
+          }
+        ],
+        "classification": "PUBLIC"
+      },
+      "paymentReference": "PUBLIC",
+      "submittedOn": "PUBLIC",
+      "externalId": "PUBLIC",
+      "interestBreakDownAmount": "PUBLIC",
+      "respondents": {
+        "value": [
+          {
+            "id": "1480548e-61c5-48b7-a2c3-b27e1885fcb4",
+            "value": {
+              "servedDate": "PUBLIC",
+              "partyDetail": {
+                "classification": "PUBLIC"
+              },
+              "letterHolderId": "PUBLIC",
+              "responseDeadline": "PUBLIC",
+              "claimantProvidedDetail": {
+                "value": {
+                  "type": "PUBLIC",
+                  "title": "PUBLIC",
+                  "lastName": "PUBLIC",
+                  "firstName": "PUBLIC",
+                  "emailAddress": "PUBLIC",
+                  "primaryAddress": {
+                    "value": {
+                      "PostCode": "PUBLIC",
+                      "PostTown": "PUBLIC",
+                      "AddressLine1": "PUBLIC",
+                      "AddressLine2": "PUBLIC",
+                      "AddressLine3": "PUBLIC"
+                    },
+                    "classification": "PUBLIC"
+                  }
+                },
+                "classification": "PUBLIC"
+              },
+              "claimantProvidedPartyName": "PUBLIC",
+              "responseMoreTimeNeededOption": "PUBLIC"
+            }
+          }
+        ],
+        "classification": "PUBLIC"
+      },
+      "totalAmount": "PUBLIC",
+      "migratedFromClaimStore": "PUBLIC",
+      "timeline": {
+        "value": [
+          {
+            "id": "f951eaa6-2bc0-4445-b10d-99bc674931fa",
+            "value": {
+              "date": "PUBLIC",
+              "description": "PUBLIC"
+            }
+          },
+          {
+            "id": "6bfe0f25-d890-4d22-b480-1f4b3e6c36a0",
+            "value": {
+              "date": "PUBLIC",
+              "description": "PUBLIC"
+            }
+          },
+          {
+            "id": "dc352492-ec9b-4ea9-997a-47fbfa1539cb",
+            "value": {
+              "date": "PUBLIC",
+              "description": "PUBLIC"
+            }
+          }
+        ],
+        "classification": "PUBLIC"
+      },
+      "submitterEmail": "PUBLIC"
+    }
+  }
+]
