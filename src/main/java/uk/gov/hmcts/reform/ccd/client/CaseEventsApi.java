@@ -4,7 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
-import uk.gov.hmcts.reform.ccd.client.model.CaseEventDetails;
+import uk.gov.hmcts.reform.ccd.client.model.CaseEventDetail;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public interface CaseEventsApi {
         value = "/caseworkers/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases/{caseId}/events",
         headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
     )
-    List<CaseEventDetails> findEventDetailsForCase(
+    List<CaseEventDetail> findEventDetailsForCase(
         @RequestHeader(AUTHORIZATION) String authorisation,
         @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
         @PathVariable("userId") String userId,

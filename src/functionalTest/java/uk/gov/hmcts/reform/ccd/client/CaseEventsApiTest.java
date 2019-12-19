@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import uk.gov.hmcts.reform.ccd.client.model.CaseDetails;
-import uk.gov.hmcts.reform.ccd.client.model.CaseEventDetails;
+import uk.gov.hmcts.reform.ccd.client.model.CaseEventDetail;
 
 import java.util.List;
 
@@ -33,7 +33,7 @@ class CaseEventsApiTest extends BaseTest {
     void getCaseForCaseworker() {
         CaseDetails caseForCaseworker = createCaseForCaseworker(caseWorker);
 
-        List<CaseEventDetails> caseEventDetails = caseEventsApi.findEventDetailsForCase(
+        List<CaseEventDetail> caseEventDetails = caseEventsApi.findEventDetailsForCase(
                 caseWorker.getAuthToken(),
                 authTokenGenerator.generate(),
                 caseWorker.getUserDetails().getId(),

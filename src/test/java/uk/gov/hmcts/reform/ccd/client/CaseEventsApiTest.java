@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import uk.gov.hmcts.reform.ccd.client.model.CaseEventDetails;
+import uk.gov.hmcts.reform.ccd.client.model.CaseEventDetail;
 
 import java.io.IOException;
 import java.util.List;
@@ -63,7 +63,7 @@ class CaseEventsApiTest {
             .withHeader(AUTHORIZATION, equalTo("UserToken"))
             .willReturn(okJson(loadFile("caseEvents.json")))
         );
-        List<CaseEventDetails> caseEventDetails = caseEventsApi
+        List<CaseEventDetail> caseEventDetails = caseEventsApi
                 .findEventDetailsForCase("UserToken", "s2sAuth", "1234", "jurisdictionId", "moneyclaim", "caseId");
 
         assertThat(caseEventDetails.size()).isEqualTo(4);
