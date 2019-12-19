@@ -1,6 +1,7 @@
 package uk.gov.hmcts.reform.ccd.client;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +22,7 @@ import static uk.gov.hmcts.reform.ccd.client.CoreCaseDataApi.SERVICE_AUTHORIZATI
 )
 public interface CaseEventsApi {
 
-    @RequestMapping(
-        method = RequestMethod.GET,
+    @GetMapping(
         value = "/caseworkers/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases/{caseId}/events",
         headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
     )
