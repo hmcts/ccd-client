@@ -1,18 +1,22 @@
 spring:
   application:
     name: 'Core case data client'
+  main:
+    allow-bean-definition-overriding: true
+
+
 
 idam:
   s2s-auth:
-    totp_secret: 'AAAAAAAAAAAAAAAC'
-    microservice: 'ccd_gw'
-    url: 'http://localhost:4502'
+    totp_secret: 'AAAAAAAAAAAAAAAA'
+    microservice: 'ccd_gateway'
+    url: 'http://localhost:4552'
   api:
-    url: 'http://localhost:4501'
+    url: 'http://localhost:5000'
   client:
     redirect_uri: 'http://localhost:3451/oauth2redirect'
     id: 'ccd_gateway'
-    secret: 'OOOOOOOOOOOOOOOO'
+    secret: '12345678'
 
 core_case_data:
   api:

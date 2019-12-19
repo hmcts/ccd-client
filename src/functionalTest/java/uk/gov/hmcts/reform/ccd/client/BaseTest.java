@@ -1,12 +1,12 @@
 package uk.gov.hmcts.reform.ccd.client;
 
+import com.google.common.collect.ImmutableList;
 import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
-
+import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
-
 import uk.gov.hmcts.reform.authorisation.generators.AuthTokenGenerator;
 import uk.gov.hmcts.reform.ccd.client.model.CaseDataContent;
 import uk.gov.hmcts.reform.ccd.client.model.CaseDetails;
@@ -21,8 +21,6 @@ import uk.gov.hmcts.reform.idam.client.models.test.UserRole;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static java.util.Collections.singletonList;
 
 @Slf4j
 @SpringBootTest(classes = {TestConfiguration.class})
@@ -59,9 +57,10 @@ public class BaseTest {
             idamTestApi.createUser(CreateUserRequest.builder()
                     .email(citizenEmail)
                     .userGroup(new UserGroup("citizens"))
+                    .roles(ImmutableList.of(new UserRole("citizen")))
                     .build());
         } catch (FeignException e) {
-            if (e.status() == HttpStatus.BAD_REQUEST.value()) {
+            if (e.status() == HttpStatus.FORBIDDEN.value()) {
                 log.info("Bad request from idam, probably user already exists, continuing");
             } else {
                 throw e;
@@ -75,7 +74,7 @@ public class BaseTest {
     }
 
     User createCaseworker() {
-        return createCaseworker("autocaseworker-ccdclient@hmcts.net");
+        return createCaseworker(String.format("autocaseworker-ccdclient%s@hmcts.net", RandomString.make(10)));
     }
 
     User createCaseworker(String email) {
@@ -83,10 +82,10 @@ public class BaseTest {
             idamTestApi.createUser(CreateUserRequest.builder()
                     .email(email)
                     .userGroup(new UserGroup("caseworker"))
-                    .roles(singletonList(new UserRole("caseworker-autotest1")))
+                    .roles(ImmutableList.of(new UserRole("caseworker-autotest1")))
                     .build());
         } catch (FeignException e) {
-            if (e.status() == HttpStatus.BAD_REQUEST.value()) {
+            if (e.status() == HttpStatus.FORBIDDEN.value()) {
                 log.info("Bad request from idam, probably user already exists, continuing");
             } else {
                 throw e;

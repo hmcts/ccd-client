@@ -24,8 +24,8 @@ class CaseAccessApiTest extends BaseTest {
 
     @BeforeEach
     void init() {
-        caseWorker = createCaseworker("autocaseworker-ccdclient@hmcts.net");
-        manager = createCaseworker("autocaseworker-ccdclient3@hmcts.net");
+        caseWorker = createCaseworker();
+        manager = createCaseworker();
     }
 
     @Test
@@ -58,13 +58,11 @@ class CaseAccessApiTest extends BaseTest {
     @Test
     @DisplayName("Should be able to revoke access to a case")
     void revokeAccessToCase() {
-        User theCaseworker = createCaseworker("autocaseworker-ccdclient@hmcts.net");
-        User manager = createCaseworker("autocaseworker-ccdclient3@hmcts.net");
-        CaseDetails caseForCaseworker = createCaseForCaseworker(theCaseworker);
+        CaseDetails caseForCaseworker = createCaseForCaseworker(caseWorker);
         caseAccessApi.grantAccessToCase(
-                theCaseworker.getAuthToken(),
+                caseWorker.getAuthToken(),
                 authTokenGenerator.generate(),
-                theCaseworker.getUserDetails().getId(),
+                caseWorker.getUserDetails().getId(),
                 JURISDICTION,
                 CASE_TYPE,
                 caseForCaseworker.getId() + "",
@@ -72,9 +70,9 @@ class CaseAccessApiTest extends BaseTest {
         );
 
         caseAccessApi.revokeAccessToCase(
-                theCaseworker.getAuthToken(),
+                caseWorker.getAuthToken(),
                 authTokenGenerator.generate(),
-                theCaseworker.getUserDetails().getId(),
+                caseWorker.getUserDetails().getId(),
                 JURISDICTION,
                 CASE_TYPE,
                 caseForCaseworker.getId() + "",
@@ -82,9 +80,9 @@ class CaseAccessApiTest extends BaseTest {
         );
 
         List<String> caseIdsGivenUserIdHasAccessTo = caseAccessApi.findCaseIdsGivenUserIdHasAccessTo(
-                theCaseworker.getAuthToken(),
+                caseWorker.getAuthToken(),
                 authTokenGenerator.generate(),
-                theCaseworker.getUserDetails().getId(),
+                caseWorker.getUserDetails().getId(),
                 JURISDICTION,
                 CASE_TYPE,
                 manager.getUserDetails().getId()

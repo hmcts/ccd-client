@@ -4,8 +4,8 @@ import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.google.common.io.Resources;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,7 @@ class CaseEventsApiTest {
     @Autowired
     private CaseEventsApi caseEventsApi;
 
-    @BeforeAll
+    @Before
     static void configureSystemUnderTest() {
         wireMockServer = new WireMockServer(WireMockConfiguration.wireMockConfig().dynamicPort());
         wireMockServer.start();
@@ -45,7 +45,7 @@ class CaseEventsApiTest {
         System.setProperty("core_case_data.api.url", "http://localhost:" + wireMockServer.port() + "/");
     }
 
-    @AfterAll
+    @After
     static void afterAll() {
         wireMockServer.shutdownServer();
     }
@@ -57,17 +57,14 @@ class CaseEventsApiTest {
     @Test
     @DisplayName("Should be able to call the get events Api")
     void getCaseEventsTest() throws IOException {
-        stubFor(get(urlEqualTo("/caseworkers/1234/jurisdictions/jurisdictionId/case-types"
-            + "/moneyclaim/cases/caseId/events"))
+        String testUrl = "/caseworkers/1234/jurisdictions/jurisdictionId/case-types/moneyclaim/cases/caseId/events";
+        stubFor(get(urlEqualTo(testUrl))
             .withHeader("ServiceAuthorization", equalTo("s2sAuth"))
             .withHeader(AUTHORIZATION, equalTo("UserToken"))
-            .withHeader("experimental", equalTo("true")
-            )
             .willReturn(okJson(loadFile("caseEvents.json")))
         );
         List<CaseEventDetails> caseEventDetails = caseEventsApi
-            .findEventDetailsForCase("UserToken", "s2sAuth", "1234",
-                "jurisdictionId", "moneyclaim", "caseId");
+                .findEventDetailsForCase("UserToken", "s2sAuth", "1234", "jurisdictionId", "moneyclaim", "caseId");
 
         assertThat(caseEventDetails.size()).isEqualTo(4);
     }
