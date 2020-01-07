@@ -41,6 +41,15 @@ To run all checks (including unit tests) please execute the following command:
     ./gradlew check
 ```
 
+## Functional Tests
+
+The functional tests rely on CCD and Idam and need to be configured with appropriate user roles and events.
+Before running the functional test on a local environment run the following:
+```bash
+    ./scripts/create-role.sh
+    ./scripts/import-definintion.sh
+```
+
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning.
