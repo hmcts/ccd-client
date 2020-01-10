@@ -1,4 +1,4 @@
-name: Publish Artefacts
+name: Publish Artifacts
 
 on:
   release:
