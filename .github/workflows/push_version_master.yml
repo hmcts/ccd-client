@@ -1,0 +1,71 @@
+name: Publish Artefacts
+
+on:
+#  push:
+#     tags:
+#      - '*'
+  release:
+    types: # This configuration does not affect the page_build event above
+      - published
+jobs:
+  bintrayUpload:
+    name: Gradle Build build
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@master
+
+      - uses: actions/cache@v1
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Build code and upload to maven
+        run: ./gradlew build
+
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+
+      - name: Set Assets Url
+        id: set_assets_url
+        run: |
+          echo ::set-output name=ASSETS_URL::$(curl --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          https://api.github.com/repos/hmcts/ccd-client/releases/tags/${{ steps.get_version.outputs.VERSION }}  | jq -r '.upload_url')
+
+      - name: Upload core-case-data-store-client-XXX.jar
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.set_assets_url.outputs.ASSETS_URL }}{?name,label}
+          asset_path: build/libs/core-case-data-store-client-${{ steps.get_version.outputs.VERSION }}.jar
+          asset_name: core-case-data-store-client-${{ steps.get_version.outputs.VERSION }}.jar
+          asset_content_type: application/java-archive
+
+      - name: Upload core-case-data-store-client-XXX-javadoc.jar
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.set_assets_url.outputs.ASSETS_URL }}{?name,label}
+          asset_path: build/libs/core-case-data-store-client-${{ steps.get_version.outputs.VERSION }}-javadoc.jar
+          asset_name: core-case-data-store-client-${{ steps.get_version.outputs.VERSION }}-javadoc.jar
+          asset_content_type: application/java-archive
+
+      - name: Upload core-case-data-store-client-XXX-sources.jar
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.set_assets_url.outputs.ASSETS_URL }}{?name,label}
+          asset_path: build/libs/core-case-data-store-client-${{ steps.get_version.outputs.VERSION }}-sources.jar
+          asset_name: core-case-data-store-client-${{ steps.get_version.outputs.VERSION }}-sources.jar
+          asset_content_type: application/java-archive

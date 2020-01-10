@@ -1,0 +1,12 @@
+on: push
+name: Push jobs
+jobs:
+  build:
+    name: Gradle Build build
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - run: gradle build
