@@ -1,11 +1,8 @@
 name: Publish Artefacts
 
 on:
-#  push:
-#     tags:
-#      - '*'
   release:
-    types: # This configuration does not affect the page_build event above
+    types:
       - published
 jobs:
   bintrayUpload:
@@ -28,7 +25,10 @@ jobs:
           java-version: 1.8
 
       - name: Build code and upload to maven
-        run: ./gradlew build
+        run: ./gradlew bintrayUpload
+        env:
+          BINTRAY_USER: jenkins-reform-hmcts
+          BINTRAY_KEY: ${{ secrets.BINTRAY_KEY }}
 
       - name: Get the version
         id: get_version
