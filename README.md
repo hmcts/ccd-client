@@ -55,6 +55,9 @@ Before running the functional test on a local environment run the following:
 We use [SemVer](http://semver.org/) for versioning.
 For the versions available, see the tags on this repository.
 
+To release a new version `Draft a new release` via the Github Release tab. When the release is published the code will 
+be built and published to maven.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
