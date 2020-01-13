@@ -8,7 +8,7 @@ on:
 name: Verify Code
 jobs:
   build:
-    name: Gradle Build build
+    name: Verify Code
     runs-on: macOS-latest
     steps:
       - name: Checkout Code

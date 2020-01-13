@@ -6,7 +6,7 @@ on:
       - published
 jobs:
   bintrayUpload:
-    name: Gradle Build build
+    name: Publish Release to Maven
     runs-on: macOS-latest
     steps:
       - name: Checkout Code
