@@ -55,8 +55,8 @@ Before running the functional test on a local environment run the following:
 We use [SemVer](http://semver.org/) for versioning.
 For the versions available, see the tags on this repository.
 
-To release a new version `Draft a new release` via the Github Release tab. When the release is published the code will 
-be built and published to maven.
+To release a new version add a tag with the version number and push this up to the origin repository. This will then 
+build and publish the release to maven.
 
 ## License
 
