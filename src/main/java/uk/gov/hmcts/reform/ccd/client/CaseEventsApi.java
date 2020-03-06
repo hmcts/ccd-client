@@ -14,7 +14,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static uk.gov.hmcts.reform.ccd.client.CoreCaseDataApi.SERVICE_AUTHORIZATION;
 
 @FeignClient(
-    name = "core-case-data-api",
+    name = "ccd-events-api",
     url = "${core_case_data.api.url}",
     configuration = CoreCaseDataConfiguration.class
 )
