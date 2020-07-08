@@ -8,7 +8,7 @@ import uk.gov.hmcts.reform.ccd.client.healthcheck.CoreCaseDataHealthIndicator;
 
 @Configuration
 @ConditionalOnProperty(prefix = "core_case_data", name = "api.url")
-@EnableFeignClients(basePackages = {"uk.gov.hmcts.reform.ccd.client", "uk.gov.hmcts.reform.idam.client"})
+@EnableFeignClients(basePackages = {"uk.gov.hmcts.reform.ccd.client"})
 public class CoreCaseDataClientAutoConfiguration {
 
     @Bean
