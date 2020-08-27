@@ -4,7 +4,9 @@ import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.google.common.io.Resources;
-
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.Map;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -12,18 +14,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import uk.gov.hmcts.reform.ccd.client.model.CaseDetails;
 import uk.gov.hmcts.reform.ccd.client.model.Classification;
+import uk.gov.hmcts.reform.ccd.client.model.SearchResult;
 import uk.gov.hmcts.reform.ccd.client.model.StartEventResponse;
-
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.Map;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.equalTo;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
 import static com.github.tomakehurst.wiremock.client.WireMock.okJson;
+import static com.github.tomakehurst.wiremock.client.WireMock.post;
 import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -109,5 +108,19 @@ class CcdClientTest {
         Map<String, Object> someProp = (Map<String, Object>) caseDetails.getData().get("someProp");
         assertThat(someProp.get("someAttributes")).isEqualTo(1);
 
+    }
+
+    @Test
+    @DisplayName("Should be able to call the search result api")
+    void searchResultTest() throws IOException {
+        stubFor(post(urlEqualTo("/searchCases?ctid=" + CASE_TYPE_ID))
+                .withHeader("ServiceAuthorization", equalTo("s2sAuth"))
+                .withHeader(AUTHORIZATION, equalTo("UserToken"))
+                .willReturn(okJson(loadFile("searchResult.json")))
+        );
+        SearchResult startEvent = ccdApi.searchCases("UserToken", "s2sAuth", CASE_TYPE_ID, "");
+
+        int total = startEvent.getTotal();
+        assertThat(total).isEqualTo(10);
     }
 }
