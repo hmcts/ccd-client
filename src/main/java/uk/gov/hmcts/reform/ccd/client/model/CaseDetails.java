@@ -1,6 +1,7 @@
 package uk.gov.hmcts.reform.ccd.client.model;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -9,7 +10,7 @@ import lombok.Data;
 
 @Data
 @Builder(toBuilder = true)
-//@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CaseDetails {
 
     private Long id;
