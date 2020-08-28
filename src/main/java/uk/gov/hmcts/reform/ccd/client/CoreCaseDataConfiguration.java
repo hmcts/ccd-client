@@ -9,6 +9,15 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import uk.gov.hmcts.reform.ccd.client.model.SearchCriteria;
 
 class CoreCaseDataConfiguration {
+
+    @Bean
+    @Primary
+    public ObjectMapper objectMapper() {
+        Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
+        builder.failOnUnknownProperties(false);
+        return builder.build();
+    }
+
     @Bean
     @Primary
     Decoder feignDecoder(ObjectMapper objectMapper) {
@@ -18,13 +27,5 @@ class CoreCaseDataConfiguration {
     @Bean
     SearchCriteria searchCriteria(ObjectMapper objectMapper) {
         return new SearchCriteria(objectMapper);
-    }
-
-    @Bean
-    @Primary
-    public ObjectMapper objectMapper() {
-        Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
-        builder.failOnUnknownProperties(false);
-        return builder.build();
     }
 }
