@@ -24,5 +24,7 @@ public class AboutToStartOrSubmitCallbackResponse implements CallbackResponse {
     private List<String> errors;
 
     private List<String> warnings;
+    
+    private String  state;
 
 }
