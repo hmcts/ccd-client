@@ -3,13 +3,16 @@ package uk.gov.hmcts.reform.ccd.client.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 @Data
 @Builder
-public class AddCaseAssignedUserRolesRequest {
+public class CaseAssignmentUserRolesRequest {
 
     @JsonProperty("case_users")
-    private List<CaseAssignedUserRoleWithOrganisation> caseAssignedUserRoles;
+    private List<CaseAssignmentUserRoleWithOrganisation> caseAssignmentUserRolesWithOrganisation;
+
 }

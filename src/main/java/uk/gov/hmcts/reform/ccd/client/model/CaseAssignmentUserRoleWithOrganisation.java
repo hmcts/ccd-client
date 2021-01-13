@@ -1,14 +1,19 @@
 package uk.gov.hmcts.reform.ccd.client.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.Data;
+import lombok.extern.jackson.Jacksonized;
 
-@ToString
-@Getter
+@Data
 @Builder(toBuilder = true)
-public class CaseAssignedUserRole {
+@Jacksonized
+public class CaseAssignmentUserRoleWithOrganisation {
+
+    @JsonProperty("organisation_id")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String organisationId;
 
     @JsonProperty("case_id")
     private String caseDataId;
