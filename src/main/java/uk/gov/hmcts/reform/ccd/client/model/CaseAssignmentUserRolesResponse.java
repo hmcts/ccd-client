@@ -1,5 +1,6 @@
 package uk.gov.hmcts.reform.ccd.client.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 import lombok.extern.jackson.Jacksonized;
@@ -8,5 +9,6 @@ import lombok.extern.jackson.Jacksonized;
 @Builder
 @Jacksonized
 public class CaseAssignmentUserRolesResponse {
-    private String status;
+    @JsonProperty("status_message")
+    private String statusMessage;
 }
