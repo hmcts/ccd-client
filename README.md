@@ -1,6 +1,4 @@
 # Core case data client
-
-[![Build Status](https://travis-ci.com/hmcts/ccd-client.svg?branch=master)](https://travis-ci.com/hmcts/ccd-client)
 [![Download](https://jitpack.io/v/hmcts/ccd-client.svg) ](https://jitpack.io/#hmcts/ccd-client)
 
 This is a client library for interacting with the core case data store application. The two main responsibilities are:
