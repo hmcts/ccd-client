@@ -1,7 +1,5 @@
 # Core case data client
-
-[![Build Status](https://travis-ci.com/hmcts/ccd-client.svg?branch=master)](https://travis-ci.com/hmcts/ccd-client)
-[![Download](https://api.bintray.com/packages/hmcts/hmcts-maven/core-case-data-store-client/images/download.svg) ](https://bintray.com/hmcts/hmcts-maven/core-case-data-store-client/_latestVersion)
+[![Download](https://jitpack.io/v/hmcts/ccd-client.svg) ](https://jitpack.io/#hmcts/ccd-client)
 
 This is a client library for interacting with the core case data store application. The two main responsibilities are:
  - start event for new case
