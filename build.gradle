@@ -106,6 +106,7 @@ publishing {
 ext {
     lombokVersion = '1.16.18'
     springCloudVersion = 'Greenwich.RELEASE'
+    swagger2Version = '3.0.0'
 }
 
 dependencyManagement {
@@ -138,9 +139,11 @@ dependencies {
     compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
     compile group: 'io.github.openfeign', name: 'feign-jackson'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
 
     compileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
+    implementation group: 'io.springfox', name: 'springfox-boot-starter', version: swagger2Version
 
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.3.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.3.0'
