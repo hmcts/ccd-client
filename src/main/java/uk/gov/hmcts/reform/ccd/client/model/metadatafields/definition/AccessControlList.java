@@ -15,17 +15,17 @@ public class AccessControlList implements Serializable {
     @JsonAlias("role")
     @JsonProperty("accessProfile")
     private String accessProfile;
-    private boolean create;
-    private boolean read;
-    private boolean update;
-    private boolean delete;
+    private Boolean create;
+    private Boolean read;
+    private Boolean update;
+    private Boolean delete;
 
     @Override
     public String toString() {
         return "ACL{"
                 + "accessProfile='" + accessProfile + '\''
-                + ", crud=" + (isCreate() ? "C" : "") + (isRead() ? "R" : "")
-                + (isUpdate() ? "U" : "") + (isDelete() ? "D" : "")
+                + ", crud=" + (getCreate() ? "C" : "") + (getRead() ? "R" : "")
+                + (getUpdate() ? "U" : "") + (getDelete() ? "D" : "")
                 + '}';
     }
 }

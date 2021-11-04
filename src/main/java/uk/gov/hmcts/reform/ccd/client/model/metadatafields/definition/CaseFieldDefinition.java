@@ -1,7 +1,6 @@
 package uk.gov.hmcts.reform.ccd.client.model.metadatafields.definition;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +14,6 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@ApiModel(description = "")
 public class CaseFieldDefinition implements Serializable, CommonField {
 
     private static final long serialVersionUID = -4257574164546267919L;
