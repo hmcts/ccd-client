@@ -7,7 +7,7 @@ import uk.gov.hmcts.reform.ccd.client.model.metadatafields.definition.FieldTypeD
 import java.util.List;
 import java.util.Optional;
 
-public interface CommonField extends CommonDCPModel {
+public interface CommonField {
 
     FieldTypeDefinition getFieldTypeDefinition();
 

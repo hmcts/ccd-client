@@ -3,54 +3,31 @@ package uk.gov.hmcts.reform.ccd.client.model.metadatafields.definition;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import uk.gov.hmcts.reform.ccd.client.model.metadatafields.common.CommonDCPModel;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
 
+@Getter
+@Setter
+@ToString
 @ApiModel(description = "")
-public class CaseTypeTabField implements Serializable, CommonDCPModel {
-    private CaseFieldDefinition caseFieldDefinition = null;
-    private Integer displayOrder = null;
-    private String showCondition = null;
-    private String displayContextParameter;
+public class CaseTypeTabField implements Serializable {
 
     @ApiModelProperty(value = "")
     @JsonProperty("case_field")
-    public CaseFieldDefinition getCaseFieldDefinition() {
-        return caseFieldDefinition;
-    }
-
-    public void setCaseFieldDefinition(final CaseFieldDefinition caseFieldDefinition) {
-        this.caseFieldDefinition = caseFieldDefinition;
-    }
+    private CaseFieldDefinition caseFieldDefinition = null;
 
     @ApiModelProperty(value = "")
     @JsonProperty("order")
-    public Integer getDisplayOrder() {
-        return displayOrder;
-    }
-
-    public void setDisplayOrder(final Integer displayOrder) {
-        this.displayOrder = displayOrder;
-    }
+    private Integer displayOrder = null;
 
     @ApiModelProperty(value = "")
     @JsonProperty("show_condition")
-    public String getShowCondition() {
-        return showCondition;
-    }
-
-    public void setShowCondition(String showCondition) {
-        this.showCondition = showCondition;
-    }
+    private String showCondition = null;
 
     @ApiModelProperty(value = "")
     @JsonProperty("display_context_parameter")
-    public String getDisplayContextParameter() {
-        return displayContextParameter;
-    }
-
-    public void setDisplayContextParameter(String displayContextParameter) {
-        this.displayContextParameter = displayContextParameter;
-    }
+    private String displayContextParameter;
 }
