@@ -2,6 +2,7 @@ package uk.gov.hmcts.reform.ccd.client.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,6 +11,7 @@ import java.util.Map;
 
 @Data
 @Builder(toBuilder = true)
+@JsonDeserialize(builder = CaseEventDetail.CaseEventDetailBuilder.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CaseEventDetail {
     @JsonProperty("user_id")
