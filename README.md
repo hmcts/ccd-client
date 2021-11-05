@@ -14,6 +14,7 @@ This is a client library for interacting with the core case data store applicati
 
 ## Usage
 
+TUCAN ! 
 Just include the library as your dependency and you will be to use the client class. Health check for CCD service is provided as well.
 
 Components provided by this library will get automatically configured in a Spring context if `core_case_data.api.url` configuration property is defined and does not equal `false`. 
