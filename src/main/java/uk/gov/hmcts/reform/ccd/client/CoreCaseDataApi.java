@@ -289,5 +289,4 @@ public interface CoreCaseDataApi {
             @PathVariable("caseId") String caseId,
             @PathVariable("triggerId") String eventId
     );
-
 }
