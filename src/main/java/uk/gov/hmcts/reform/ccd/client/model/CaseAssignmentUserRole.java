@@ -1,7 +1,6 @@
 package uk.gov.hmcts.reform.ccd.client.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -9,7 +8,6 @@ import lombok.ToString;
 @ToString
 @Getter
 @Builder(toBuilder = true)
-@AllArgsConstructor
 public class CaseAssignmentUserRole {
 
     @JsonProperty("case_id")
