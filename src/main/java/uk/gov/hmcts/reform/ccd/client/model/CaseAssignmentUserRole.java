@@ -4,10 +4,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
+import lombok.extern.jackson.Jacksonized;
 
 @ToString
 @Getter
 @Builder(toBuilder = true)
+@Jacksonized
 public class CaseAssignmentUserRole {
 
     @JsonProperty("case_id")
