@@ -25,6 +25,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @FeignClient(
         name = "core-case-data-api",
+        primary = false,
         url = "${core_case_data.api.url}",
         configuration = CoreCaseDataConfiguration.class
 )
