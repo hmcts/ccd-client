@@ -20,7 +20,6 @@ import java.util.Map;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
-import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @FeignClient(
@@ -250,7 +249,7 @@ public interface CoreCaseDataApi {
     @RequestMapping(
             method = RequestMethod.GET,
             value = "/status/health",
-            headers = CONTENT_TYPE + "=" + APPLICATION_JSON_UTF8_VALUE
+            headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
     )
     InternalHealth health();
 
