@@ -146,7 +146,7 @@ dependencies {
     testImplementation group: 'com.github.tomakehurst', name: 'wiremock-standalone', version: '2.27.2'
     testImplementation group: 'com.google.guava', name: 'guava', version: '31.0.1-jre'
 
-    testCompile group: 'org.projectlombok', name: 'lombok', version: lombokVersion
+    testImplementation group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
 
     functionalTestImplementation group: 'uk.gov.hmcts.reform', name: 'service-auth-provider-client', version: '2.0.1'
@@ -172,4 +172,5 @@ bootJar {
 
 jar {
     enabled = true
+    archiveClassifier = ''
 }
