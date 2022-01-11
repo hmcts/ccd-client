@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.extern.jackson.Jacksonized;
 
+import java.util.Map;
+
 @Data
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -15,6 +17,9 @@ public class CaseDataContent {
     private Event event;
 
     private Object data;
+
+    @JsonProperty("supplementary_data_request")
+    private Map<String, Map<String, Object>> supplementaryDataRequest;
 
     @JsonProperty("security_classification")
     private Classification securityClassification;
