@@ -47,6 +47,30 @@ public interface CaseAssignmentApi {
             @RequestParam("case_ids") List<String> caseIds
     );
 
+    @GetMapping(
+            value = "/case-users",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseBody
+    CaseAssignmentUserRolesResource getUserRoles(
+            @RequestHeader(AUTHORIZATION) String authorisation,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
+            @RequestParam("case_ids") List<String> caseIds,
+            @RequestParam("user_ids") List<String> userIds
+    );
+
+    @GetMapping(
+            value = "/case-users",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseBody
+    CaseAssignmentUserRolesResource getUserRoles(
+            @RequestHeader(AUTHORIZATION) String authorisation,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
+            @RequestParam("case_ids") String caseId,
+            @RequestParam("user_ids") String userId
+    );
+
     @DeleteMapping(
             value = "/case-users",
             consumes = MediaType.APPLICATION_JSON_VALUE

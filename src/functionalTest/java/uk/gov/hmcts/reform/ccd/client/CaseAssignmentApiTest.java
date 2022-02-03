@@ -81,6 +81,56 @@ class CaseAssignmentApiTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Should be able to retrieve case user roles for a specific user")
+    void getUserRolesForASingleUser() {
+        CaseAssignmentUserRole expectedCaseAssignmentUserRole = CaseAssignmentUserRole.builder()
+                .caseDataId(caseDetails.getId().toString())
+                .userId(caseWorker.getUserDetails().getId())
+                .caseRole("[TESTSOLICITOR]")
+                .build();
+
+        caseAssignmentApi.addCaseUserRoles(
+                caseWorker.getAuthToken(),
+                authTokenGenerator.generate(),
+                caseAssignmentRequest
+        );
+
+        CaseAssignmentUserRolesResource resource = caseAssignmentApi.getUserRoles(
+                manager.getAuthToken(),
+                authTokenGenerator.generate(),
+                Collections.singletonList(caseDetails.getId().toString()),
+                Collections.singletonList(caseWorker.getUserDetails().getId())
+        );
+
+        assertThat(resource.getCaseAssignmentUserRoles()).containsOnly(expectedCaseAssignmentUserRole);
+    }
+
+    @Test
+    @DisplayName("Should be able to retrieve case user roles for a specific user and specific case")
+    void getUserRolesForASingleUserAndSpecificCase() {
+        CaseAssignmentUserRole expectedCaseAssignmentUserRole = CaseAssignmentUserRole.builder()
+                .caseDataId(caseDetails.getId().toString())
+                .userId(caseWorker.getUserDetails().getId())
+                .caseRole("[TESTSOLICITOR]")
+                .build();
+
+        caseAssignmentApi.addCaseUserRoles(
+                caseWorker.getAuthToken(),
+                authTokenGenerator.generate(),
+                caseAssignmentRequest
+        );
+
+        CaseAssignmentUserRolesResource resource = caseAssignmentApi.getUserRoles(
+                manager.getAuthToken(),
+                authTokenGenerator.generate(),
+                caseDetails.getId().toString(),
+                caseWorker.getUserDetails().getId()
+        );
+
+        assertThat(resource.getCaseAssignmentUserRoles()).containsOnly(expectedCaseAssignmentUserRole);
+    }
+
+    @Test
     @DisplayName("Should be able to remove case user roles")
     void removeCaseUserRoles() {
         CaseAssignmentUserRole expectedCaseAssignmentUserRole = CaseAssignmentUserRole.builder()
