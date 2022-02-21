@@ -288,4 +288,15 @@ public interface CoreCaseDataApi {
             @PathVariable("caseId") String caseId,
             @PathVariable("triggerId") String eventId
     );
+    
+    @RequestMapping(
+            method = RequestMethod.POST,
+            value = "/cases/{caseId}/supplementary-data"
+    )
+    CaseDetails submitSupplementaryData(
+            @RequestHeader(AUTHORIZATION) String authorisation,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
+            @PathVariable("caseId") String caseId,
+            @RequestBody Map<String, Map<String, Map<String, Object>>> supplementaryData
+    );
 }
