@@ -325,5 +325,28 @@ class CoreCaseDataApiTest extends BaseTest {
 
             assertThat(updatedCase.getData().get("TextField")).isEqualTo("text updated");
         }
+
+        @Test
+        @DisplayName("Should be able to store supplementary data")
+        void saveSupplementaryData() {
+            Map<String, Object> hmctsServiceIdMap = new HashMap<>();
+            hmctsServiceIdMap.put("HMCTSServiceId", "BBA3");
+            Map<String, Map<String, Object>> supplementaryDataRequestMap = new HashMap<>();
+            supplementaryDataRequestMap.put("$set", hmctsServiceIdMap);
+            Map<String, Map<String, Map<String, Object>>> supplementaryDataUpdates = new HashMap<>();
+            supplementaryDataUpdates.put("supplementary_data_updates", supplementaryDataRequestMap);
+
+            CaseDetails caseDetails = createCase(caseWorker);
+
+            CaseDetails theCase = coreCaseDataApi.submitSupplementaryData(
+                    caseWorker.getAuthToken(),
+                    authTokenGenerator.generate(),
+                    caseDetails.getId() + "",
+                    supplementaryDataUpdates
+            );
+
+            assertThat(theCase.getId())
+                    .isEqualTo(caseDetails.getId());
+        }
     }
 }

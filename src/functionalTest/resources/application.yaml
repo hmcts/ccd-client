@@ -9,8 +9,8 @@ spring:
 idam:
   s2s-auth:
     totp_secret: 'AAAAAAAAAAAAAAAA'
-    microservice: 'ccd_gateway'
-    url: 'http://localhost:4552'
+    microservice: 'sscs'
+    url: 'http://localhost:4502'
   api:
     url: 'http://localhost:5000'
   client:
