@@ -3,6 +3,7 @@ package uk.gov.hmcts.reform.ccd.client;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import uk.gov.hmcts.reform.ccd.client.healthcheck.InternalHealth;
 import uk.gov.hmcts.reform.ccd.client.model.CaseDataContent;
 import uk.gov.hmcts.reform.ccd.client.model.CaseDetails;
+import uk.gov.hmcts.reform.ccd.client.model.CaseResource;
 import uk.gov.hmcts.reform.ccd.client.model.PaginatedSearchMetadata;
 import uk.gov.hmcts.reform.ccd.client.model.SearchResult;
 import uk.gov.hmcts.reform.ccd.client.model.StartEventResponse;
@@ -288,7 +290,16 @@ public interface CoreCaseDataApi {
             @PathVariable("caseId") String caseId,
             @PathVariable("triggerId") String eventId
     );
-    
+
+    @PostMapping(
+            path = "/cases/{caseId}/events",
+            headers = EXPERIMENTAL
+    )
+    CaseResource createEvent(@RequestHeader(AUTHORIZATION) String userAuthorizationHeader,
+                             @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
+                             @PathVariable("caseId") String caseId,
+                             @RequestBody CaseDataContent caseDataContent);
+
     @RequestMapping(
             method = RequestMethod.POST,
             value = "/cases/{caseId}/supplementary-data"

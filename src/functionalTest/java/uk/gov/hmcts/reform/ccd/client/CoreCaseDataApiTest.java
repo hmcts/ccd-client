@@ -14,6 +14,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import uk.gov.hmcts.reform.authorisation.generators.AuthTokenGenerator;
 import uk.gov.hmcts.reform.ccd.client.model.CaseDataContent;
 import uk.gov.hmcts.reform.ccd.client.model.CaseDetails;
+import uk.gov.hmcts.reform.ccd.client.model.CaseResource;
 import uk.gov.hmcts.reform.ccd.client.model.Event;
 import uk.gov.hmcts.reform.ccd.client.model.StartEventResponse;
 
@@ -347,6 +348,37 @@ class CoreCaseDataApiTest extends BaseTest {
 
             assertThat(theCase.getId())
                     .isEqualTo(caseDetails.getId());
+        }
+
+        @Test
+        @DisplayName("Should be able to submit an event for a case")
+        void createEventForCase() {
+            CaseDetails caseDetails = createCase(caseWorker);
+
+            StartEventResponse startEventResponse = coreCaseDataApi.startEvent(
+                    caseWorker.getAuthToken(),
+                    authTokenGenerator.generate(),
+                    caseDetails.getId() + "",
+                    UPDATE_CASE_EVENT);
+
+            CaseDataContent caseDataContent = CaseDataContent.builder()
+                    .caseReference(startEventResponse.getCaseDetails().getId().toString())
+                    .data(startEventResponse.getCaseDetails().getData())
+                    .event(Event.builder().id(UPDATE_CASE_EVENT).build())
+                    .eventToken(startEventResponse.getToken())
+                    .build();
+
+            CaseResource theCase = coreCaseDataApi.createEvent(
+                    caseWorker.getAuthToken(),
+                    authTokenGenerator.generate(),
+                    caseDetails.getId() + "",
+                    caseDataContent);
+
+            assertThat(theCase.getReference())
+                    .isEqualTo(caseDetails.getId().toString());
+            assertThat(theCase.getData().get("TextField").asText())
+                    .isEqualTo(caseDetails.getData().get("TextField").toString());
+            assertThat(theCase.getState()).isEqualTo("IN_PROGRESS");
         }
     }
 }

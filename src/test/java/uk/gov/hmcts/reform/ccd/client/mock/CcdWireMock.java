@@ -2,6 +2,7 @@ package uk.gov.hmcts.reform.ccd.client.mock;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.MappingBuilder;
+import com.github.tomakehurst.wiremock.core.Options;
 import com.google.common.io.Resources;
 
 import java.io.IOException;
@@ -12,7 +13,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 public class CcdWireMock {
-    private static final WireMockServer SERVER = new WireMockServer(8081);
+    private static final WireMockServer SERVER = new WireMockServer(Options.DYNAMIC_PORT);
 
     private CcdWireMock() {
     }
