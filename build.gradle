@@ -102,7 +102,7 @@ publishing {
 }
 
 ext {
-    lombokVersion = '1.18.24'
+    lombokVersion = '1.18.26'
     springCloudVersion = '2020.0.6'
 }
 
