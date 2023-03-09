@@ -97,4 +97,14 @@ class CcdClientTest {
         int total = startEvent.getTotal();
         assertThat(total).isEqualTo(10);
     }
+
+    @Test
+    @DisplayName("Should be able to call the elastic search result api")
+    void elasticSearchResultTest() throws IOException {
+        CcdWireMock.stub(post(urlEqualTo("/internal/searchCases?ctid=" + CASE_TYPE_ID)), "searchResult.json");
+        SearchResult startEvent = ccdApi.elasticSearchCases("UserToken", "s2sAuth", CASE_TYPE_ID, "");
+
+        int total = startEvent.getTotal();
+        assertThat(total).isEqualTo(10);
+    }
 }

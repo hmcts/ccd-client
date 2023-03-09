@@ -76,6 +76,18 @@ public interface CoreCaseDataApi {
     );
 
     @RequestMapping(
+            method = RequestMethod.POST,
+            value = "/internal/searchCases?ctid={caseType}",
+            headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
+    )
+    SearchResult elasticSearchCases(
+            @RequestHeader(AUTHORIZATION) String authorisation,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
+            @PathVariable("caseType") String caseType,
+            @RequestBody String searchString
+    );
+
+    @RequestMapping(
             method = RequestMethod.GET,
             value = "/caseworkers/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases",
             headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
