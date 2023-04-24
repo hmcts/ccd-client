@@ -13,6 +13,7 @@ import uk.gov.hmcts.reform.ccd.client.healthcheck.InternalHealth;
 import uk.gov.hmcts.reform.ccd.client.model.CaseDataContent;
 import uk.gov.hmcts.reform.ccd.client.model.CaseDetails;
 import uk.gov.hmcts.reform.ccd.client.model.CaseResource;
+import uk.gov.hmcts.reform.ccd.client.model.CategoriesAndDocuments;
 import uk.gov.hmcts.reform.ccd.client.model.PaginatedSearchMetadata;
 import uk.gov.hmcts.reform.ccd.client.model.SearchResult;
 import uk.gov.hmcts.reform.ccd.client.model.StartEventResponse;
@@ -310,4 +311,10 @@ public interface CoreCaseDataApi {
             @PathVariable("caseId") String caseId,
             @RequestBody Map<String, Map<String, Map<String, Object>>> supplementaryData
     );
+
+    @GetMapping(path = "/categoriesAndDocuments/{caseRef}", headers = EXPERIMENTAL)
+    CategoriesAndDocuments getCategoriesAndDocuments(
+                    @RequestHeader(AUTHORIZATION) String authorisation,
+                    @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
+                    @PathVariable("caseRef") String caseRef);
 }
