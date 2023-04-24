@@ -1,7 +1,6 @@
 package uk.gov.hmcts.reform.ccd.client;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -314,7 +313,7 @@ public interface CoreCaseDataApi {
     );
 
     @GetMapping(path = "/categoriesAndDocuments/{caseRef}", headers = EXPERIMENTAL)
-    ResponseEntity<CategoriesAndDocuments> getCategoriesAndDocuments(
+    CategoriesAndDocuments getCategoriesAndDocuments(
                     @RequestHeader(AUTHORIZATION) String authorisation,
                     @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorisation,
                     @PathVariable("caseRef") String caseRef);
