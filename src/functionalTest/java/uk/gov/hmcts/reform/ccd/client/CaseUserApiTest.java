@@ -42,20 +42,20 @@ class CaseUserApiTest extends BaseTest {
         caseAccessApi.grantAccessToCase(
                 caseWorker.getAuthToken(),
                 authTokenGenerator.generate(),
-                caseWorker.getUserDetails().getId(),
+                caseWorker.getUserDetails().getUid(),
                 JURISDICTION,
                 CASE_TYPE,
                 caseForCaseworker.getId() + "",
-                new UserId(manager.getUserDetails().getId())
+                new UserId(manager.getUserDetails().getUid())
         );
 
         List<String> caseIdsGivenUserIdHasAccessTo = caseAccessApi.findCaseIdsGivenUserIdHasAccessTo(
                 caseWorker.getAuthToken(),
                 authTokenGenerator.generate(),
-                caseWorker.getUserDetails().getId(),
+                caseWorker.getUserDetails().getUid(),
                 JURISDICTION,
                 CASE_TYPE,
-                manager.getUserDetails().getId()
+                manager.getUserDetails().getUid()
         );
 
         assertThat(caseIdsGivenUserIdHasAccessTo.contains(caseForCaseworker.getId().toString())).isTrue();
@@ -65,17 +65,17 @@ class CaseUserApiTest extends BaseTest {
                 caseWorker.getAuthToken(),
                 authTokenGenerator.generate(),
                 caseForCaseworker.getId() + "",
-                manager.getUserDetails().getId(),
-                new CaseUser(manager.getUserDetails().getId(), newCaseRoles)
+                manager.getUserDetails().getUid(),
+                new CaseUser(manager.getUserDetails().getUid(), newCaseRoles)
         );
 
         caseIdsGivenUserIdHasAccessTo = caseAccessApi.findCaseIdsGivenUserIdHasAccessTo(
                 caseWorker.getAuthToken(),
                 authTokenGenerator.generate(),
-                caseWorker.getUserDetails().getId(),
+                caseWorker.getUserDetails().getUid(),
                 JURISDICTION,
                 CASE_TYPE,
-                manager.getUserDetails().getId()
+                manager.getUserDetails().getUid()
         );
         assertThat(caseIdsGivenUserIdHasAccessTo.contains(caseForCaseworker.getId().toString())).isFalse();
 
@@ -85,17 +85,17 @@ class CaseUserApiTest extends BaseTest {
                 caseWorker.getAuthToken(),
                 authTokenGenerator.generate(),
                 caseForCaseworker.getId() + "",
-                manager.getUserDetails().getId(),
-                new CaseUser(manager.getUserDetails().getId(), newCaseRoles)
+                manager.getUserDetails().getUid(),
+                new CaseUser(manager.getUserDetails().getUid(), newCaseRoles)
         );
 
         caseIdsGivenUserIdHasAccessTo = caseAccessApi.findCaseIdsGivenUserIdHasAccessTo(
                 caseWorker.getAuthToken(),
                 authTokenGenerator.generate(),
-                caseWorker.getUserDetails().getId(),
+                caseWorker.getUserDetails().getUid(),
                 JURISDICTION,
                 CASE_TYPE,
-                manager.getUserDetails().getId()
+                manager.getUserDetails().getUid()
         );
 
         assertThat(caseIdsGivenUserIdHasAccessTo.contains(caseForCaseworker.getId().toString())).isTrue();

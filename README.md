@@ -9,8 +9,7 @@ This is a client library for interacting with the core case data store applicati
 
 ### Prerequisites
 
-- [JDK 8](https://www.oracle.com/java)
-- [Docker](https://www.docker.com)
+- [Java 17](https://adoptium.net/temurin/releases/)
 
 ## Usage
 

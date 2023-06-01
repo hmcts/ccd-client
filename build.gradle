@@ -1,8 +1,9 @@
 plugins {
     id 'checkstyle'
     id 'io.spring.dependency-management' version '1.1.0'
-    id 'org.springframework.boot' version '2.5.6'
+    id 'org.springframework.boot' version '3.1.0'
     id 'com.github.ben-manes.versions' version '0.46.0'
+    id 'se.patrikerdes.use-latest-versions' version '0.2.18'
     id 'java-library'
     id 'maven-publish'
 }
@@ -14,10 +15,14 @@ version buildNumber
 
 checkstyle {
     maxWarnings = 0
-    toolVersion = '8.5'
+    toolVersion = '10.12.0'
 }
 
-sourceCompatibility = 1.8
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(17)
+  }
+}
 
 compileJava {
     options.compilerArgs << '-parameters' << '-Xlint:deprecation'
@@ -29,7 +34,8 @@ compileTestJava {
 
 repositories {
     mavenLocal()
-    jcenter()
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
 
 jar {
@@ -48,7 +54,7 @@ def pomConfig = {
     licenses {
         license {
             name "MIT License"
-            url "http://www.opensource.org/licenses/mit-license.php"
+            url "https://www.opensource.org/licenses/MIT"
             distribution "repo"
         }
     }
@@ -60,12 +66,12 @@ def pomConfig = {
 
 
 task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
+    archiveClassifier = 'sources'
     from sourceSets.main.allSource
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
+    archiveClassifier = 'javadoc'
     from javadoc.destinationDir
 }
 
@@ -89,8 +95,8 @@ publishing {
                 url = gitRepo
                 licenses {
                     license {
-                        name = 'MIT License, Copyright (c) 2019 HM Courts & Tribunals Service'
-                        url = "http://www.opensource.org/licenses/mit-license.php"
+                        name = 'MIT License, Copyright (c) 2023 HM Courts & Tribunals Service'
+                        url = "https://www.opensource.org/licenses/MIT"
                     }
                 }
                 scm {
@@ -103,13 +109,6 @@ publishing {
 
 ext {
     lombokVersion = '1.18.28'
-    springCloudVersion = '2020.0.6'
-}
-
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-    }
 }
 
 sourceSets {
@@ -133,6 +132,7 @@ task functionalTest(type: Test) {
 }
 
 dependencies {
+    implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2022.0.3"))
     implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
     implementation group: 'io.github.openfeign', name: 'feign-jackson'
@@ -140,17 +140,18 @@ dependencies {
     implementation group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
 
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.9.3'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.10.0-M1'
 
     testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test'
-    testImplementation group: 'com.github.tomakehurst', name: 'wiremock-standalone', version: '2.27.2'
+    testImplementation group: 'com.github.tomakehurst', name: 'wiremock-standalone', version: '3.0.0-beta-8'
     testImplementation group: 'com.google.guava', name: 'guava', version: '32.0.0-jre'
 
     testImplementation group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
 
-    functionalTestImplementation group: 'uk.gov.hmcts.reform', name: 'service-auth-provider-client', version: '2.0.1'
-    functionalTestImplementation group: 'uk.gov.hmcts.reform', name: 'idam-client', version: '1.5.5'
+    functionalTestImplementation group: 'com.github.hmcts', name: 'service-auth-provider-java-client', version: '5.1.0'
+    functionalTestImplementation group: 'com.github.hmcts', name: 'idam-java-client', version: '3.0.1'
+
     functionalTestImplementation group: 'org.assertj', name: 'assertj-core', version: '3.24.2'
     functionalTestCompileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     functionalTestAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion

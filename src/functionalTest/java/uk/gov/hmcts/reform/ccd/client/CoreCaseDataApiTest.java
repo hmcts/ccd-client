@@ -104,7 +104,7 @@ class CoreCaseDataApiTest extends BaseTest {
                         .readForCaseWorker(
                                 caseWorker.getAuthToken(),
                                 authTokenGenerator.generate(),
-                                caseWorker.getUserDetails().getId(),
+                                caseWorker.getUserDetails().getUid(),
                                 JURISDICTION,
                                 CASE_TYPE,
                                 caseDetails.getId() + ""
@@ -122,7 +122,7 @@ class CoreCaseDataApiTest extends BaseTest {
                 List<CaseDetails> caseDetails1 = coreCaseDataApi.searchForCaseworker(
                         caseWorker.getAuthToken(),
                         authTokenGenerator.generate(),
-                        caseWorker.getUserDetails().getId(),
+                        caseWorker.getUserDetails().getUid(),
                         JURISDICTION,
                         CASE_TYPE,
                         SEARCH_CRITERIA
@@ -140,7 +140,7 @@ class CoreCaseDataApiTest extends BaseTest {
                 StartEventResponse startEventResponse = coreCaseDataApi.startEventForCaseWorker(
                         caseWorker.getAuthToken(),
                         authTokenGenerator.generate(),
-                        caseWorker.getUserDetails().getId(),
+                        caseWorker.getUserDetails().getUid(),
                         JURISDICTION,
                         CASE_TYPE,
                         caseDetails.getId() + "",
@@ -156,7 +156,7 @@ class CoreCaseDataApiTest extends BaseTest {
                 CaseDetails updatedCase = coreCaseDataApi.submitEventForCaseWorker(
                         caseWorker.getAuthToken(),
                         authTokenGenerator.generate(),
-                        caseWorker.getUserDetails().getId(),
+                        caseWorker.getUserDetails().getUid(),
                         JURISDICTION,
                         CASE_TYPE,
                         caseDetails.getId() + "",
@@ -196,7 +196,7 @@ class CoreCaseDataApiTest extends BaseTest {
                         .readForCitizen(
                                 citizen.getAuthToken(),
                                 authTokenGenerator.generate(),
-                                citizen.getUserDetails().getId(),
+                                citizen.getUserDetails().getUid(),
                                 JURISDICTION,
                                 CASE_TYPE,
                                 caseDetails.getId() + ""
@@ -214,7 +214,7 @@ class CoreCaseDataApiTest extends BaseTest {
                 List<CaseDetails> caseDetails1 = coreCaseDataApi.searchForCitizen(
                         citizen.getAuthToken(),
                         authTokenGenerator.generate(),
-                        citizen.getUserDetails().getId(),
+                        citizen.getUserDetails().getUid(),
                         JURISDICTION,
                         CASE_TYPE,
                         SEARCH_CRITERIA
@@ -232,7 +232,7 @@ class CoreCaseDataApiTest extends BaseTest {
                 StartEventResponse startEventResponse = coreCaseDataApi.startEventForCitizen(
                         citizen.getAuthToken(),
                         authTokenGenerator.generate(),
-                        citizen.getUserDetails().getId(),
+                        citizen.getUserDetails().getUid(),
                         JURISDICTION,
                         CASE_TYPE,
                         caseDetails.getId() + "",
@@ -248,7 +248,7 @@ class CoreCaseDataApiTest extends BaseTest {
                 CaseDetails updatedCase = coreCaseDataApi.submitEventForCitizen(
                         caseWorker.getAuthToken(),
                         authTokenGenerator.generate(),
-                        caseWorker.getUserDetails().getId(),
+                        caseWorker.getUserDetails().getUid(),
                         JURISDICTION,
                         CASE_TYPE,
                         caseDetails.getId() + "",
@@ -316,7 +316,7 @@ class CoreCaseDataApiTest extends BaseTest {
             CaseDetails updatedCase = coreCaseDataApi.submitEventForCaseWorker(
                     caseWorker.getAuthToken(),
                     authTokenGenerator.generate(),
-                    caseWorker.getUserDetails().getId(),
+                    caseWorker.getUserDetails().getUid(),
                     JURISDICTION,
                     CASE_TYPE,
                     caseDetails.getId() + "",

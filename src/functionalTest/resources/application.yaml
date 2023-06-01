@@ -1,10 +1,11 @@
 spring:
   application:
     name: 'Core case data client'
-  main:
-    allow-bean-definition-overriding: true
-
-
+  # https://github.com/spring-cloud/spring-cloud-openfeign/issues/847
+  cloud:
+    mvc:
+      token-relay:
+        enabled: false
 
 idam:
   s2s-auth:
