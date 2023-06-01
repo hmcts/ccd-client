@@ -24,9 +24,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(classes = {
-        CoreCaseDataClientAutoConfiguration.class,
-        CoreCaseDataConfiguration.class,
-        CoreCaseDataApi.class
+    CoreCaseDataClientAutoConfiguration.class, CoreCaseDataConfiguration.class, CoreCaseDataApi.class
 })
 @DirtiesContext
 @EnableAutoConfiguration
@@ -62,9 +60,14 @@ class CcdClientTest {
         assertThat(caseData.getCaseTypeId()).isEqualTo("someCaseType");
         assertThat(caseData.getId()).isEqualTo(1234L);
         assertThat(caseData.getSecurityClassification()).isEqualTo(Classification.PUBLIC);
-        Map<String, Object> someProp = (Map<String, Object>) caseData.getData().get("someProp");
+        Map<String, Object> someProp = getSomeProp(caseData);
         assertThat(someProp.get("someAttributes")).isEqualTo(1);
 
+    }
+
+    @SuppressWarnings("unchecked")
+    private static Map<String, Object> getSomeProp(CaseDetails caseData) {
+        return (Map<String, Object>) caseData.getData().get("someProp");
     }
 
     @Test
@@ -83,7 +86,7 @@ class CcdClientTest {
         assertThat(caseDetails.getState()).isEqualTo("SOME_STATE");
         assertThat(caseDetails.getId()).isEqualTo(1234L);
         assertThat(caseDetails.getSecurityClassification()).isEqualTo(Classification.PUBLIC);
-        Map<String, Object> someProp = (Map<String, Object>) caseDetails.getData().get("someProp");
+        Map<String, Object> someProp = getSomeProp(caseDetails);
         assertThat(someProp.get("someAttributes")).isEqualTo(1);
 
     }

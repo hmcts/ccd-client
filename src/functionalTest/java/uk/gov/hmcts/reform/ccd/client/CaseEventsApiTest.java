@@ -36,7 +36,7 @@ class CaseEventsApiTest extends BaseTest {
         List<CaseEventDetail> caseEventDetails = caseEventsApi.findEventDetailsForCase(
                 caseWorker.getAuthToken(),
                 authTokenGenerator.generate(),
-                caseWorker.getUserDetails().getId(),
+                caseWorker.getUserDetails().getUid(),
                 JURISDICTION,
                 CASE_TYPE,
                 caseForCaseworker.getId() + ""

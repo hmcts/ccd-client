@@ -38,6 +38,7 @@ public class CaseFieldDefinition implements Serializable, CommonField {
     private String showConditon = null;
     @JsonProperty("acls")
     private List<AccessControlList> accessControlLists;
+    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     @JsonProperty("complexACLs")
     private List<ComplexACL> complexACLs = new ArrayList<>();
     private boolean metadata;

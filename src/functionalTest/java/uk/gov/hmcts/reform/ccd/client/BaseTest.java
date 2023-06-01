@@ -14,7 +14,7 @@ import uk.gov.hmcts.reform.ccd.client.model.Event;
 import uk.gov.hmcts.reform.ccd.client.model.StartEventResponse;
 import uk.gov.hmcts.reform.idam.client.IdamClient;
 import uk.gov.hmcts.reform.idam.client.IdamTestApi;
-import uk.gov.hmcts.reform.idam.client.models.UserDetails;
+import uk.gov.hmcts.reform.idam.client.models.UserInfo;
 import uk.gov.hmcts.reform.idam.client.models.test.CreateUserRequest;
 import uk.gov.hmcts.reform.idam.client.models.test.UserGroup;
 import uk.gov.hmcts.reform.idam.client.models.test.UserRole;
@@ -33,22 +33,26 @@ public class BaseTest {
     private static final String CREATE_CASE_EVENT = "CREATE";
     private static final String CASE_REFERENCE = "REF123";
 
-    private static final Map<String, String> CREATE_CASE_DATA = new HashMap<String, String>() {
+    private static final Map<String, String> CREATE_CASE_DATA = new HashMap<>() {
         {
             put("TextField", "text...");
         }
     };
 
     @Autowired
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     protected IdamClient idamClient;
 
     @Autowired
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     protected IdamTestApi idamTestApi;
 
     @Autowired
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     protected CoreCaseDataApi coreCaseDataApi;
 
     @Autowired
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     protected AuthTokenGenerator authTokenGenerator;
 
     User createCitizen() {
@@ -67,8 +71,8 @@ public class BaseTest {
             }
         }
 
-        String token = idamClient.authenticateUser(citizenEmail, CreateUserRequest.DEFAULT_PASSWORD);
-        UserDetails userDetails = idamClient.getUserDetails(token);
+        String token = idamClient.getAccessToken(citizenEmail, CreateUserRequest.DEFAULT_PASSWORD);
+        UserInfo userDetails = idamClient.getUserInfo(token);
 
         return new User(token, userDetails);
     }
@@ -92,8 +96,8 @@ public class BaseTest {
             }
         }
 
-        String token = idamClient.authenticateUser(email, CreateUserRequest.DEFAULT_PASSWORD);
-        UserDetails userDetails = idamClient.getUserDetails(token);
+        String token = idamClient.getAccessToken(email, CreateUserRequest.DEFAULT_PASSWORD);
+        UserInfo userDetails = idamClient.getUserInfo(token);
 
         return new User(token, userDetails);
     }
@@ -102,7 +106,7 @@ public class BaseTest {
         StartEventResponse startEventResponse = coreCaseDataApi.startForCaseworker(
                 caseworker.getAuthToken(),
                 authTokenGenerator.generate(),
-                caseworker.getUserDetails().getId(),
+                caseworker.getUserDetails().getUid(),
                 JURISDICTION,
                 CASE_TYPE,
                 CREATE_CASE_EVENT
@@ -118,7 +122,7 @@ public class BaseTest {
         return coreCaseDataApi.submitForCaseworker(
                 caseworker.getAuthToken(),
                 authTokenGenerator.generate(),
-                caseworker.getUserDetails().getId(),
+                caseworker.getUserDetails().getUid(),
                 JURISDICTION,
                 CASE_TYPE,
                 true,
@@ -143,7 +147,7 @@ public class BaseTest {
         return coreCaseDataApi.submitForCaseworker(
                 user.getAuthToken(),
                 authTokenGenerator.generate(),
-                user.getUserDetails().getId(),
+                user.getUserDetails().getUid(),
                 JURISDICTION,
                 CASE_TYPE,
                 true,
@@ -155,7 +159,7 @@ public class BaseTest {
         StartEventResponse startEventResponse = coreCaseDataApi.startForCitizen(
                 citizen.getAuthToken(),
                 authTokenGenerator.generate(),
-                citizen.getUserDetails().getId(),
+                citizen.getUserDetails().getUid(),
                 JURISDICTION,
                 CASE_TYPE,
                 CREATE_CASE_EVENT
@@ -170,7 +174,7 @@ public class BaseTest {
         return coreCaseDataApi.submitForCitizen(
                 citizen.getAuthToken(),
                 authTokenGenerator.generate(),
-                citizen.getUserDetails().getId(),
+                citizen.getUserDetails().getUid(),
                 JURISDICTION,
                 CASE_TYPE,
                 true,

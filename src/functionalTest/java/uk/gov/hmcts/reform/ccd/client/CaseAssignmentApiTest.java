@@ -38,7 +38,7 @@ class CaseAssignmentApiTest extends BaseTest {
                         CaseAssignmentUserRoleWithOrganisation.builder()
                                 .organisationId("TESTTORG")
                                 .caseDataId(caseDetails.getId().toString())
-                                .userId(caseWorker.getUserDetails().getId())
+                                .userId(caseWorker.getUserDetails().getUid())
                                 .caseRole("[TESTSOLICITOR]")
                                 .build()))
                 .build();
@@ -61,7 +61,7 @@ class CaseAssignmentApiTest extends BaseTest {
     void getUserRoles() {
         CaseAssignmentUserRole expectedCaseAssignmentUserRole = CaseAssignmentUserRole.builder()
                 .caseDataId(caseDetails.getId().toString())
-                .userId(caseWorker.getUserDetails().getId())
+                .userId(caseWorker.getUserDetails().getUid())
                 .caseRole("[TESTSOLICITOR]")
                 .build();
 
@@ -85,7 +85,7 @@ class CaseAssignmentApiTest extends BaseTest {
     void getUserRolesForASingleUser() {
         CaseAssignmentUserRole expectedCaseAssignmentUserRole = CaseAssignmentUserRole.builder()
                 .caseDataId(caseDetails.getId().toString())
-                .userId(caseWorker.getUserDetails().getId())
+                .userId(caseWorker.getUserDetails().getUid())
                 .caseRole("[TESTSOLICITOR]")
                 .build();
 
@@ -99,7 +99,7 @@ class CaseAssignmentApiTest extends BaseTest {
                 manager.getAuthToken(),
                 authTokenGenerator.generate(),
                 Collections.singletonList(caseDetails.getId().toString()),
-                Collections.singletonList(caseWorker.getUserDetails().getId())
+                Collections.singletonList(caseWorker.getUserDetails().getUid())
         );
 
         assertThat(resource.getCaseAssignmentUserRoles()).containsOnly(expectedCaseAssignmentUserRole);
@@ -110,7 +110,7 @@ class CaseAssignmentApiTest extends BaseTest {
     void getUserRolesForASingleUserAndSpecificCase() {
         CaseAssignmentUserRole expectedCaseAssignmentUserRole = CaseAssignmentUserRole.builder()
                 .caseDataId(caseDetails.getId().toString())
-                .userId(caseWorker.getUserDetails().getId())
+                .userId(caseWorker.getUserDetails().getUid())
                 .caseRole("[TESTSOLICITOR]")
                 .build();
 
@@ -124,7 +124,7 @@ class CaseAssignmentApiTest extends BaseTest {
                 manager.getAuthToken(),
                 authTokenGenerator.generate(),
                 caseDetails.getId().toString(),
-                caseWorker.getUserDetails().getId()
+                caseWorker.getUserDetails().getUid()
         );
 
         assertThat(resource.getCaseAssignmentUserRoles()).containsOnly(expectedCaseAssignmentUserRole);
@@ -135,7 +135,7 @@ class CaseAssignmentApiTest extends BaseTest {
     void removeCaseUserRoles() {
         CaseAssignmentUserRole expectedCaseAssignmentUserRole = CaseAssignmentUserRole.builder()
                 .caseDataId(caseDetails.getId().toString())
-                .userId(caseWorker.getUserDetails().getId())
+                .userId(caseWorker.getUserDetails().getUid())
                 .caseRole("[TESTSOLICITOR]")
                 .build();
 

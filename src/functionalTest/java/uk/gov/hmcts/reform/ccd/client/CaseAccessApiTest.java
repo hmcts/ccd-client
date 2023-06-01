@@ -35,20 +35,20 @@ class CaseAccessApiTest extends BaseTest {
         caseAccessApi.grantAccessToCase(
                 caseWorker.getAuthToken(),
                 authTokenGenerator.generate(),
-                caseWorker.getUserDetails().getId(),
+                caseWorker.getUserDetails().getUid(),
                 JURISDICTION,
                 CASE_TYPE,
                 caseForCaseworker.getId() + "",
-                new UserId(manager.getUserDetails().getId())
+                new UserId(manager.getUserDetails().getUid())
         );
 
         List<String> caseIdsGivenUserIdHasAccessTo = caseAccessApi.findCaseIdsGivenUserIdHasAccessTo(
                 caseWorker.getAuthToken(),
                 authTokenGenerator.generate(),
-                caseWorker.getUserDetails().getId(),
+                caseWorker.getUserDetails().getUid(),
                 JURISDICTION,
                 CASE_TYPE,
-                manager.getUserDetails().getId()
+                manager.getUserDetails().getUid()
         );
 
         assertThat(caseIdsGivenUserIdHasAccessTo.contains(caseForCaseworker.getId() + ""))
@@ -62,32 +62,32 @@ class CaseAccessApiTest extends BaseTest {
         caseAccessApi.grantAccessToCase(
                 caseWorker.getAuthToken(),
                 authTokenGenerator.generate(),
-                caseWorker.getUserDetails().getId(),
+                caseWorker.getUserDetails().getUid(),
                 JURISDICTION,
                 CASE_TYPE,
                 caseForCaseworker.getId() + "",
-                new UserId(manager.getUserDetails().getId())
+                new UserId(manager.getUserDetails().getUid())
         );
 
         caseAccessApi.revokeAccessToCase(
                 caseWorker.getAuthToken(),
                 authTokenGenerator.generate(),
-                caseWorker.getUserDetails().getId(),
+                caseWorker.getUserDetails().getUid(),
                 JURISDICTION,
                 CASE_TYPE,
                 caseForCaseworker.getId() + "",
-                manager.getUserDetails().getId()
+                manager.getUserDetails().getUid()
         );
 
         List<String> caseIdsGivenUserIdHasAccessTo = caseAccessApi.findCaseIdsGivenUserIdHasAccessTo(
                 caseWorker.getAuthToken(),
                 authTokenGenerator.generate(),
-                caseWorker.getUserDetails().getId(),
+                caseWorker.getUserDetails().getUid(),
                 JURISDICTION,
                 CASE_TYPE,
-                manager.getUserDetails().getId()
+                manager.getUserDetails().getUid()
         );
 
-        assertThat(caseIdsGivenUserIdHasAccessTo.contains(manager.getUserDetails().getId())).isFalse();
+        assertThat(caseIdsGivenUserIdHasAccessTo.contains(manager.getUserDetails().getUid())).isFalse();
     }
 }
