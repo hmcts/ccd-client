@@ -108,7 +108,7 @@ publishing {
 }
 
 ext {
-    lombokVersion = '1.18.28'
+    lombokVersion = '1.18.30'
 }
 
 sourceSets {
