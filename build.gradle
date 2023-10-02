@@ -15,7 +15,7 @@ version buildNumber
 
 checkstyle {
     maxWarnings = 0
-    toolVersion = '10.12.3'
+    toolVersion = '10.12.4'
 }
 
 java {
