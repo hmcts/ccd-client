@@ -144,7 +144,7 @@ dependencies {
 
     testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test'
     testImplementation group: 'com.github.tomakehurst', name: 'wiremock-standalone', version: '3.0.1'
-    testImplementation group: 'com.google.guava', name: 'guava', version: '32.1.2-jre'
+    testImplementation group: 'com.google.guava', name: 'guava', version: '32.1.3-jre'
 
     testImplementation group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
