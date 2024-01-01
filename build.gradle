@@ -152,7 +152,7 @@ dependencies {
     functionalTestImplementation group: 'com.github.hmcts', name: 'service-auth-provider-java-client', version: '5.1.1'
     functionalTestImplementation group: 'com.github.hmcts', name: 'idam-java-client', version: '3.0.3'
 
-    functionalTestImplementation group: 'org.assertj', name: 'assertj-core', version: '3.24.2'
+    functionalTestImplementation group: 'org.assertj', name: 'assertj-core', version: '3.25.0'
     functionalTestCompileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     functionalTestAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
 
