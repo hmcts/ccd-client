@@ -1,7 +1,7 @@
 plugins {
     id 'checkstyle'
     id 'io.spring.dependency-management' version '1.1.5'
-    id 'org.springframework.boot' version '3.1.5'
+    id 'org.springframework.boot' version '3.2.5'
     id 'com.github.ben-manes.versions' version '0.51.0'
     id 'se.patrikerdes.use-latest-versions' version '0.2.18'
     id 'java-library'
@@ -10,12 +10,12 @@ plugins {
 
 def buildNumber = System.getenv("RELEASE_VERSION")?.replace("refs/tags/", "") ?: "DEV-SNAPSHOT"
 
-group 'uk.gov.hmcts.reform'
+group 'com.github.hmcts'
 version buildNumber
 
 checkstyle {
     maxWarnings = 0
-    toolVersion = '10.16.0'
+    toolVersion = '10.13.0'
 }
 
 java {
@@ -108,7 +108,7 @@ publishing {
 }
 
 ext {
-    lombokVersion = '1.18.32'
+    lombokVersion = '1.18.30'
 }
 
 sourceSets {
@@ -132,7 +132,7 @@ task functionalTest(type: Test) {
 }
 
 dependencies {
-    implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2022.0.5"))
+    implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2023.0.1"))
     implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
     implementation group: 'io.github.openfeign', name: 'feign-jackson'
@@ -144,7 +144,7 @@ dependencies {
 
     testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test'
     testImplementation group: 'com.github.tomakehurst', name: 'wiremock-standalone', version: '3.0.1'
-    testImplementation group: 'com.google.guava', name: 'guava', version: '33.2.0-jre'
+    testImplementation group: 'com.google.guava', name: 'guava', version: '33.0.0-jre'
 
     testImplementation group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
@@ -156,7 +156,7 @@ dependencies {
     functionalTestCompileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     functionalTestAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
 
-    functionalTestImplementation group: 'com.fasterxml.jackson.module', name: 'jackson-module-parameter-names', version: '2.17.1'
+    functionalTestImplementation group: 'com.fasterxml.jackson.module', name: 'jackson-module-parameter-names', version: '2.16.1'
 }
 
 wrapper {
