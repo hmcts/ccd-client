@@ -63,7 +63,7 @@ public interface CoreCaseDataApi {
             @PathVariable("jurisdictionId") String jurisdictionId,
             @PathVariable("caseType") String caseType,
             @PathVariable("eventId") String eventId,
-            @RequestParam("ignore-warning") boolean ignoreWarning,
+            @RequestParam("ignore-warning") boolean ignoreWarning
     );
 
     @RequestMapping(
