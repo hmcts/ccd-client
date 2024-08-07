@@ -51,6 +51,22 @@ public interface CoreCaseDataApi {
     );
 
     @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/caseworkers/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/event-triggers/"
+                    + "{eventId}/token",
+            headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
+    )
+    StartEventResponse startForCaseworker(
+            @RequestHeader(AUTHORIZATION) String authorisation,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
+            @PathVariable("userId") String userId,
+            @PathVariable("jurisdictionId") String jurisdictionId,
+            @PathVariable("caseType") String caseType,
+            @PathVariable("eventId") String eventId,
+            @RequestParam("ignore-warning") boolean ignoreWarning
+    );
+
+    @RequestMapping(
             method = RequestMethod.POST,
             value = "/caseworkers/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases"
     )
