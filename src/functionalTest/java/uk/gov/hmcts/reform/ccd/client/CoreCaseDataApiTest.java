@@ -168,6 +168,42 @@ class CoreCaseDataApiTest extends BaseTest {
             }
         }
 
+        @Test
+        @DisplayName("Should be able to update a case and ignore warning")
+        void updateWithIgnoreWarning() {
+            CaseDetails caseDetails = createCaseForCaseworker(caseWorker);
+
+            StartEventResponse startEventResponse = coreCaseDataApi.startEventForCaseWorker(
+                    caseWorker.getAuthToken(),
+                    authTokenGenerator.generate(),
+                    caseWorker.getUserDetails().getUid(),
+                    JURISDICTION,
+                    CASE_TYPE,
+                    caseDetails.getId() + "",
+                    UPDATE_CASE_EVENT,
+                    true
+            );
+
+            CaseDataContent caseDataContent = CaseDataContent.builder()
+                    .eventToken(startEventResponse.getToken())
+                    .event(Event.builder().id(startEventResponse.getEventId()).build())
+                    .data(UPDATE_CASE_DATA)
+                    .build();
+
+            CaseDetails updatedCase = coreCaseDataApi.submitEventForCaseWorker(
+                    caseWorker.getAuthToken(),
+                    authTokenGenerator.generate(),
+                    caseWorker.getUserDetails().getUid(),
+                    JURISDICTION,
+                    CASE_TYPE,
+                    caseDetails.getId() + "",
+                    true,
+                    caseDataContent
+            );
+
+            assertThat(updatedCase.getData().get("TextField")).isEqualTo("text updated");
+        }
+        
         @Nested
         @DisplayName("Citizen")
         @Disabled("Auto test jurisdiction doesn't have citizen events currently, it's on the CCD backlog to do soon")
