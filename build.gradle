@@ -156,7 +156,7 @@ dependencies {
     functionalTestCompileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     functionalTestAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
 
-    functionalTestImplementation group: 'com.fasterxml.jackson.module', name: 'jackson-module-parameter-names', version: '2.18.0'
+    functionalTestImplementation group: 'com.fasterxml.jackson.module', name: 'jackson-module-parameter-names', version: '2.18.1'
 }
 
 wrapper {
