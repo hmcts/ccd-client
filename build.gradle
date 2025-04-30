@@ -35,6 +35,10 @@ compileTestJava {
 repositories {
     mavenLocal()
     mavenCentral()
+    maven {
+        url 'https://pkgs.dev.azure.com/hmcts/Artifacts/_packaging/hmcts-lib/maven/v1'
+        name 'HMCTS common libraries'
+    }
 }
 
 jar {
@@ -159,8 +163,8 @@ dependencies {
     testImplementation group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
 
-    functionalTestImplementation group: 'com.github.hmcts', name: 'service-auth-provider-java-client', version: '5.3.0'
-    functionalTestImplementation group: 'com.github.hmcts', name: 'idam-java-client', version: '3.0.3'
+    functionalTestImplementation group: 'com.github.hmcts', name: 'service-auth-provider-java-client', version: '5.3.2'
+    functionalTestImplementation group: 'com.github.hmcts', name: 'idam-java-client', version: '3.0.4'
 
     functionalTestImplementation group: 'org.assertj', name: 'assertj-core', version: '3.27.0'
     functionalTestCompileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
