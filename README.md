@@ -1,11 +1,24 @@
 # Core case data client
-[![Download](https://jitpack.io/v/hmcts/ccd-client.svg) ](https://jitpack.io/#hmcts/ccd-client)
 
 This is a client library for interacting with the core case data store application. The two main responsibilities are:
  - start event for new case
  - submit case to core case data app
 
 ## Getting started
+
+This library is hosted on Azure DevOps Artifacts and can be used in your project by adding the following to your `build.gradle` file:
+
+```gradle
+repositories {
+    maven {
+        url 'https://pkgs.dev.azure.com/hmcts/Artifacts/_packaging/hmcts-lib/maven/v1'
+    }
+}
+
+dependencies {
+  implementation 'com.github.hmcts:core-case-data-store-client:LATEST_TAG'
+}
+```
 
 ### Prerequisites
 
