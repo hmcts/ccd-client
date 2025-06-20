@@ -313,6 +313,16 @@ public interface CoreCaseDataApi {
             @PathVariable("triggerId") String eventId
     );
 
+    @PostMapping(
+            path = "/case-types/{caseTypeId}/cases",
+            headers = EXPERIMENTAL
+    )
+    CaseDetails submitCaseCreation(
+            @RequestHeader(AUTHORIZATION) String authorisation,
+            @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
+            @PathVariable("caseTypeId") String caseType,
+            @RequestBody CaseDataContent caseDataContent);
+
     @GetMapping(
             path = "/cases/{caseId}/event-triggers/{triggerId}",
             headers = EXPERIMENTAL
