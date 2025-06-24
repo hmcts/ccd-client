@@ -7,7 +7,7 @@ plugins {
     id 'maven-publish'
 }
 
-def buildNumber = System.getenv("RELEASE_VERSION")?.replace("refs/tags/", "") ?: "DEV-SNAPSHOT"
+def buildNumber = System.getenv("RELEASE_VERSION")?: "DEV-SNAPSHOT"
 
 group 'uk.gov.hmcts.reform'
 version buildNumber
@@ -29,7 +29,10 @@ compileTestJava {
 
 repositories {
     mavenLocal()
-    jcenter()
+    mavenCentral()
+    maven {
+        url = uri('https://pkgs.dev.azure.com/hmcts/Artifacts/_packaging/hmcts-lib/maven/v1')
+    }
 }
 
 jar {
@@ -99,6 +102,16 @@ publishing {
             }
         }
     }
+    repositories {
+        maven {
+            name = "AzureArtifacts"
+            url = uri("https://pkgs.dev.azure.com/hmcts/Artifacts/_packaging/hmcts-lib/maven/v1")
+            credentials {
+                username = System.getenv("AZURE_DEVOPS_ARTIFACT_USERNAME")
+                password = System.getenv("AZURE_DEVOPS_ARTIFACT_TOKEN")
+            }
+        }
+    }
 }
 
 ext {
@@ -149,8 +162,8 @@ dependencies {
     testImplementation group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
 
-    functionalTestImplementation group: 'uk.gov.hmcts.reform', name: 'service-auth-provider-client', version: '2.0.1'
-    functionalTestImplementation group: 'uk.gov.hmcts.reform', name: 'idam-client', version: '1.5.5'
+    functionalTestImplementation group: 'uk.gov.hmcts.reform', name: 'service-auth-provider-client', version: '2.0.1-rc'
+    functionalTestImplementation group: 'uk.gov.hmcts.reform', name: 'idam-client', version: '1.5.5-rc'
     functionalTestImplementation group: 'org.assertj', name: 'assertj-core', version: '3.24.2'
     functionalTestCompileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     functionalTestAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
