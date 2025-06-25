@@ -1,24 +1,31 @@
-name: Java CI
+name: Publish to Azure Artifacts
 
 on:
-  pull_request:
-    branches:
-      - master
+  workflow_dispatch:
   push:
-    branches:
-      - master
-      - refs/tags/*
     tags:
       - '*'
 
 jobs:
-  build:
+  PublishToAzureArtifacts:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
       - name: Set up JDK 1.8
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Build
-        run: ./gradlew check
+
+      - name: Publish to Azure DevOps Artifacts
+        run: |
+          ./gradlew publish
+        env:
+          AZURE_DEVOPS_ARTIFACT_USERNAME: ${{ secrets.AZURE_DEVOPS_ARTIFACT_USERNAME }}
+          AZURE_DEVOPS_ARTIFACT_TOKEN: ${{ secrets.AZURE_DEVOPS_ARTIFACT_TOKEN }}
+          RELEASE_VERSION: ${{ github.ref_name }}
+        shell: bash
