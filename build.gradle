@@ -147,7 +147,7 @@ task functionalTest(type: Test) {
 }
 
 dependencies {
-    implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2024.0.1"))
+    implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2024.0.2"))
     implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
     implementation group: 'io.github.openfeign', name: 'feign-jackson'
