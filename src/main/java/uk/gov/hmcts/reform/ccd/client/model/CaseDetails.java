@@ -49,4 +49,6 @@ public class CaseDetails {
 
     @JsonProperty("callback_response_status")
     private String callbackResponseStatus;
+
+    private Integer version;
 }
