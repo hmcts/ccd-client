@@ -64,6 +64,7 @@ class CcdClientTest {
         assertThat(caseData.getCaseTypeId()).isEqualTo("someCaseType");
         assertThat(caseData.getId()).isEqualTo(1234L);
         assertThat(caseData.getSecurityClassification()).isEqualTo(Classification.PUBLIC);
+        assertThat(caseData.getVersion()).isEqualTo(99);
         Map<String, Object> someProp = getSomeProp(caseData);
         assertThat(someProp.get("someAttributes")).isEqualTo(1);
 
@@ -90,6 +91,7 @@ class CcdClientTest {
         assertThat(caseDetails.getState()).isEqualTo("SOME_STATE");
         assertThat(caseDetails.getId()).isEqualTo(1234L);
         assertThat(caseDetails.getSecurityClassification()).isEqualTo(Classification.PUBLIC);
+        assertThat(caseDetails.getVersion()).isNull();
         Map<String, Object> someProp = getSomeProp(caseDetails);
         assertThat(someProp.get("someAttributes")).isEqualTo(1);
 
