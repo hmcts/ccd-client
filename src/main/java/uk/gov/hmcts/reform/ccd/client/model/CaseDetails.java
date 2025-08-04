@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Setter;
 import lombok.extern.jackson.Jacksonized;
 
 import java.time.LocalDateTime;
@@ -49,4 +50,7 @@ public class CaseDetails {
 
     @JsonProperty("callback_response_status")
     private String callbackResponseStatus;
+
+    @Setter(lombok.AccessLevel.NONE)
+    private Integer version;
 }
