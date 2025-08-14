@@ -2,7 +2,7 @@ plugins {
     id 'checkstyle'
     id 'org.springframework.boot' version '3.4.5'
     id 'com.github.ben-manes.versions' version '0.52.0'
-    id 'se.patrikerdes.use-latest-versions' version '0.2.18'
+    id 'se.patrikerdes.use-latest-versions' version '0.2.19'
     id 'java-library'
     id 'maven-publish'
 }
