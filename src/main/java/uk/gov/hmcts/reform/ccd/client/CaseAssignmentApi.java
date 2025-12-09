@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import uk.gov.hmcts.reform.ccd.client.model.CaseAssignmentUserRolesRequest;
 import uk.gov.hmcts.reform.ccd.client.model.CaseAssignmentUserRolesResource;
 import uk.gov.hmcts.reform.ccd.client.model.CaseAssignmentUserRolesResponse;
+import uk.gov.hmcts.reform.ccd.client.model.CaseAssignmentUserRolesWithOrganisationRequest;
 
 import java.util.List;
 
@@ -33,7 +34,18 @@ public interface CaseAssignmentApi {
     CaseAssignmentUserRolesResponse addCaseUserRoles(
             @RequestHeader(AUTHORIZATION) String authorisation,
             @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
-            @RequestBody CaseAssignmentUserRolesRequest caseRoleRequest
+            @RequestBody CaseAssignmentUserRolesWithOrganisationRequest caseRoleRequest
+    );
+
+    @PostMapping(
+        value = "/case-users",
+        consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseBody
+    CaseAssignmentUserRolesResponse addCaseUserRoles(
+        @RequestHeader(AUTHORIZATION) String authorisation,
+        @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
+        @RequestBody CaseAssignmentUserRolesRequest caseRoleRequest
     );
 
     @GetMapping(
@@ -79,6 +91,6 @@ public interface CaseAssignmentApi {
     CaseAssignmentUserRolesResponse removeCaseUserRoles(
             @RequestHeader(AUTHORIZATION) String authorisation,
             @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
-            @RequestBody CaseAssignmentUserRolesRequest caseRoleRequest
+            @RequestBody CaseAssignmentUserRolesWithOrganisationRequest caseRoleRequest
     );
 }

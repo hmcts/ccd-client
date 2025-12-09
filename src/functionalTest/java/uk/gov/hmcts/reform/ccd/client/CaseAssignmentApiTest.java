@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import uk.gov.hmcts.reform.ccd.client.model.CaseAssignmentUserRole;
 import uk.gov.hmcts.reform.ccd.client.model.CaseAssignmentUserRoleWithOrganisation;
-import uk.gov.hmcts.reform.ccd.client.model.CaseAssignmentUserRolesRequest;
 import uk.gov.hmcts.reform.ccd.client.model.CaseAssignmentUserRolesResource;
 import uk.gov.hmcts.reform.ccd.client.model.CaseAssignmentUserRolesResponse;
+import uk.gov.hmcts.reform.ccd.client.model.CaseAssignmentUserRolesWithOrganisationRequest;
 import uk.gov.hmcts.reform.ccd.client.model.CaseDetails;
 
 import java.util.Collections;
@@ -26,14 +26,14 @@ class CaseAssignmentApiTest extends BaseTest {
     private User caseWorker;
     private User manager;
     private CaseDetails caseDetails;
-    private CaseAssignmentUserRolesRequest caseAssignmentRequest;
+    private CaseAssignmentUserRolesWithOrganisationRequest caseAssignmentRequest;
 
     @BeforeEach
     void init() {
         caseWorker = createCaseworker();
         manager = createCaseworker();
         caseDetails = createCaseForCaseworker(caseWorker);
-        caseAssignmentRequest = CaseAssignmentUserRolesRequest.builder()
+        caseAssignmentRequest = CaseAssignmentUserRolesWithOrganisationRequest.builder()
                 .caseAssignmentUserRolesWithOrganisation(Collections.singletonList(
                         CaseAssignmentUserRoleWithOrganisation.builder()
                                 .organisationId("TESTTORG")
