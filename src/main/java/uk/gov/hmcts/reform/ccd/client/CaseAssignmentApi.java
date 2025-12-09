@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import uk.gov.hmcts.reform.ccd.client.model.CaseAssignmentUserRolesRequest;
 import uk.gov.hmcts.reform.ccd.client.model.CaseAssignmentUserRolesResource;
 import uk.gov.hmcts.reform.ccd.client.model.CaseAssignmentUserRolesResponse;
 import uk.gov.hmcts.reform.ccd.client.model.CaseAssignmentUserRolesWithOrganisationRequest;
@@ -45,7 +44,7 @@ public interface CaseAssignmentApi {
     CaseAssignmentUserRolesResponse addCaseUserRoles(
         @RequestHeader(AUTHORIZATION) String authorisation,
         @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
-        @RequestBody CaseAssignmentUserRolesRequest caseRoleRequest
+        @RequestBody CaseAssignmentUserRolesResponse caseRoleRequest
     );
 
     @GetMapping(
