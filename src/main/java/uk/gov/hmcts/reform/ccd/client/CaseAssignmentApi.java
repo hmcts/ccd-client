@@ -44,7 +44,7 @@ public interface CaseAssignmentApi {
     CaseAssignmentUserRolesResponse addCaseUserRoles(
         @RequestHeader(AUTHORIZATION) String authorisation,
         @RequestHeader(SERVICE_AUTHORIZATION) String serviceAuthorization,
-        @RequestBody CaseAssignmentUserRolesResponse caseRoleRequest
+        @RequestBody CaseAssignmentUserRolesResource caseRoleRequest
     );
 
     @GetMapping(
