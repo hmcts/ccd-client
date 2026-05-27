@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
-import lombok.extern.jackson.Jacksonized;
 
 import java.util.List;
 import java.util.Map;
@@ -12,7 +11,6 @@ import java.util.Map;
 @Data
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Jacksonized
 public class AboutToStartOrSubmitCallbackResponse implements CallbackResponse {
 
     private Map<String, Object> data;

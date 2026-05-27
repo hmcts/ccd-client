@@ -1,21 +1,17 @@
 package uk.gov.hmcts.reform.ccd.client;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import feign.codec.Decoder;
-import feign.jackson.JacksonDecoder;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Primary;
+import tools.jackson.databind.ObjectMapper;
 import uk.gov.hmcts.reform.ccd.client.model.SearchCriteria;
 
-class CoreCaseDataConfiguration {
-    @Bean
-    @Primary
-    Decoder feignDecoder(ObjectMapper objectMapper) {
-        return new JacksonDecoder(objectMapper);
-    }
+@AutoConfiguration
+public class CoreCaseDataConfiguration {
 
     @Bean
-    SearchCriteria searchCriteria(ObjectMapper objectMapper) {
+    @ConditionalOnMissingBean
+    public SearchCriteria searchCriteria(ObjectMapper objectMapper) {
         return new SearchCriteria(objectMapper);
     }
 }
