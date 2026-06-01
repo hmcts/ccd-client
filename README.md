@@ -51,13 +51,50 @@ To run all checks (including unit tests) please execute the following command:
     ./gradlew check
 ```
 
-## Functional Tests
+## Functional tests against AAT
 
-The functional tests rely on CCD and Idam and need to be configured with appropriate user roles and events.
-Before running the functional test on a local environment run the following:
+Create a `.env` file with the required AAT URLs and credentials:
+
 ```bash
-    ./scripts/create-role.sh
-    ./scripts/import-definintion.sh
+# IDAM / S2S
+IDAM_S2S_AUTH_TOTP_SECRET=
+IDAM_S2S_AUTH_MICROSERVICE=
+IDAM_S2S_AUTH_URL=
+
+IDAM_API_URL=
+IDAM_CLIENT_REDIRECT_URI=
+IDAM_CLIENT_ID=
+IDAM_CLIENT_SECRET=
+
+# CCD
+CORE_CASE_DATA_API_URL=
+```
+
+Then run:
+
+```bash
+set -a
+source .env
+set +a
+
+./gradlew functionalTest
+```
+
+## Functional tests using CFTLib
+
+The functional tests rely on CCD and IDAM and need to be configured with appropriate user roles and events.
+
+Before running the functional tests against a local CFTLib environment, run:
+
+```bash
+./scripts/create-role.sh
+./scripts/import-definition.sh
+```
+
+Then run:
+
+```bash
+./gradlew functionalTest
 ```
 
 ## Versioning
