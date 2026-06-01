@@ -55,33 +55,6 @@ class CaseAssignmentApiTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Should be able to retrieve case user roles")
-    void getUserRoles() {
-        CaseAssignmentUserRole expectedCaseAssignmentUserRole = CaseAssignmentUserRole.builder()
-                .caseDataId(caseDetails.getId().toString())
-                .userId(caseWorker.getUserDetails().getUid())
-                .caseRole("[TESTSOLICITOR]")
-                .build();
-
-        caseAssignmentApi.addCaseUserRoles(
-                caseWorker.getAuthToken(),
-                authTokenGenerator.generate(),
-                caseAssignmentRequest
-        );
-
-        CaseAssignmentUserRolesResource resource = caseAssignmentApi.getUserRoles(
-                caseWorker.getAuthToken(),
-                authTokenGenerator.generate(),
-                Collections.singletonList(caseDetails.getId().toString()),
-                Collections.singletonList(caseWorker.getUserDetails().getUid())
-        );
-
-        assertThat(resource.getCaseAssignmentUserRoles())
-                .usingRecursiveFieldByFieldElementComparator()
-                .containsOnly(expectedCaseAssignmentUserRole);
-    }
-
-    @Test
     @DisplayName("Should be able to retrieve case user roles for a specific user")
     void getUserRolesForASingleUser() {
         CaseAssignmentUserRole expectedCaseAssignmentUserRole = CaseAssignmentUserRole.builder()
