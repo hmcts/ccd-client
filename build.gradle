@@ -9,89 +9,33 @@ plugins {
 }
 
 group = 'com.github.hmcts'
-version = System.getenv("RELEASE_VERSION")?: "DEV-SNAPSHOT"
+version = System.getenv('RELEASE_VERSION') ?: 'DEV-SNAPSHOT'
+
+def gitRepo = 'https://github.com/hmcts/ccd-client'
+def lombokVersion = '1.18.40'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+
+    withSourcesJar()
+    withJavadocJar()
+}
 
 checkstyle {
     maxWarnings = 0
     toolVersion = '11.0.1'
 }
 
-java {
-  toolchain {
-    languageVersion = JavaLanguageVersion.of(17)
-  }
-
-    withSourcesJar()
-    withJavadocJar()
-}
-
-compileJava {
-    options.compilerArgs << '-parameters' << '-Xlint:deprecation'
-}
-
-compileTestJava {
-    options.compilerArgs << '-Xlint:deprecation'
-}
-
 repositories {
     mavenLocal()
     mavenCentral()
+
     maven {
-        url = 'https://pkgs.dev.azure.com/hmcts/Artifacts/_packaging/hmcts-lib/maven/v1'
         name = 'HMCTS common libraries'
+        url = uri('https://pkgs.dev.azure.com/hmcts/Artifacts/_packaging/hmcts-lib/maven/v1')
     }
-}
-
-jar {
-    manifest {
-        attributes 'Implementation-Title': project.name, 'Implementation-Version': project.version
-    }
-}
-
-task printVersion {
-    doLast {
-        print project.version
-    }
-}
-
-def gitRepo = "https://github.com/hmcts/ccd-client"
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-
-            pom {
-                name = 'Core case data store client'
-                description = 'Core case data store client'
-                url = gitRepo
-                licenses {
-                    license {
-                        name = 'MIT License, Copyright (c) 2023 HM Courts & Tribunals Service'
-                        url = 'https://www.opensource.org/licenses/MIT'
-                    }
-                }
-                scm {
-                    url = gitRepo
-                }
-            }
-        }
-    }
-
-    repositories {
-        maven {
-            name = 'AzureArtifacts'
-            url = uri('https://pkgs.dev.azure.com/hmcts/Artifacts/_packaging/hmcts-lib/maven/v1')
-            credentials {
-                username = System.getenv('AZURE_DEVOPS_ARTIFACT_USERNAME')
-                password = System.getenv('AZURE_DEVOPS_ARTIFACT_TOKEN')
-            }
-        }
-    }
-}
-
-ext {
-    lombokVersion = '1.18.40'
 }
 
 sourceSets {
@@ -104,9 +48,40 @@ sourceSets {
 configurations {
     functionalTestImplementation.extendsFrom testImplementation
     functionalTestRuntimeOnly.extendsFrom testRuntimeOnly
+    functionalTestCompileOnly.extendsFrom testCompileOnly
+    functionalTestAnnotationProcessor.extendsFrom testAnnotationProcessor
 }
 
-task functionalTest(type: Test) {
+dependencies {
+    implementation platform('org.springframework.cloud:spring-cloud-dependencies:2024.0.2')
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'io.github.openfeign:feign-jackson'
+
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'com.github.tomakehurst:wiremock-standalone:3.0.1'
+
+    functionalTestImplementation 'com.github.hmcts:service-auth-provider-java-client:5.3.3'
+    functionalTestImplementation 'com.github.hmcts:idam-java-client:3.0.4'
+    functionalTestImplementation 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.20.0'
+}
+
+tasks.named('compileJava') {
+    options.compilerArgs << '-parameters' << '-Xlint:deprecation'
+}
+
+tasks.named('compileTestJava') {
+    options.compilerArgs << '-Xlint:deprecation'
+}
+
+tasks.register('functionalTest', Test) {
     description = 'Runs functional tests.'
     group = 'verification'
 
@@ -114,47 +89,69 @@ task functionalTest(type: Test) {
     classpath = sourceSets.functionalTest.runtimeClasspath
 }
 
-dependencies {
-    implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2024.0.2"))
-    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'io.github.openfeign:feign-jackson'
+tasks.register('printVersion') {
+    doLast {
+        print project.version
+    }
+}
 
-    implementation "org.projectlombok:lombok:${lombokVersion}"
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+}
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.13.4'
+tasks.named('bootJar') {
+    enabled = false
+}
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'com.github.tomakehurst:wiremock-standalone:3.0.1'
-    testImplementation 'com.google.guava:guava:33.4.8-jre'
+tasks.named('jar') {
+    enabled = true
+    archiveClassifier = ''
 
-    testImplementation "org.projectlombok:lombok:${lombokVersion}"
-    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    manifest {
+        attributes(
+                'Implementation-Title': project.name,
+                'Implementation-Version': project.version
+        )
+    }
+}
 
-    functionalTestImplementation 'com.github.hmcts:service-auth-provider-java-client:5.3.3'
-    functionalTestImplementation 'com.github.hmcts:idam-java-client:3.0.4'
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
 
-    functionalTestImplementation 'org.assertj:assertj-core:3.27.0'
-    functionalTestCompileOnly "org.projectlombok:lombok:${lombokVersion}"
-    functionalTestAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+            pom {
+                name = 'Core case data store client'
+                description = 'Core case data store client'
+                url = gitRepo
 
-    functionalTestImplementation 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.20.0'
+                licenses {
+                    license {
+                        name = 'MIT License, Copyright (c) 2023 HM Courts & Tribunals Service'
+                        url = 'https://www.opensource.org/licenses/MIT'
+                    }
+                }
+
+                scm {
+                    url = gitRepo
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = 'AzureArtifacts'
+            url = uri('https://pkgs.dev.azure.com/hmcts/Artifacts/_packaging/hmcts-lib/maven/v1')
+
+            credentials {
+                username = System.getenv('AZURE_DEVOPS_ARTIFACT_USERNAME')
+                password = System.getenv('AZURE_DEVOPS_ARTIFACT_TOKEN')
+            }
+        }
+    }
 }
 
 wrapper {
     distributionType = Wrapper.DistributionType.ALL
-}
-
-tasks.withType(Test) {
-    useJUnitPlatform()
-}
-
-bootJar {
-    enabled = false
-}
-
-jar {
-    enabled = true
-    archiveClassifier = ''
 }
