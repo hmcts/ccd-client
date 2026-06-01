@@ -24,14 +24,12 @@ class CaseAssignmentApiTest extends BaseTest {
     private CaseAssignmentApi caseAssignmentApi;
 
     private User caseWorker;
-    private User manager;
     private CaseDetails caseDetails;
     private CaseAssignmentUserRolesRequest caseAssignmentRequest;
 
     @BeforeEach
     void init() {
         caseWorker = createCaseworker();
-        manager = createCaseworker();
         caseDetails = createCaseForCaseworker(caseWorker);
         caseAssignmentRequest = CaseAssignmentUserRolesRequest.builder()
                 .caseAssignmentUserRolesWithOrganisation(Collections.singletonList(
@@ -72,12 +70,15 @@ class CaseAssignmentApiTest extends BaseTest {
         );
 
         CaseAssignmentUserRolesResource resource = caseAssignmentApi.getUserRoles(
-                manager.getAuthToken(),
+                caseWorker.getAuthToken(),
                 authTokenGenerator.generate(),
-                Collections.singletonList(caseDetails.getId().toString())
+                Collections.singletonList(caseDetails.getId().toString()),
+                Collections.singletonList(caseWorker.getUserDetails().getUid())
         );
 
-        assertThat(resource.getCaseAssignmentUserRoles()).containsOnly(expectedCaseAssignmentUserRole);
+        assertThat(resource.getCaseAssignmentUserRoles())
+                .usingRecursiveFieldByFieldElementComparator()
+                .containsOnly(expectedCaseAssignmentUserRole);
     }
 
     @Test
@@ -96,13 +97,16 @@ class CaseAssignmentApiTest extends BaseTest {
         );
 
         CaseAssignmentUserRolesResource resource = caseAssignmentApi.getUserRoles(
-                manager.getAuthToken(),
+                caseWorker.getAuthToken(),
                 authTokenGenerator.generate(),
                 Collections.singletonList(caseDetails.getId().toString()),
                 Collections.singletonList(caseWorker.getUserDetails().getUid())
         );
 
-        assertThat(resource.getCaseAssignmentUserRoles()).containsOnly(expectedCaseAssignmentUserRole);
+        assertThat(resource.getCaseAssignmentUserRoles())
+        .singleElement()
+        .usingRecursiveComparison()
+        .isEqualTo(expectedCaseAssignmentUserRole);
     }
 
     @Test
@@ -121,13 +125,16 @@ class CaseAssignmentApiTest extends BaseTest {
         );
 
         CaseAssignmentUserRolesResource resource = caseAssignmentApi.getUserRoles(
-                manager.getAuthToken(),
+                caseWorker.getAuthToken(),
                 authTokenGenerator.generate(),
                 caseDetails.getId().toString(),
                 caseWorker.getUserDetails().getUid()
         );
 
-        assertThat(resource.getCaseAssignmentUserRoles()).containsOnly(expectedCaseAssignmentUserRole);
+        assertThat(resource.getCaseAssignmentUserRoles())
+        .singleElement()
+        .usingRecursiveComparison()
+        .isEqualTo(expectedCaseAssignmentUserRole);
     }
 
     @Test
@@ -152,11 +159,14 @@ class CaseAssignmentApiTest extends BaseTest {
         );
 
         CaseAssignmentUserRolesResource resource = caseAssignmentApi.getUserRoles(
-                manager.getAuthToken(),
+                caseWorker.getAuthToken(),
                 authTokenGenerator.generate(),
-                Collections.singletonList(caseDetails.getId().toString())
+                Collections.singletonList(caseDetails.getId().toString()),
+                Collections.singletonList(caseWorker.getUserDetails().getUid())
         );
 
-        assertThat(resource.getCaseAssignmentUserRoles()).doesNotContain(expectedCaseAssignmentUserRole);
+        assertThat(resource.getCaseAssignmentUserRoles())
+                .usingRecursiveFieldByFieldElementComparator()
+                .doesNotContain(expectedCaseAssignmentUserRole);
     }
 }
