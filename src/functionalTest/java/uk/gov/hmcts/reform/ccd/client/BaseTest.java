@@ -59,11 +59,7 @@ public class BaseTest {
                     .roles(List.of(new UserRole("citizen")))
                     .build());
         } catch (FeignException e) {
-            if (e.status() == HttpStatus.FORBIDDEN.value()) {
-                log.info("Bad request from idam, probably user already exists, continuing");
-            } else {
-                throw e;
-            }
+            ignoreUserAlreadyExists(e);
         }
 
         String token = idamClient.getAccessToken(citizenEmail, CreateUserRequest.DEFAULT_PASSWORD);
@@ -84,11 +80,7 @@ public class BaseTest {
                     .roles(List.of(new UserRole("caseworker-autotest1")))
                     .build());
         } catch (FeignException e) {
-            if (e.status() == HttpStatus.FORBIDDEN.value()) {
-                log.info("Bad request from idam, probably user already exists, continuing");
-            } else {
-                throw e;
-            }
+            ignoreUserAlreadyExists(e);
         }
 
         String token = idamClient.getAccessToken(email, CreateUserRequest.DEFAULT_PASSWORD);
@@ -175,5 +167,13 @@ public class BaseTest {
                 true,
                 caseDataContent
         );
+    }
+
+    private void ignoreUserAlreadyExists(FeignException e) {
+        if (e.status() == HttpStatus.CONFLICT.value()) {
+            log.info("User already exists in IDAM, continuing");
+        } else {
+            throw e;
+        }
     }
 }
