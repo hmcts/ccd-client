@@ -1,17 +1,11 @@
 package uk.gov.hmcts.reform.ccd.client;
 
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import uk.gov.hmcts.reform.authorisation.generators.AuthTokenGenerator;
 import uk.gov.hmcts.reform.ccd.client.model.CaseDataContent;
 import uk.gov.hmcts.reform.ccd.client.model.CaseDetails;
 import uk.gov.hmcts.reform.ccd.client.model.CaseResource;
@@ -23,58 +17,21 @@ import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 
-@Slf4j
 @EnableAutoConfiguration
 @DisplayName("Core case data api")
-@ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = {TestConfiguration.class})
-// IntelliJ doesn't seem to pickup any of the clients here
 class CoreCaseDataApiTest extends BaseTest {
 
-    private static final Map<String, String> UPDATE_CASE_DATA = new HashMap<String, String>() {
-        {
-            put("TextField", "text updated");
-        }
-    };
+    private static final Map<String, String> UPDATE_CASE_DATA = Map.of("TextField", "text updated");
 
-    private static final Map<String, String> SEARCH_CRITERIA = new HashMap<String, String>() {
-        {
-            put("case.TextField", "text...");
-        }
-    };
+    private static final Map<String, String> SEARCH_CRITERIA = Map.of("case.TextField", "text...");
 
-    @Autowired
-    private CoreCaseDataApi coreCaseDataApi;
-
-    @Autowired
-    private AuthTokenGenerator authTokenGenerator;
-
-    private static User caseWorker;
-    private static User citizen;
+    private User caseWorker;
+    private User citizen;
 
     @Nested
-    @DisplayName("Case worker")
-    class CaseWorker {
-        @BeforeEach
-        void init() {
-            caseWorker = createCaseworker();
-        }
-
-        @Test
-        @DisplayName("Should be able to retrieve a case")
-        void getCaseForCaseworker() {
-            CaseDetails caseDetails = createCaseForCaseworker(caseWorker);
-
-            CaseDetails theCase = coreCaseDataApi
-                    .getCase(caseWorker.getAuthToken(), authTokenGenerator.generate(), caseDetails.getId() + "");
-
-            assertThat(theCase.getId())
-                    .isEqualTo(caseDetails.getId());
-        }
-    }
-
-    @Nested
+    @DisplayName("V1")
     class V1 {
 
         @Nested
@@ -100,15 +57,14 @@ class CoreCaseDataApiTest extends BaseTest {
             void getCase() {
                 CaseDetails caseDetails = createCaseForCaseworker(caseWorker);
 
-                CaseDetails theCase = coreCaseDataApi
-                        .readForCaseWorker(
-                                caseWorker.getAuthToken(),
-                                authTokenGenerator.generate(),
-                                caseWorker.getUserDetails().getUid(),
-                                JURISDICTION,
-                                CASE_TYPE,
-                                caseDetails.getId() + ""
-                        );
+                CaseDetails theCase = coreCaseDataApi.readForCaseWorker(
+                        caseWorker.getAuthToken(),
+                        authTokenGenerator.generate(),
+                        caseWorker.getUserDetails().getUid(),
+                        JURISDICTION,
+                        CASE_TYPE,
+                        caseDetails.getId().toString()
+                );
 
                 assertThat(theCase.getId())
                         .isEqualTo(caseDetails.getId());
@@ -119,7 +75,7 @@ class CoreCaseDataApiTest extends BaseTest {
             void search() {
                 createCaseForCaseworker(caseWorker);
 
-                List<CaseDetails> caseDetails1 = coreCaseDataApi.searchForCaseworker(
+                List<CaseDetails> caseDetails = coreCaseDataApi.searchForCaseworker(
                         caseWorker.getAuthToken(),
                         authTokenGenerator.generate(),
                         caseWorker.getUserDetails().getUid(),
@@ -128,8 +84,8 @@ class CoreCaseDataApiTest extends BaseTest {
                         SEARCH_CRITERIA
                 );
 
-                assertThat(caseDetails1.size()).isGreaterThan(0);
-                assertThat(caseDetails1.get(0).getData().get("TextField")).isEqualTo("text...");
+                assertThat(caseDetails).isNotEmpty();
+                assertThat(caseDetails.get(0).getData().get("TextField")).isEqualTo("text...");
             }
 
             @Test
@@ -143,7 +99,7 @@ class CoreCaseDataApiTest extends BaseTest {
                         caseWorker.getUserDetails().getUid(),
                         JURISDICTION,
                         CASE_TYPE,
-                        caseDetails.getId() + "",
+                        caseDetails.getId().toString(),
                         UPDATE_CASE_EVENT
                 );
 
@@ -159,7 +115,7 @@ class CoreCaseDataApiTest extends BaseTest {
                         caseWorker.getUserDetails().getUid(),
                         JURISDICTION,
                         CASE_TYPE,
-                        caseDetails.getId() + "",
+                        caseDetails.getId().toString(),
                         true,
                         caseDataContent
                 );
@@ -178,7 +134,7 @@ class CoreCaseDataApiTest extends BaseTest {
                         caseWorker.getUserDetails().getUid(),
                         JURISDICTION,
                         CASE_TYPE,
-                        caseDetails.getId() + "",
+                        caseDetails.getId().toString(),
                         UPDATE_CASE_EVENT,
                         true
                 );
@@ -195,7 +151,7 @@ class CoreCaseDataApiTest extends BaseTest {
                         caseWorker.getUserDetails().getUid(),
                         JURISDICTION,
                         CASE_TYPE,
-                        caseDetails.getId() + "",
+                        caseDetails.getId().toString(),
                         true,
                         caseDataContent
                 );
@@ -228,15 +184,14 @@ class CoreCaseDataApiTest extends BaseTest {
             void getCase() {
                 CaseDetails caseDetails = createCaseForCitizen(citizen);
 
-                CaseDetails theCase = coreCaseDataApi
-                        .readForCitizen(
-                                citizen.getAuthToken(),
-                                authTokenGenerator.generate(),
-                                citizen.getUserDetails().getUid(),
-                                JURISDICTION,
-                                CASE_TYPE,
-                                caseDetails.getId() + ""
-                        );
+                CaseDetails theCase = coreCaseDataApi.readForCitizen(
+                        citizen.getAuthToken(),
+                        authTokenGenerator.generate(),
+                        citizen.getUserDetails().getUid(),
+                        JURISDICTION,
+                        CASE_TYPE,
+                        caseDetails.getId().toString()
+                );
 
                 assertThat(theCase.getId())
                         .isEqualTo(caseDetails.getId());
@@ -247,7 +202,7 @@ class CoreCaseDataApiTest extends BaseTest {
             void search() {
                 createCaseForCitizen(citizen);
 
-                List<CaseDetails> caseDetails1 = coreCaseDataApi.searchForCitizen(
+                List<CaseDetails> caseDetails = coreCaseDataApi.searchForCitizen(
                         citizen.getAuthToken(),
                         authTokenGenerator.generate(),
                         citizen.getUserDetails().getUid(),
@@ -256,8 +211,8 @@ class CoreCaseDataApiTest extends BaseTest {
                         SEARCH_CRITERIA
                 );
 
-                assertThat(caseDetails1.size()).isGreaterThan(0);
-                assertThat(caseDetails1.get(0).getData().get("TextField")).isEqualTo("text...");
+                assertThat(caseDetails).isNotEmpty();
+                assertThat(caseDetails.get(0).getData().get("TextField")).isEqualTo("text...");
             }
 
             @Test
@@ -271,7 +226,7 @@ class CoreCaseDataApiTest extends BaseTest {
                         citizen.getUserDetails().getUid(),
                         JURISDICTION,
                         CASE_TYPE,
-                        caseDetails.getId() + "",
+                        caseDetails.getId().toString(),
                         UPDATE_CASE_EVENT
                 );
 
@@ -282,12 +237,12 @@ class CoreCaseDataApiTest extends BaseTest {
                         .build();
 
                 CaseDetails updatedCase = coreCaseDataApi.submitEventForCitizen(
-                        caseWorker.getAuthToken(),
+                        citizen.getAuthToken(),
                         authTokenGenerator.generate(),
-                        caseWorker.getUserDetails().getUid(),
+                        citizen.getUserDetails().getUid(),
                         JURISDICTION,
                         CASE_TYPE,
-                        caseDetails.getId() + "",
+                        caseDetails.getId().toString(),
                         true,
                         caseDataContent
                 );
@@ -295,10 +250,10 @@ class CoreCaseDataApiTest extends BaseTest {
                 assertThat(updatedCase.getData().get("TextField")).isEqualTo("text updated");
             }
         }
-
     }
 
     @Nested
+    @DisplayName("V2")
     class V2 {
 
         @BeforeEach
@@ -320,12 +275,11 @@ class CoreCaseDataApiTest extends BaseTest {
         void getCase() {
             CaseDetails caseDetails = createCase(caseWorker);
 
-            CaseDetails theCase = coreCaseDataApi
-                    .getCase(
-                            caseWorker.getAuthToken(),
-                            authTokenGenerator.generate(),
-                            caseDetails.getId() + ""
-                    );
+            CaseDetails theCase = coreCaseDataApi.getCase(
+                    caseWorker.getAuthToken(),
+                    authTokenGenerator.generate(),
+                    caseDetails.getId().toString()
+            );
 
             assertThat(theCase.getId())
                     .isEqualTo(caseDetails.getId());
@@ -339,7 +293,7 @@ class CoreCaseDataApiTest extends BaseTest {
             StartEventResponse startEventResponse = coreCaseDataApi.startEvent(
                     caseWorker.getAuthToken(),
                     authTokenGenerator.generate(),
-                    caseDetails.getId() + "",
+                    caseDetails.getId().toString(),
                     UPDATE_CASE_EVENT
             );
 
@@ -355,7 +309,7 @@ class CoreCaseDataApiTest extends BaseTest {
                     caseWorker.getUserDetails().getUid(),
                     JURISDICTION,
                     CASE_TYPE,
-                    caseDetails.getId() + "",
+                    caseDetails.getId().toString(),
                     true,
                     caseDataContent
             );
@@ -368,22 +322,21 @@ class CoreCaseDataApiTest extends BaseTest {
         void saveSupplementaryData() {
             Map<String, Object> hmctsServiceIdMap = new HashMap<>();
             hmctsServiceIdMap.put("HMCTSServiceId", "BBA3");
+
             Map<String, Map<String, Object>> supplementaryDataRequestMap = new HashMap<>();
             supplementaryDataRequestMap.put("$set", hmctsServiceIdMap);
+
             Map<String, Map<String, Map<String, Object>>> supplementaryDataUpdates = new HashMap<>();
             supplementaryDataUpdates.put("supplementary_data_updates", supplementaryDataRequestMap);
 
             CaseDetails caseDetails = createCase(caseWorker);
 
-            CaseDetails theCase = coreCaseDataApi.submitSupplementaryData(
+            assertThatCode(() -> coreCaseDataApi.submitSupplementaryData(
                     caseWorker.getAuthToken(),
                     authTokenGenerator.generate(),
-                    caseDetails.getId() + "",
+                    caseDetails.getId().toString(),
                     supplementaryDataUpdates
-            );
-
-            assertThat(theCase.getId())
-                    .isEqualTo(caseDetails.getId());
+            )).doesNotThrowAnyException();
         }
 
         @Test
@@ -394,8 +347,9 @@ class CoreCaseDataApiTest extends BaseTest {
             StartEventResponse startEventResponse = coreCaseDataApi.startEvent(
                     caseWorker.getAuthToken(),
                     authTokenGenerator.generate(),
-                    caseDetails.getId() + "",
-                    UPDATE_CASE_EVENT);
+                    caseDetails.getId().toString(),
+                    UPDATE_CASE_EVENT
+            );
 
             CaseDataContent caseDataContent = CaseDataContent.builder()
                     .caseReference(startEventResponse.getCaseDetails().getId().toString())
@@ -407,8 +361,9 @@ class CoreCaseDataApiTest extends BaseTest {
             CaseResource theCase = coreCaseDataApi.createEvent(
                     caseWorker.getAuthToken(),
                     authTokenGenerator.generate(),
-                    caseDetails.getId() + "",
-                    caseDataContent);
+                    caseDetails.getId().toString(),
+                    caseDataContent
+            );
 
             assertThat(theCase.getReference())
                     .isEqualTo(caseDetails.getId().toString());

@@ -3,9 +3,10 @@ package uk.gov.hmcts.reform.ccd.client.mock;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.MappingBuilder;
 import com.github.tomakehurst.wiremock.core.Options;
-import com.google.common.io.Resources;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.equalTo;
 import static com.github.tomakehurst.wiremock.client.WireMock.okJson;
@@ -42,7 +43,13 @@ public class CcdWireMock {
     }
 
     private static String loadFile(String filename) throws IOException {
-        return Resources.toString(ClassLoader.getSystemClassLoader().getResource(filename), UTF_8);
+        try (InputStream inputStream = ClassLoader.getSystemResourceAsStream(filename)) {
+            if (inputStream == null) {
+                throw new FileNotFoundException("Resource not found: " + filename);
+            }
+
+            return new String(inputStream.readAllBytes(), UTF_8);
+        }
     }
 
 }

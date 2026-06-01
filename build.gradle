@@ -1,129 +1,41 @@
 plugins {
     id 'checkstyle'
-    id 'org.springframework.boot' version '3.4.5'
-    id 'com.github.ben-manes.versions' version '0.52.0'
+    id 'org.springframework.boot' version '3.5.14'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id 'com.github.ben-manes.versions' version '0.54.0'
     id 'se.patrikerdes.use-latest-versions' version '0.2.19'
     id 'java-library'
     id 'maven-publish'
 }
 
-apply plugin: 'io.spring.dependency-management'
+group = 'com.github.hmcts'
+version = System.getenv('RELEASE_VERSION') ?: 'DEV-SNAPSHOT'
 
-def buildNumber = System.getenv("RELEASE_VERSION")?: "DEV-SNAPSHOT"
+def gitRepo = 'https://github.com/hmcts/ccd-client'
+def lombokVersion = '1.18.46'
 
-group 'com.github.hmcts'
-version buildNumber
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+
+    withSourcesJar()
+    withJavadocJar()
+}
 
 checkstyle {
     maxWarnings = 0
-    toolVersion = '11.0.1'
-}
-
-java {
-  toolchain {
-    languageVersion = JavaLanguageVersion.of(17)
-  }
-}
-
-compileJava {
-    options.compilerArgs << '-parameters' << '-Xlint:deprecation'
-}
-
-compileTestJava {
-    options.compilerArgs << '-Xlint:deprecation'
+    toolVersion = '11.1.0'
 }
 
 repositories {
     mavenLocal()
     mavenCentral()
+
     maven {
-        url 'https://pkgs.dev.azure.com/hmcts/Artifacts/_packaging/hmcts-lib/maven/v1'
-        name 'HMCTS common libraries'
+        name = 'HMCTS common libraries'
+        url = uri('https://pkgs.dev.azure.com/hmcts/Artifacts/_packaging/hmcts-lib/maven/v1')
     }
-}
-
-jar {
-    manifest {
-        attributes 'Implementation-Title': project.name, 'Implementation-Version': project.version
-    }
-}
-
-task printVersion {
-    doLast {
-        print project.version
-    }
-}
-
-def pomConfig = {
-    licenses {
-        license {
-            name "MIT License"
-            url "https://www.opensource.org/licenses/MIT"
-            distribution "repo"
-        }
-    }
-
-    scm {
-        url "https://github.com/hmcts/ccd-client"
-    }
-}
-
-
-task sourcesJar(type: Jar, dependsOn: classes) {
-    archiveClassifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    archiveClassifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives sourcesJar
-    archives javadocJar
-}
-
-def gitRepo = "https://github.com/hmcts/ccd-client"
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            artifact sourcesJar
-            artifact javadocJar
-
-            pom {
-                name = 'Core case data store client'
-                description = 'Core case data store client'
-                url = gitRepo
-                licenses {
-                    license {
-                        name = 'MIT License, Copyright (c) 2023 HM Courts & Tribunals Service'
-                        url = "https://www.opensource.org/licenses/MIT"
-                    }
-                }
-                scm {
-                    url = gitRepo
-                }
-            }
-        }
-    }
-
-    repositories {
-        maven {
-            name = "AzureArtifacts"
-            url = uri("https://pkgs.dev.azure.com/hmcts/Artifacts/_packaging/hmcts-lib/maven/v1")
-            credentials {
-                username = System.getenv("AZURE_DEVOPS_ARTIFACT_USERNAME")
-                password = System.getenv("AZURE_DEVOPS_ARTIFACT_TOKEN")
-            }
-        }
-    }
-}
-
-ext {
-    lombokVersion = '1.18.40'
 }
 
 sourceSets {
@@ -136,9 +48,44 @@ sourceSets {
 configurations {
     functionalTestImplementation.extendsFrom testImplementation
     functionalTestRuntimeOnly.extendsFrom testRuntimeOnly
+    functionalTestCompileOnly.extendsFrom testCompileOnly
+    functionalTestAnnotationProcessor.extendsFrom testAnnotationProcessor
 }
 
-task functionalTest(type: Test) {
+dependencies {
+    implementation platform('org.springframework.cloud:spring-cloud-dependencies:2025.0.0')
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'io.github.openfeign:feign-jackson'
+
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'com.github.tomakehurst:wiremock-standalone:3.0.1'
+
+    functionalTestImplementation 'com.github.hmcts:service-auth-provider-java-client:5.3.3'
+    functionalTestImplementation 'com.github.hmcts:idam-java-client:3.0.4'
+    functionalTestImplementation 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.20.0'
+}
+
+tasks.named('compileJava') {
+    options.compilerArgs << '-parameters' << '-Xlint:deprecation'
+}
+
+tasks.named('compileTestJava') {
+    options.compilerArgs << '-Xlint:deprecation'
+}
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+}
+
+tasks.register('functionalTest', Test) {
     description = 'Runs functional tests.'
     group = 'verification'
 
@@ -146,47 +93,65 @@ task functionalTest(type: Test) {
     classpath = sourceSets.functionalTest.runtimeClasspath
 }
 
-dependencies {
-    implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2024.0.2"))
-    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign'
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
-    implementation group: 'io.github.openfeign', name: 'feign-jackson'
+tasks.register('printVersion') {
+    doLast {
+        print project.version
+    }
+}
 
-    implementation group: 'org.projectlombok', name: 'lombok', version: lombokVersion
-    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
+tasks.named('bootJar') {
+    enabled = false
+}
 
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.13.4'
+tasks.named('jar') {
+    enabled = true
+    archiveClassifier = ''
 
-    testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test'
-    testImplementation group: 'com.github.tomakehurst', name: 'wiremock-standalone', version: '3.0.1'
-    testImplementation group: 'com.google.guava', name: 'guava', version: '33.4.8-jre'
+    manifest {
+        attributes(
+                'Implementation-Title': project.name,
+                'Implementation-Version': project.version
+        )
+    }
+}
 
-    testImplementation group: 'org.projectlombok', name: 'lombok', version: lombokVersion
-    testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
 
-    functionalTestImplementation group: 'com.github.hmcts', name: 'service-auth-provider-java-client', version: '5.3.3'
-    functionalTestImplementation group: 'com.github.hmcts', name: 'idam-java-client', version: '3.0.4'
+            pom {
+                name = 'Core case data store client'
+                description = 'Core case data store client'
+                url = gitRepo
 
-    functionalTestImplementation group: 'org.assertj', name: 'assertj-core', version: '3.27.0'
-    functionalTestCompileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
-    functionalTestAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
+                licenses {
+                    license {
+                        name = 'MIT License, Copyright (c) 2023 HM Courts & Tribunals Service'
+                        url = 'https://www.opensource.org/licenses/MIT'
+                    }
+                }
 
-    functionalTestImplementation group: 'com.fasterxml.jackson.module', name: 'jackson-module-parameter-names', version: '2.20.0'
+                scm {
+                    url = gitRepo
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = 'AzureArtifacts'
+            url = uri('https://pkgs.dev.azure.com/hmcts/Artifacts/_packaging/hmcts-lib/maven/v1')
+
+            credentials {
+                username = System.getenv('AZURE_DEVOPS_ARTIFACT_USERNAME')
+                password = System.getenv('AZURE_DEVOPS_ARTIFACT_TOKEN')
+            }
+        }
+    }
 }
 
 wrapper {
     distributionType = Wrapper.DistributionType.ALL
-}
-
-tasks.withType(Test) {
-    useJUnitPlatform()
-}
-
-bootJar {
-    enabled = false
-}
-
-jar {
-    enabled = true
-    archiveClassifier = ''
 }
