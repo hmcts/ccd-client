@@ -1,8 +1,8 @@
 plugins {
     id 'checkstyle'
-    id 'org.springframework.boot' version '3.4.5'
+    id 'org.springframework.boot' version '3.5.14'
     id 'io.spring.dependency-management' version '1.1.7'
-    id 'com.github.ben-manes.versions' version '0.52.0'
+    id 'com.github.ben-manes.versions' version '0.54.0'
     id 'se.patrikerdes.use-latest-versions' version '0.2.19'
     id 'java-library'
     id 'maven-publish'
@@ -12,7 +12,7 @@ group = 'com.github.hmcts'
 version = System.getenv('RELEASE_VERSION') ?: 'DEV-SNAPSHOT'
 
 def gitRepo = 'https://github.com/hmcts/ccd-client'
-def lombokVersion = '1.18.40'
+def lombokVersion = '1.18.46'
 
 java {
     toolchain {
@@ -25,7 +25,7 @@ java {
 
 checkstyle {
     maxWarnings = 0
-    toolVersion = '11.0.1'
+    toolVersion = '11.1.0'
 }
 
 repositories {
@@ -53,7 +53,7 @@ configurations {
 }
 
 dependencies {
-    implementation platform('org.springframework.cloud:spring-cloud-dependencies:2024.0.2')
+    implementation platform('org.springframework.cloud:spring-cloud-dependencies:2025.0.0')
 
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
@@ -81,6 +81,10 @@ tasks.named('compileTestJava') {
     options.compilerArgs << '-Xlint:deprecation'
 }
 
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+}
+
 tasks.register('functionalTest', Test) {
     description = 'Runs functional tests.'
     group = 'verification'
@@ -93,10 +97,6 @@ tasks.register('printVersion') {
     doLast {
         print project.version
     }
-}
-
-tasks.withType(Test).configureEach {
-    useJUnitPlatform()
 }
 
 tasks.named('bootJar') {
