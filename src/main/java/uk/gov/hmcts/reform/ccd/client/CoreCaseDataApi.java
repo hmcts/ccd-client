@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import uk.gov.hmcts.reform.ccd.client.healthcheck.InternalHealth;
 import uk.gov.hmcts.reform.ccd.client.model.CaseDataContent;
@@ -35,8 +33,7 @@ public interface CoreCaseDataApi {
     String SERVICE_AUTHORIZATION = "ServiceAuthorization";
     String EXPERIMENTAL = "experimental=true";
 
-    @RequestMapping(
-            method = RequestMethod.GET,
+    @GetMapping(
             value = "/caseworkers/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/event-triggers/"
                     + "{eventId}/token",
             headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
@@ -50,8 +47,7 @@ public interface CoreCaseDataApi {
             @PathVariable("eventId") String eventId
     );
 
-    @RequestMapping(
-            method = RequestMethod.GET,
+    @GetMapping(
             value = "/caseworkers/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/event-triggers/"
                     + "{eventId}/token",
             headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
@@ -66,8 +62,7 @@ public interface CoreCaseDataApi {
             @RequestParam("ignore-warning") boolean ignoreWarning
     );
 
-    @RequestMapping(
-            method = RequestMethod.POST,
+    @PostMapping(
             value = "/caseworkers/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases"
     )
     CaseDetails submitForCaseworker(
@@ -80,8 +75,7 @@ public interface CoreCaseDataApi {
             @RequestBody CaseDataContent caseDataContent
     );
 
-    @RequestMapping(
-            method = RequestMethod.POST,
+    @PostMapping(
             value = "/searchCases?ctid={caseType}",
             headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
     )
@@ -92,8 +86,7 @@ public interface CoreCaseDataApi {
             @RequestBody String searchString
     );
 
-    @RequestMapping(
-            method = RequestMethod.GET,
+    @GetMapping(
             value = "/caseworkers/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases",
             headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
     )
@@ -106,8 +99,7 @@ public interface CoreCaseDataApi {
             @RequestParam Map<String, String> searchCriteria
     );
 
-    @RequestMapping(
-            method = RequestMethod.GET,
+    @GetMapping(
             value = "/caseworkers/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases"
                     + "/pagination_metadata",
             headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE)
@@ -120,8 +112,7 @@ public interface CoreCaseDataApi {
             @RequestParam Map<String, String> searchCriteria
     );
 
-    @RequestMapping(
-            method = RequestMethod.GET,
+    @GetMapping(
             value = "/caseworkers/{uid}/jurisdictions/{jid}/case-types/{ctid}/cases/{cid}/event-triggers/{etid}/token",
             headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
     )
@@ -135,8 +126,7 @@ public interface CoreCaseDataApi {
             @PathVariable("etid") String eventId
     );
 
-    @RequestMapping(
-            method = RequestMethod.GET,
+    @GetMapping(
             value = "/caseworkers/{uid}/jurisdictions/{jid}/case-types/{ctid}/cases/{cid}/event-triggers/{etid}/token",
             headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
     )
@@ -151,8 +141,7 @@ public interface CoreCaseDataApi {
             @RequestParam("ignore-warning") boolean ignoreWarning
     );
 
-    @RequestMapping(
-            method = RequestMethod.POST,
+    @PostMapping(
             value = "/caseworkers/{uid}/jurisdictions/{jid}/case-types/{ctid}/cases/{cid}/events"
     )
     CaseDetails submitEventForCaseWorker(
@@ -166,8 +155,7 @@ public interface CoreCaseDataApi {
             @RequestBody CaseDataContent caseDataContent
     );
 
-    @RequestMapping(
-            method = RequestMethod.GET,
+    @GetMapping(
             value = "/citizens/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases/pagination_metadata",
             headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE)
     PaginatedSearchMetadata getPaginationInfoForSearchForCitizens(
@@ -180,8 +168,7 @@ public interface CoreCaseDataApi {
     );
 
 
-    @RequestMapping(
-            method = RequestMethod.GET,
+    @GetMapping(
             value = "/citizens/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/event-triggers/"
                     + "{eventId}/token",
             headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
@@ -195,8 +182,7 @@ public interface CoreCaseDataApi {
             @PathVariable("eventId") String eventId
     );
 
-    @RequestMapping(
-            method = RequestMethod.POST,
+    @PostMapping(
             value = "/citizens/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases"
     )
     CaseDetails submitForCitizen(
@@ -209,8 +195,7 @@ public interface CoreCaseDataApi {
             @RequestBody CaseDataContent caseDataContent
     );
 
-    @RequestMapping(
-            method = RequestMethod.GET,
+    @GetMapping(
             value = "/citizens/{uid}/jurisdictions/{jid}/case-types/{ctid}/cases/{cid}/event-triggers/{etid}/token",
             headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
     )
@@ -224,8 +209,7 @@ public interface CoreCaseDataApi {
             @PathVariable("etid") String eventId
     );
 
-    @RequestMapping(
-            method = RequestMethod.POST,
+    @PostMapping(
             value = "/citizens/{uid}/jurisdictions/{jid}/case-types/{ctid}/cases/{cid}/events"
     )
     CaseDetails submitEventForCitizen(
@@ -239,8 +223,7 @@ public interface CoreCaseDataApi {
             @RequestBody CaseDataContent caseDataContent
     );
 
-    @RequestMapping(
-            method = RequestMethod.GET,
+    @GetMapping(
             value = "/citizens/{userId}/jurisdictions/{jurisdictionId}/case-types/{caseType}/cases",
             headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
     )
@@ -253,8 +236,7 @@ public interface CoreCaseDataApi {
             @RequestParam Map<String, String> searchCriteria
     );
 
-    @RequestMapping(
-            method = RequestMethod.GET,
+    @GetMapping(
             value = "/caseworkers/{uid}/jurisdictions/{jid}/case-types/{ctid}/cases/{cid}",
             headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
     )
@@ -267,8 +249,7 @@ public interface CoreCaseDataApi {
             @PathVariable("cid") final String caseId
     );
 
-    @RequestMapping(
-            method = RequestMethod.GET,
+    @GetMapping(
             value = "/citizens/{uid}/jurisdictions/{jid}/case-types/{ctid}/cases/{cid}",
             headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
     )
@@ -281,8 +262,7 @@ public interface CoreCaseDataApi {
             @PathVariable("cid") final String caseId
     );
 
-    @RequestMapping(
-            method = RequestMethod.GET,
+    @GetMapping(
             value = "/status/health",
             headers = CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE
     )
@@ -343,8 +323,7 @@ public interface CoreCaseDataApi {
                              @PathVariable("caseId") String caseId,
                              @RequestBody CaseDataContent caseDataContent);
 
-    @RequestMapping(
-            method = RequestMethod.POST,
+    @PostMapping(
             value = "/cases/{caseId}/supplementary-data"
     )
     CaseDetails submitSupplementaryData(
