@@ -20,6 +20,9 @@ java {
   toolchain {
     languageVersion = JavaLanguageVersion.of(17)
   }
+
+    withSourcesJar()
+    withJavadocJar()
 }
 
 compileJava {
@@ -34,8 +37,8 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven {
-        url 'https://pkgs.dev.azure.com/hmcts/Artifacts/_packaging/hmcts-lib/maven/v1'
-        name 'HMCTS common libraries'
+        url = 'https://pkgs.dev.azure.com/hmcts/Artifacts/_packaging/hmcts-lib/maven/v1'
+        name = 'HMCTS common libraries'
     }
 }
 
@@ -51,44 +54,12 @@ task printVersion {
     }
 }
 
-def pomConfig = {
-    licenses {
-        license {
-            name "MIT License"
-            url "https://www.opensource.org/licenses/MIT"
-            distribution "repo"
-        }
-    }
-
-    scm {
-        url "https://github.com/hmcts/ccd-client"
-    }
-}
-
-
-task sourcesJar(type: Jar, dependsOn: classes) {
-    archiveClassifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    archiveClassifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives sourcesJar
-    archives javadocJar
-}
-
 def gitRepo = "https://github.com/hmcts/ccd-client"
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
             from components.java
-            artifact sourcesJar
-            artifact javadocJar
 
             pom {
                 name = 'Core case data store client'
@@ -97,7 +68,7 @@ publishing {
                 licenses {
                     license {
                         name = 'MIT License, Copyright (c) 2023 HM Courts & Tribunals Service'
-                        url = "https://www.opensource.org/licenses/MIT"
+                        url = 'https://www.opensource.org/licenses/MIT'
                     }
                 }
                 scm {
@@ -109,11 +80,11 @@ publishing {
 
     repositories {
         maven {
-            name = "AzureArtifacts"
-            url = uri("https://pkgs.dev.azure.com/hmcts/Artifacts/_packaging/hmcts-lib/maven/v1")
+            name = 'AzureArtifacts'
+            url = uri('https://pkgs.dev.azure.com/hmcts/Artifacts/_packaging/hmcts-lib/maven/v1')
             credentials {
-                username = System.getenv("AZURE_DEVOPS_ARTIFACT_USERNAME")
-                password = System.getenv("AZURE_DEVOPS_ARTIFACT_TOKEN")
+                username = System.getenv('AZURE_DEVOPS_ARTIFACT_USERNAME')
+                password = System.getenv('AZURE_DEVOPS_ARTIFACT_TOKEN')
             }
         }
     }
@@ -145,30 +116,30 @@ task functionalTest(type: Test) {
 
 dependencies {
     implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2024.0.2"))
-    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign'
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
-    implementation group: 'io.github.openfeign', name: 'feign-jackson'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'io.github.openfeign:feign-jackson'
 
-    implementation group: 'org.projectlombok', name: 'lombok', version: lombokVersion
-    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
+    implementation "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.13.4'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.13.4'
 
-    testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test'
-    testImplementation group: 'com.github.tomakehurst', name: 'wiremock-standalone', version: '3.0.1'
-    testImplementation group: 'com.google.guava', name: 'guava', version: '33.4.8-jre'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'com.github.tomakehurst:wiremock-standalone:3.0.1'
+    testImplementation 'com.google.guava:guava:33.4.8-jre'
 
-    testImplementation group: 'org.projectlombok', name: 'lombok', version: lombokVersion
-    testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
+    testImplementation "org.projectlombok:lombok:${lombokVersion}"
+    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 
-    functionalTestImplementation group: 'com.github.hmcts', name: 'service-auth-provider-java-client', version: '5.3.3'
-    functionalTestImplementation group: 'com.github.hmcts', name: 'idam-java-client', version: '3.0.4'
+    functionalTestImplementation 'com.github.hmcts:service-auth-provider-java-client:5.3.3'
+    functionalTestImplementation 'com.github.hmcts:idam-java-client:3.0.4'
 
-    functionalTestImplementation group: 'org.assertj', name: 'assertj-core', version: '3.27.0'
-    functionalTestCompileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
-    functionalTestAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
+    functionalTestImplementation 'org.assertj:assertj-core:3.27.0'
+    functionalTestCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+    functionalTestAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 
-    functionalTestImplementation group: 'com.fasterxml.jackson.module', name: 'jackson-module-parameter-names', version: '2.20.0'
+    functionalTestImplementation 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.20.0'
 }
 
 wrapper {
