@@ -8,10 +8,8 @@ plugins {
     id 'maven-publish'
 }
 
-def buildNumber = System.getenv("RELEASE_VERSION")?: "DEV-SNAPSHOT"
-
-group 'com.github.hmcts'
-version buildNumber
+group = 'com.github.hmcts'
+version = System.getenv("RELEASE_VERSION")?: "DEV-SNAPSHOT"
 
 checkstyle {
     maxWarnings = 0
