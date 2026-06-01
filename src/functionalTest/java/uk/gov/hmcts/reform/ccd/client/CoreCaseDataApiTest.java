@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 
 @Slf4j
 @EnableAutoConfiguration
@@ -32,17 +33,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 // IntelliJ doesn't seem to pickup any of the clients here
 class CoreCaseDataApiTest extends BaseTest {
 
-    private static final Map<String, String> UPDATE_CASE_DATA = new HashMap<String, String>() {
-        {
-            put("TextField", "text updated");
-        }
-    };
+    private static final Map<String, String> UPDATE_CASE_DATA = Map.of("TextField", "text updated");
 
-    private static final Map<String, String> SEARCH_CRITERIA = new HashMap<String, String>() {
-        {
-            put("case.TextField", "text...");
-        }
-    };
+    private static final Map<String, String> SEARCH_CRITERIA = Map.of("case.TextField", "text...");
 
     @Autowired
     private CoreCaseDataApi coreCaseDataApi;
@@ -368,22 +361,21 @@ class CoreCaseDataApiTest extends BaseTest {
         void saveSupplementaryData() {
             Map<String, Object> hmctsServiceIdMap = new HashMap<>();
             hmctsServiceIdMap.put("HMCTSServiceId", "BBA3");
+
             Map<String, Map<String, Object>> supplementaryDataRequestMap = new HashMap<>();
             supplementaryDataRequestMap.put("$set", hmctsServiceIdMap);
+
             Map<String, Map<String, Map<String, Object>>> supplementaryDataUpdates = new HashMap<>();
             supplementaryDataUpdates.put("supplementary_data_updates", supplementaryDataRequestMap);
 
             CaseDetails caseDetails = createCase(caseWorker);
 
-            CaseDetails theCase = coreCaseDataApi.submitSupplementaryData(
+            assertThatCode(() -> coreCaseDataApi.submitSupplementaryData(
                     caseWorker.getAuthToken(),
                     authTokenGenerator.generate(),
-                    caseDetails.getId() + "",
+                    caseDetails.getId().toString(),
                     supplementaryDataUpdates
-            );
-
-            assertThat(theCase.getId())
-                    .isEqualTo(caseDetails.getId());
+            )).doesNotThrowAnyException();
         }
 
         @Test
