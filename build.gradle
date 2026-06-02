@@ -48,10 +48,36 @@ jar {
     }
 }
 
-task printVersion {
-    doLast {
-        print project.version
-    }
+configurations {
+    functionalTestImplementation.extendsFrom testImplementation
+    functionalTestRuntimeOnly.extendsFrom testRuntimeOnly
+    functionalTestCompileOnly.extendsFrom testCompileOnly
+    functionalTestAnnotationProcessor.extendsFrom testAnnotationProcessor
+}
+
+dependencies {
+    implementation platform('org.springframework.cloud:spring-cloud-dependencies:2025.0.0')
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'io.github.openfeign:feign-jackson'
+
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'com.github.tomakehurst:wiremock-standalone:3.0.1'
+
+    functionalTestImplementation 'com.github.hmcts:service-auth-provider-java-client:5.3.3'
+    functionalTestImplementation 'com.github.hmcts:idam-java-client:3.0.5'
+    functionalTestImplementation 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.20.0'
+}
+
+tasks.named('compileJava') {
+    options.compilerArgs << '-parameters' << '-Xlint:deprecation'
 }
 
 def pomConfig = {
@@ -144,34 +170,6 @@ task functionalTest(type: Test) {
 
     testClassesDirs = sourceSets.functionalTest.output.classesDirs
     classpath = sourceSets.functionalTest.runtimeClasspath
-}
-
-dependencies {
-    implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2024.0.2"))
-    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign'
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
-    implementation group: 'io.github.openfeign', name: 'feign-jackson'
-
-    implementation group: 'org.projectlombok', name: 'lombok', version: lombokVersion
-    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
-
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.13.4'
-
-    testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test'
-    testImplementation group: 'com.github.tomakehurst', name: 'wiremock-standalone', version: '3.0.1'
-    testImplementation group: 'com.google.guava', name: 'guava', version: '33.4.8-jre'
-
-    testImplementation group: 'org.projectlombok', name: 'lombok', version: lombokVersion
-    testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
-
-    functionalTestImplementation group: 'com.github.hmcts', name: 'service-auth-provider-java-client', version: '5.3.3'
-    functionalTestImplementation group: 'com.github.hmcts', name: 'idam-java-client', version: '3.0.4'
-
-    functionalTestImplementation group: 'org.assertj', name: 'assertj-core', version: '3.27.0'
-    functionalTestCompileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
-    functionalTestAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
-
-    functionalTestImplementation group: 'com.fasterxml.jackson.module', name: 'jackson-module-parameter-names', version: '2.20.0'
 }
 
 wrapper {
