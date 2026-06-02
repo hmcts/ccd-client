@@ -20,17 +20,15 @@ class CaseEventsApiTest extends BaseTest {
     private CaseEventsApi caseEventsApi;
 
     private User caseWorker;
-    private User manager;
 
     @BeforeEach
     void init() {
         caseWorker = createCaseworker();
-        manager = createCaseworker();
     }
 
     @Test
     @DisplayName("Should be able to retrieve events for a case")
-    void getCaseForCaseworker() {
+    void getEventsForCase() {
         CaseDetails caseForCaseworker = createCaseForCaseworker(caseWorker);
 
         List<CaseEventDetail> caseEventDetails = caseEventsApi.findEventDetailsForCase(
@@ -39,7 +37,7 @@ class CaseEventsApiTest extends BaseTest {
                 caseWorker.getUserDetails().getUid(),
                 JURISDICTION,
                 CASE_TYPE,
-                caseForCaseworker.getId() + ""
+                caseForCaseworker.getId().toString()
         );
 
         assertThat(caseEventDetails).isNotEmpty();

@@ -38,6 +38,8 @@ class CaseUserApiTest extends BaseTest {
     @DisplayName("Should be able to update case roles")
     void updateCaseRolesWhenRolesRemovedOrAdded() {
         CaseDetails caseForCaseworker = createCaseForCaseworker(caseWorker);
+        String caseId = caseForCaseworker.getId().toString();
+        String managerId = manager.getUserDetails().getUid();
 
         caseAccessApi.grantAccessToCase(
                 caseWorker.getAuthToken(),
@@ -45,51 +47,42 @@ class CaseUserApiTest extends BaseTest {
                 caseWorker.getUserDetails().getUid(),
                 JURISDICTION,
                 CASE_TYPE,
-                caseForCaseworker.getId() + "",
-                new UserId(manager.getUserDetails().getUid())
+                caseId,
+                new UserId(managerId)
         );
 
-        List<String> caseIdsGivenUserIdHasAccessTo = caseAccessApi.findCaseIdsGivenUserIdHasAccessTo(
-                caseWorker.getAuthToken(),
-                authTokenGenerator.generate(),
-                caseWorker.getUserDetails().getUid(),
-                JURISDICTION,
-                CASE_TYPE,
-                manager.getUserDetails().getUid()
-        );
-
-        assertThat(caseIdsGivenUserIdHasAccessTo.contains(caseForCaseworker.getId().toString())).isTrue();
+        assertThat(findCaseIdsGivenManagerHasAccessTo())
+                .contains(caseId);
 
         Set<String> newCaseRoles = new HashSet<>();
+
         caseUserApi.updateCaseRolesForUser(
                 caseWorker.getAuthToken(),
                 authTokenGenerator.generate(),
-                caseForCaseworker.getId() + "",
-                manager.getUserDetails().getUid(),
-                new CaseUser(manager.getUserDetails().getUid(), newCaseRoles)
+                caseId,
+                managerId,
+                new CaseUser(managerId, newCaseRoles)
         );
 
-        caseIdsGivenUserIdHasAccessTo = caseAccessApi.findCaseIdsGivenUserIdHasAccessTo(
-                caseWorker.getAuthToken(),
-                authTokenGenerator.generate(),
-                caseWorker.getUserDetails().getUid(),
-                JURISDICTION,
-                CASE_TYPE,
-                manager.getUserDetails().getUid()
-        );
-        assertThat(caseIdsGivenUserIdHasAccessTo.contains(caseForCaseworker.getId().toString())).isFalse();
+        assertThat(findCaseIdsGivenManagerHasAccessTo())
+                .doesNotContain(caseId);
 
         newCaseRoles.add("[CREATOR]");
 
         caseUserApi.updateCaseRolesForUser(
                 caseWorker.getAuthToken(),
                 authTokenGenerator.generate(),
-                caseForCaseworker.getId() + "",
-                manager.getUserDetails().getUid(),
-                new CaseUser(manager.getUserDetails().getUid(), newCaseRoles)
+                caseId,
+                managerId,
+                new CaseUser(managerId, newCaseRoles)
         );
 
-        caseIdsGivenUserIdHasAccessTo = caseAccessApi.findCaseIdsGivenUserIdHasAccessTo(
+        assertThat(findCaseIdsGivenManagerHasAccessTo())
+                .contains(caseId);
+    }
+
+    private List<String> findCaseIdsGivenManagerHasAccessTo() {
+        return caseAccessApi.findCaseIdsGivenUserIdHasAccessTo(
                 caseWorker.getAuthToken(),
                 authTokenGenerator.generate(),
                 caseWorker.getUserDetails().getUid(),
@@ -97,7 +90,5 @@ class CaseUserApiTest extends BaseTest {
                 CASE_TYPE,
                 manager.getUserDetails().getUid()
         );
-
-        assertThat(caseIdsGivenUserIdHasAccessTo.contains(caseForCaseworker.getId().toString())).isTrue();
     }
 }

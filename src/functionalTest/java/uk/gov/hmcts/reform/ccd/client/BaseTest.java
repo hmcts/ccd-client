@@ -1,6 +1,5 @@
 package uk.gov.hmcts.reform.ccd.client;
 
-import com.google.common.collect.ImmutableList;
 import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import net.bytebuddy.utility.RandomString;
@@ -19,7 +18,7 @@ import uk.gov.hmcts.reform.idam.client.models.test.CreateUserRequest;
 import uk.gov.hmcts.reform.idam.client.models.test.UserGroup;
 import uk.gov.hmcts.reform.idam.client.models.test.UserRole;
 
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -33,11 +32,7 @@ public class BaseTest {
     private static final String CREATE_CASE_EVENT = "CREATE";
     private static final String CASE_REFERENCE = "REF123";
 
-    private static final Map<String, String> CREATE_CASE_DATA = new HashMap<>() {
-        {
-            put("TextField", "text...");
-        }
-    };
+    private static final Map<String, String> CREATE_CASE_DATA = Map.of("TextField", "text...");
 
     @Autowired
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
@@ -61,14 +56,10 @@ public class BaseTest {
             idamTestApi.createUser(CreateUserRequest.builder()
                     .email(citizenEmail)
                     .userGroup(new UserGroup("citizens"))
-                    .roles(ImmutableList.of(new UserRole("citizen")))
+                    .roles(List.of(new UserRole("citizen")))
                     .build());
         } catch (FeignException e) {
-            if (e.status() == HttpStatus.FORBIDDEN.value()) {
-                log.info("Bad request from idam, probably user already exists, continuing");
-            } else {
-                throw e;
-            }
+            ignoreUserAlreadyExists(e);
         }
 
         String token = idamClient.getAccessToken(citizenEmail, CreateUserRequest.DEFAULT_PASSWORD);
@@ -86,14 +77,10 @@ public class BaseTest {
             idamTestApi.createUser(CreateUserRequest.builder()
                     .email(email)
                     .userGroup(new UserGroup("caseworker"))
-                    .roles(ImmutableList.of(new UserRole("caseworker-autotest1")))
+                    .roles(List.of(new UserRole("caseworker-autotest1")))
                     .build());
         } catch (FeignException e) {
-            if (e.status() == HttpStatus.FORBIDDEN.value()) {
-                log.info("Bad request from idam, probably user already exists, continuing");
-            } else {
-                throw e;
-            }
+            ignoreUserAlreadyExists(e);
         }
 
         String token = idamClient.getAccessToken(email, CreateUserRequest.DEFAULT_PASSWORD);
@@ -180,5 +167,13 @@ public class BaseTest {
                 true,
                 caseDataContent
         );
+    }
+
+    private void ignoreUserAlreadyExists(FeignException e) {
+        if (e.status() == HttpStatus.CONFLICT.value()) {
+            log.info("User already exists in IDAM, continuing");
+        } else {
+            throw e;
+        }
     }
 }

@@ -51,8 +51,8 @@ class CaseAccessApiTest extends BaseTest {
                 manager.getUserDetails().getUid()
         );
 
-        assertThat(caseIdsGivenUserIdHasAccessTo.contains(caseForCaseworker.getId() + ""))
-                .isTrue();
+        assertThat(caseIdsGivenUserIdHasAccessTo)
+                .contains(caseForCaseworker.getId().toString());
     }
 
     @Test
@@ -88,6 +88,7 @@ class CaseAccessApiTest extends BaseTest {
                 manager.getUserDetails().getUid()
         );
 
-        assertThat(caseIdsGivenUserIdHasAccessTo.contains(manager.getUserDetails().getUid())).isFalse();
+        assertThat(caseIdsGivenUserIdHasAccessTo)
+                .doesNotContain(caseForCaseworker.getId().toString());
     }
 }

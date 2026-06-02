@@ -1,6 +1,6 @@
 plugins {
     id 'checkstyle'
-    id 'org.springframework.boot' version '4.0.6'
+    id 'org.springframework.boot' version '3.4.5'
     id 'com.github.ben-manes.versions' version '0.52.0'
     id 'se.patrikerdes.use-latest-versions' version '0.2.19'
     id 'java-library'
@@ -11,8 +11,8 @@ apply plugin: 'io.spring.dependency-management'
 
 def buildNumber = System.getenv("RELEASE_VERSION")?: "DEV-SNAPSHOT"
 
-group = 'com.github.hmcts'
-version = buildNumber
+group 'com.github.hmcts'
+version buildNumber
 
 checkstyle {
     maxWarnings = 0
@@ -37,8 +37,8 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven {
-        url ='https://pkgs.dev.azure.com/hmcts/Artifacts/_packaging/hmcts-lib/maven/v1'
-        name = 'HMCTS common libraries'
+        url 'https://pkgs.dev.azure.com/hmcts/Artifacts/_packaging/hmcts-lib/maven/v1'
+        name 'HMCTS common libraries'
     }
 }
 
@@ -123,7 +123,7 @@ publishing {
 }
 
 ext {
-    lombokVersion = '1.18.46'
+    lombokVersion = '1.18.40'
 }
 
 sourceSets {
@@ -147,14 +147,15 @@ task functionalTest(type: Test) {
 }
 
 dependencies {
-    implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2025.1.1"))
+    implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2024.0.2"))
     implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-json'
+    implementation group: 'io.github.openfeign', name: 'feign-jackson'
 
     implementation group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
+
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.13.4'
 
     testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test'
     testImplementation group: 'com.github.tomakehurst', name: 'wiremock-standalone', version: '3.0.1'
@@ -163,14 +164,14 @@ dependencies {
     testImplementation group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
 
-    functionalTestImplementation group: 'com.github.hmcts', name: 'service-auth-provider-java-client', version: '6.0.0'
-    functionalTestImplementation group: 'com.github.hmcts', name: 'idam-java-client', version: '4.0.0'
+    functionalTestImplementation group: 'com.github.hmcts', name: 'service-auth-provider-java-client', version: '5.3.3'
+    functionalTestImplementation group: 'com.github.hmcts', name: 'idam-java-client', version: '3.0.4'
 
     functionalTestImplementation group: 'org.assertj', name: 'assertj-core', version: '3.27.0'
     functionalTestCompileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     functionalTestAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
 
-    functionalTestImplementation group: 'com.fasterxml.jackson.module', name: 'jackson-module-parameter-names'
+    functionalTestImplementation group: 'com.fasterxml.jackson.module', name: 'jackson-module-parameter-names', version: '2.20.0'
 }
 
 wrapper {
