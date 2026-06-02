@@ -70,7 +70,7 @@ dependencies {
 
     functionalTestImplementation 'com.github.hmcts:service-auth-provider-java-client:5.3.3'
     functionalTestImplementation 'com.github.hmcts:idam-java-client:3.0.5'
-    functionalTestImplementation 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.20.0'
+    functionalTestImplementation 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.22.0'
 }
 
 tasks.named('compileJava') {
