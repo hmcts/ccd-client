@@ -1,10 +1,10 @@
 package uk.gov.hmcts.reform.ccd.client.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import tools.jackson.databind.JsonNode;
 
 import java.time.LocalDateTime;
 import java.util.Map;

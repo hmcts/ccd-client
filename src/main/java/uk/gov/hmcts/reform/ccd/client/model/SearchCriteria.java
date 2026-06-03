@@ -1,6 +1,6 @@
 package uk.gov.hmcts.reform.ccd.client.model;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 
 import java.util.Optional;
 
