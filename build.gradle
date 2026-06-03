@@ -53,11 +53,11 @@ configurations {
 }
 
 dependencies {
-    implementation platform('org.springframework.cloud:spring-cloud-dependencies:2025.0.0')
+    implementation platform('org.springframework.cloud:spring-cloud-dependencies:2025.1.1')
 
-    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'io.github.openfeign:feign-jackson'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'org.springframework.boot:spring-boot-starter-json'
 
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
@@ -68,9 +68,9 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'com.github.tomakehurst:wiremock-standalone:3.0.1'
 
-    functionalTestImplementation 'com.github.hmcts:service-auth-provider-java-client:5.3.4'
-    functionalTestImplementation 'com.github.hmcts:idam-java-client:3.0.5'
-    functionalTestImplementation 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.22.0'
+    functionalTestImplementation 'com.github.hmcts:service-auth-provider-java-client:6.0.0'
+    functionalTestImplementation 'jakarta.servlet:jakarta.servlet-api'
+    functionalTestImplementation 'com.github.hmcts:idam-java-client:4.0.0'
 }
 
 tasks.named('compileJava') {
