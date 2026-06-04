@@ -25,7 +25,7 @@ java {
 
 checkstyle {
     maxWarnings = 0
-    toolVersion = '11.1.0'
+    toolVersion = '13.5.0'
 }
 
 repositories {
