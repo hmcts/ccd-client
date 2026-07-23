@@ -68,7 +68,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'com.github.tomakehurst:wiremock-standalone:3.0.1'
 
-    functionalTestImplementation 'com.github.hmcts:service-auth-provider-java-client:6.0.0'
+    functionalTestImplementation 'com.github.hmcts:service-auth-provider-java-client:6.0.1'
     functionalTestImplementation 'jakarta.servlet:jakarta.servlet-api'
     functionalTestImplementation 'com.github.hmcts:idam-java-client:4.0.0'
 }
