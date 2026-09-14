@@ -12,7 +12,7 @@ group = 'com.github.hmcts'
 version = System.getenv('RELEASE_VERSION') ?: 'DEV-SNAPSHOT'
 
 def gitRepo = 'https://github.com/hmcts/ccd-client'
-def lombokVersion = '1.18.46'
+def lombokVersion = '1.18.48'
 
 java {
     toolchain {
