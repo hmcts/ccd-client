@@ -22,7 +22,7 @@ dependencies {
 
 ### Prerequisites
 
-- [Java 17](https://adoptium.net/temurin/releases/)
+- [Java 21](https://adoptium.net/temurin/releases/)
 
 ## Usage
 
