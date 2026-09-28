@@ -1,15 +1,20 @@
 package uk.gov.hmcts.reform.ccd.client.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
-import lombok.extern.jackson.Jacksonized;
 
 @ToString
 @Getter
 @Builder(toBuilder = true)
-@Jacksonized
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CaseAssignmentUserRole {
 
     @JsonProperty("case_id")

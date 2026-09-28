@@ -367,7 +367,7 @@ class CoreCaseDataApiTest extends BaseTest {
 
             assertThat(theCase.getReference())
                     .isEqualTo(caseDetails.getId().toString());
-            assertThat(theCase.getData().get("TextField").asText())
+            assertThat(theCase.getData().get("TextField"))
                     .isEqualTo(caseDetails.getData().get("TextField").toString());
             assertThat(theCase.getState()).isEqualTo("IN_PROGRESS");
         }

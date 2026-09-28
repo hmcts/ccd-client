@@ -1,16 +1,17 @@
 package uk.gov.hmcts.reform.ccd.client.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import tools.jackson.databind.JsonNode;
 
 import java.time.LocalDateTime;
 import java.util.Map;
 
 @Data
 @EqualsAndHashCode
+@JsonIgnoreProperties(ignoreUnknown = true)
 @NoArgsConstructor
 public class CaseResource {
 
@@ -39,10 +40,10 @@ public class CaseResource {
     private Classification securityClassification;
 
     @JsonProperty("data")
-    private Map<String, JsonNode> data;
+    private Map<String, Object> data;
 
     @JsonProperty("data_classification")
-    private Map<String, JsonNode> dataClassification;
+    private Map<String, Object> dataClassification;
 
     @JsonProperty("after_submit_callback_response")
     @SuppressWarnings("squid:common-java:DuplicatedBlocks")

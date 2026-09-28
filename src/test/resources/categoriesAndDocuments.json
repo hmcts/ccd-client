@@ -1,0 +1,38 @@
+{
+  "case_version": 1,
+  "categories": [
+    {
+      "category_id": "evidence",
+      "category_name": "Evidence",
+      "category_order": 1,
+      "documents": [
+        {
+          "document_url": "http://localhost/documents/2",
+          "document_filename": "evidence.pdf",
+          "document_binary_url": "http://localhost/documents/2/binary",
+          "attribute_path": "evidenceDocument",
+          "upload_timestamp": "2026-09-28T13:21:54.123",
+          "content_type": "application/pdf"
+        }
+      ],
+      "sub_categories": [
+        {
+          "category_id": "photos",
+          "category_name": "Photos",
+          "category_order": 1,
+          "documents": [],
+          "sub_categories": []
+        }
+      ]
+    }
+  ],
+  "uncategorised_documents": [
+    {
+      "document_url": "http://localhost/documents/12345678-1234-1234-1234-123456789012",
+      "document_filename": "test.pdf",
+      "document_binary_url": "http://localhost/documents/12345678-1234-1234-1234-123456789012/binary",
+      "attribute_path": "testDocument",
+      "upload_timestamp": null
+    }
+  ]
+}

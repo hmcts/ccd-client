@@ -69,6 +69,9 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'com.github.tomakehurst:wiremock-standalone:3.0.1'
+    // Consumers may decode the models with either Jackson 2 or Jackson 3; tests cover both.
+    testImplementation 'com.fasterxml.jackson.core:jackson-databind'
+    testImplementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 
     functionalTestImplementation 'com.github.hmcts:service-auth-provider-java-client:6.0.1'
     functionalTestImplementation 'jakarta.servlet:jakarta.servlet-api'

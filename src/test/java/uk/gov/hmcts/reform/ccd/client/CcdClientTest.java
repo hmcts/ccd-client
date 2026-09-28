@@ -11,6 +11,8 @@ import org.springframework.test.annotation.DirtiesContext;
 import uk.gov.hmcts.reform.ccd.client.mock.CcdWireMock;
 import uk.gov.hmcts.reform.ccd.client.model.CaseDataContent;
 import uk.gov.hmcts.reform.ccd.client.model.CaseDetails;
+import uk.gov.hmcts.reform.ccd.client.model.CaseResource;
+import uk.gov.hmcts.reform.ccd.client.model.CategoriesAndDocuments;
 import uk.gov.hmcts.reform.ccd.client.model.Classification;
 import uk.gov.hmcts.reform.ccd.client.model.Event;
 import uk.gov.hmcts.reform.ccd.client.model.SearchResult;
@@ -124,5 +126,33 @@ class CcdClientTest {
 
         int total = startEvent.getTotal();
         assertThat(total).isEqualTo(10);
+    }
+
+    @Test
+    @DisplayName("Should be able to call the v2 create event Api")
+    void createEventTest() throws IOException {
+        CcdWireMock.stub(post(urlEqualTo("/cases/1790598114368751/events")), "createEvent.v2.json");
+        CaseDataContent caseDataContent = CaseDataContent.builder()
+            .event(Event.builder().id("caseworker-add-note").build())
+            .eventToken("token")
+            .build();
+
+        CaseResource resource = ccdApi.createEvent("UserToken", "s2sAuth", "1790598114368751", caseDataContent);
+
+        assertThat(resource.getReference()).isEqualTo("1790598114368751");
+        assertThat(resource.getState()).isEqualTo("Submitted");
+        assertThat(resource.getData()).containsEntry("note", "probe note");
+    }
+
+    @Test
+    @DisplayName("Should be able to call the categories and documents Api")
+    void categoriesAndDocumentsTest() throws IOException {
+        CcdWireMock.stub(get(urlEqualTo("/categoriesAndDocuments/1790598114368751")), "categoriesAndDocuments.json");
+
+        CategoriesAndDocuments result = ccdApi.getCategoriesAndDocuments("UserToken", "s2sAuth", "1790598114368751");
+
+        assertThat(result.getCaseVersion()).isEqualTo(1);
+        assertThat(result.getCategories().getFirst().getCategoryId()).isEqualTo("evidence");
+        assertThat(result.getUncategorisedDocuments().getFirst().getDocumentFilename()).isEqualTo("test.pdf");
     }
 }

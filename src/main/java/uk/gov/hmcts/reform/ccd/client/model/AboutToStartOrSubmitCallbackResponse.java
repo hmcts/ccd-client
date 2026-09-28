@@ -2,9 +2,11 @@ package uk.gov.hmcts.reform.ccd.client.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.extern.jackson.Jacksonized;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.Map;
@@ -12,7 +14,8 @@ import java.util.Map;
 @Data
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Jacksonized
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
 public class AboutToStartOrSubmitCallbackResponse implements CallbackResponse {
 
     private Map<String, Object> data;

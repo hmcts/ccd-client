@@ -1,0 +1,37 @@
+{
+  "id": "1790598114368751",
+  "jurisdiction": "DIVORCE",
+  "case_type": "E2E",
+  "created_on": "2026-09-28T13:21:54.123",
+  "last_modified_on": "2026-09-28T13:21:55.456",
+  "last_state_modified_on": "2026-09-28T13:21:54.123",
+  "state": "Submitted",
+  "security_classification": "PUBLIC",
+  "data": {
+    "note": "probe note",
+    "applicant1": {
+      "firstName": "app1_first_name"
+    },
+    "notes": [
+      {
+        "id": "1",
+        "value": {
+          "note": "x"
+        }
+      }
+    ]
+  },
+  "data_classification": {
+    "note": "PUBLIC"
+  },
+  "after_submit_callback_response": null,
+  "callback_response_status_code": null,
+  "callback_response_status": null,
+  "delete_draft_response_status_code": null,
+  "delete_draft_response_status": null,
+  "_links": {
+    "self": {
+      "href": "http://localhost:4452/cases/1790598114368751/events"
+    }
+  }
+}
