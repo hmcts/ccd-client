@@ -59,7 +59,10 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
     implementation 'org.springframework.boot:spring-boot-http-converter'
-    implementation 'org.springframework.boot:spring-boot-jackson'
+    // No JSON library here: Feign decodes with the application's HTTP message converters, so the
+    // consumer chooses Jackson 2 (spring-boot-jackson2) or Jackson 3 (spring-boot-jackson). The
+    // models only need the annotations, which Jackson 2 and Jackson 3 share.
+    api 'com.fasterxml.jackson.core:jackson-annotations'
 
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
@@ -69,6 +72,7 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'com.github.tomakehurst:wiremock-standalone:3.0.1'
+    testImplementation 'org.springframework.boot:spring-boot-jackson'
     // Consumers may decode the models with either Jackson 2 or Jackson 3; tests cover both.
     testImplementation 'com.fasterxml.jackson.core:jackson-databind'
     testImplementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
