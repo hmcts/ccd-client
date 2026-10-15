@@ -19,6 +19,6 @@ jobs:
       - uses: actions/setup-java@v6
         with:
           distribution: 'temurin' # See 'Supported distributions' for available options
-          java-version: '21'
+          java-version: '25'
       - name: Build
         run: ./gradlew check
