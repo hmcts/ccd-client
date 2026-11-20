@@ -2,6 +2,7 @@ package uk.gov.hmcts.reform.ccd.client.healthcheck;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.boot.health.contributor.Status;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -10,7 +11,7 @@ public class InternalHealth {
 
     @JsonCreator
     public InternalHealth(
-        String status
+        @JsonProperty("status") String status
     ) {
         this.status = new Status(status);
     }
